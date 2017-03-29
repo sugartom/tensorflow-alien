@@ -625,6 +625,8 @@ Status ExecutorImpl::Initialize() {
     const string& frame_name = cf_info.frame_names[id];
     FrameInfo* frame_info = EnsureFrameInfo(frame_name);
 
+    LOG(INFO) << "[Yitao] ExecutorImpl::Initialize() deal with Node " << id << " " << n->type_string() << " " << n->name() << " " << n->in_edges().size() << " inputs!";
+
     // See if this node is a root node, and if so, add to root_nodes_.
     const int num_in_edges = n->in_edges().size();
     if (num_in_edges == 0) {
@@ -1157,6 +1159,8 @@ class ExecutorState {
     const TaggedNode* begin() const { return ready_.begin() + front_index_; }
     const TaggedNode* end() const { return ready_.end(); }
 
+    int queueLength() {return ready_.size(); }
+
    private:
     gtl::InlinedVector<TaggedNode, 16> ready_;
     int front_index_;
@@ -1425,6 +1429,9 @@ void ExecutorState::RunAsync(Executor::DoneCallback done) {
 
   // Initialize the ready queue.
   for (const Node* n : impl_->root_nodes_) {
+
+    LOG(INFO) << "[Yitao] ExecutorState::RunAsync deal with Node " << n->id() << " " << n->type_string() << " " << n->name() << " " << n->in_edges().size() << " inputs!";
+
     DCHECK_EQ(n->in_edges().size(), 0);
     ready.push_back(TaggedNode{n, root_frame_, 0, false});
   }
@@ -1489,6 +1496,9 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
   TaggedNodeSeq ready;
   TaggedNodeReadyQueue inline_ready;
 
+  const Node* tomNode = tagged_node.node;
+  LOG(INFO) << "[Yitao] we are calling ExecutorState::Process() with Node " << tomNode->id() << " " << tomNode->type_string() << " " << tomNode->name() << " " << tomNode->in_edges().size() << " inputs!";
+
   // Parameters passed to OpKernel::Compute.
   TensorValueVec inputs;
   DeviceContextVec input_device_contexts;
@@ -1527,6 +1537,15 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
     int64 input_iter = tagged_node.input_iter;
     const int id = node->id();
     const NodeItem& item = *gview.node(id);
+
+    LOG(INFO) << "[Yitao] pop Node " << id << " " << node->type_string() << " "
+              << node->name() << " " << node->in_edges().size() << " inputs";
+    if (inline_ready.empty()) {
+      LOG(INFO) << "[Yitao]    after pop, no node left...";
+    } else {
+      const Node* tmpNode = inline_ready.front().node;
+      LOG(INFO) << "[Yitao]   after pop, queue.size() = " << inline_ready.queueLength() << ", next node is " << tmpNode->id() << " " << tmpNode->type_string() << " " << tmpNode->name();
+    }
 
     // TODO(misard) Replace with a finer-grain enabling flag once we
     // add better optional debugging support.
@@ -1583,6 +1602,9 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
         MaybeMarkCompleted(input_frame, input_iter, id);
         // Continue to process the nodes in 'inline_ready'.
         completed = NodeDone(s, item.node, ready, stats, &inline_ready);
+
+        LOG(INFO) << "[Yitao]    oo...";
+
         continue;
       }
 
