@@ -1134,37 +1134,103 @@ class ExecutorState {
   // don't free up memory from the queue as we consume nodes.
   class TaggedNodeReadyQueue {
    public:
-    TaggedNodeReadyQueue() : front_index_(0) {}
-
-    void push_back(TaggedNode node) { ready_.push_back(node); }
-    TaggedNode front() const {
-      DCHECK_LT(front_index_, ready_.size());
-      return ready_[front_index_];
+    TaggedNodeReadyQueue() {
+      front_index_[0] = 0;
+      front_index_[1] = 0;
     }
-    void pop_front() {
-      DCHECK_LT(front_index_, ready_.size());
-      front_index_++;
-      if ((front_index_ == ready_.size()) || (front_index_ > 16384)) {
-        if (front_index_ == ready_.size()) {
-          ready_.clear();
-        } else {
-          // Lots of unused entries at beginning of vector: move everything down
-          // to start of vector.
-          ready_.erase(ready_.begin(), ready_.begin() + front_index_);
-        }
-        front_index_ = 0;
+
+    void push_back(TaggedNode node) {
+      int id = node.node->id();
+      if (id <= 7) {
+        ready_[0].push_back(node);
+      } else {
+        ready_[1].push_back(node);
       }
     }
-    bool empty() const { return ready_.empty(); }
-    const TaggedNode* begin() const { return ready_.begin() + front_index_; }
-    const TaggedNode* end() const { return ready_.end(); }
 
-    int queueLength() {return ready_.size(); }
+    TaggedNode front() const {
+      if (queueLengthPrivate(0) > 0) {
+        return ready_[0][front_index_[0]];
+      } else {
+        DCHECK_LT(front_index_[1], ready_[1].size());
+        return ready_[1][front_index_[1]];
+      }
+    }
+
+    void pop_front() {
+      if (queueLengthPrivate(0) > 0) {
+        front_index_[0] ++;
+        if ((front_index_[0] == ready_[0].size()) || (front_index_[0] > 16384)) {
+          if (front_index_[0] == ready_[0].size()) {
+            ready_[0].clear();
+          } else {
+            // Lots of unused entries at beginning of vector: move everything down
+            // to start of vector.
+            ready_[0].erase(ready_[0].begin(), ready_[0].begin() + front_index_[0]);
+          }
+          front_index_[0] = 0;
+        }
+      } else {
+        DCHECK_LT(front_index_[1], ready_[1].size());
+        front_index_[1]++;
+        if ((front_index_[1] == ready_[1].size()) || (front_index_[1] > 16384)) {
+          if (front_index_[1] == ready_[1].size()) {
+            ready_[1].clear();
+          } else {
+            // Lots of unused entries at beginning of vector: move everything down
+            // to start of vector.
+            ready_[1].erase(ready_[1].begin(), ready_[1].begin() + front_index_[1]);
+          }
+          front_index_[1] = 0;
+        }
+      }
+    }
+
+    bool empty() const { return ready_[0].empty() && ready_[1].empty(); }
+    // const TaggedNode* begin() const { return ready_.begin() + front_index_; }
+    // const TaggedNode* end() const { return ready_.end(); }
+
+    int queueLengthPrivate(int id) const {return (ready_[id].size() - front_index_[id]); }
+    int queueLength() const {return queueLengthPrivate(0) + queueLengthPrivate(1);}
 
    private:
-    gtl::InlinedVector<TaggedNode, 16> ready_;
-    int front_index_;
+    gtl::InlinedVector<TaggedNode, 16> ready_[2];
+    int front_index_[2];
   };
+
+  // class TaggedNodeReadyQueue {
+  //  public:
+  //   TaggedNodeReadyQueue() : front_index_(0) {}
+
+  //   void push_back(TaggedNode node) { ready_.push_back(node); }
+  //   TaggedNode front() const {
+  //     DCHECK_LT(front_index_, ready_.size());
+  //     return ready_[front_index_];
+  //   }
+  //   void pop_front() {
+  //     DCHECK_LT(front_index_, ready_.size());
+  //     front_index_++;
+  //     if ((front_index_ == ready_.size()) || (front_index_ > 16384)) {
+  //       if (front_index_ == ready_.size()) {
+  //         ready_.clear();
+  //       } else {
+  //         // Lots of unused entries at beginning of vector: move everything down
+  //         // to start of vector.
+  //         ready_.erase(ready_.begin(), ready_.begin() + front_index_);
+  //       }
+  //       front_index_ = 0;
+  //     }
+  //   }
+  //   bool empty() const { return ready_.empty(); }
+  //   const TaggedNode* begin() const { return ready_.begin() + front_index_; }
+  //   const TaggedNode* end() const { return ready_.end(); }
+
+  //   int queueLength() {return (ready_.size() - front_index_); }
+
+  //  private:
+  //   gtl::InlinedVector<TaggedNode, 16> ready_;
+  //   int front_index_;
+  // };
 
   struct AsyncState;
 
@@ -1427,10 +1493,12 @@ void ExecutorState::RunAsync(Executor::DoneCallback done) {
     return;
   }
 
+  LOG(INFO) << "[Yitao] we are in ExecutorState::RunAsync()";
+
   // Initialize the ready queue.
   for (const Node* n : impl_->root_nodes_) {
 
-    LOG(INFO) << "[Yitao] ExecutorState::RunAsync deal with Node " << n->id() << " " << n->type_string() << " " << n->name() << " " << n->in_edges().size() << " inputs!";
+    LOG(INFO) << "[Yitao]    ExecutorState::RunAsync deal with Node " << n->id() << " " << n->type_string() << " " << n->name() << " " << n->in_edges().size() << " inputs!";
 
     DCHECK_EQ(n->in_edges().size(), 0);
     ready.push_back(TaggedNode{n, root_frame_, 0, false});
@@ -1541,10 +1609,10 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
     LOG(INFO) << "[Yitao] pop Node " << id << " " << node->type_string() << " "
               << node->name() << " " << node->in_edges().size() << " inputs";
     if (inline_ready.empty()) {
-      LOG(INFO) << "[Yitao]    after pop, no node left...";
+      LOG(INFO) << "[Yitao]    after pop Node " << id << " " << node->type_string() << " " << node->name() << ", no node left...";
     } else {
       const Node* tmpNode = inline_ready.front().node;
-      LOG(INFO) << "[Yitao]   after pop, queue.size() = " << inline_ready.queueLength() << ", next node is " << tmpNode->id() << " " << tmpNode->type_string() << " " << tmpNode->name();
+      LOG(INFO) << "[Yitao]    after pop Node " << id << " " << node->type_string() << " " << node->name() << ", queue.size() = " << inline_ready.queueLength() << ", next node is " << tmpNode->id() << " " << tmpNode->type_string() << " " << tmpNode->name();
     }
 
     // TODO(misard) Replace with a finer-grain enabling flag once we
@@ -1603,7 +1671,7 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
         // Continue to process the nodes in 'inline_ready'.
         completed = NodeDone(s, item.node, ready, stats, &inline_ready);
 
-        LOG(INFO) << "[Yitao]    oo...";
+        LOG(INFO) << "[Yitao]    oo.....................................";
 
         continue;
       }
@@ -1616,6 +1684,9 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
       params.output_attr_array = item.output_attrs();
 
       if (item.kernel_is_async) {
+
+        LOG(INFO) << "[Yitao]    Node" << item.node->id() << " " << item.node->type_string() << " " << item.node->name() << " " << item.node->in_edges().size() << " inputs is asynchronous...";
+
         // Asynchronous computes.
         AsyncOpKernel* async = item.kernel->AsAsync();
         DCHECK(async != nullptr);
@@ -1667,6 +1738,9 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
         if (stats) nodestats::SetOpStart(stats);
         device->ComputeAsync(async, &state->ctx, done);
       } else {
+
+        LOG(INFO) << "[Yitao]    Node" << item.node->id() << " " << item.node->type_string() << " " << item.node->name() << " " << item.node->in_edges().size() << " inputs is synchronous!";
+
         // Synchronous computes.
         OpKernelContext ctx(&params, item.num_outputs);
         if (stats) nodestats::SetOpStart(stats);
@@ -1692,7 +1766,18 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
       MaybeMarkCompleted(input_frame, input_iter, id);
       // Propagates outputs.
       if (s.ok()) {
+
+        LOG(INFO) << "[Yitao]    before PropagateOutputs(), ready.size() = " << ready.size();
+
         PropagateOutputs(tagged_node, &item, &outputs, &ready);
+
+        LOG(INFO) << "[Yitao]    after PropagateOutputs(), ready.size() = " << ready.size();
+        // if (ready.size() == 4 && ready[0].node->name() == "Variable") {
+        //   // LOG(INFO) << "[Yitao]    ready[0].node->name() = " << ready[0].node->name();
+        //   TaggedNode tmpTaggedNode = ready[0];
+        //   ready.pop_front();
+        //   ready.push_back(tmpTaggedNode);
+        // }
       }
       outputs.clear();
       if (!accessed_tensors.empty()) {
@@ -2071,12 +2156,20 @@ void ExecutorState::ScheduleReady(const TaggedNodeSeq& ready,
   }
   const GraphView& gview = impl_->gview_;
   const TaggedNode* curr_expensive_node = nullptr;
-  for (auto& tagged_node : ready) {
+  for (auto& tagged_node : ready) {              // <--- original version
+  // for (int i = ready.size() - 1; i >= 0; i--) {     // <--- Yitao version
+  //   auto& tagged_node = ready[i];                   // <--- Yitao version
     const NodeItem& item = *gview.node(tagged_node.node->id());
+
+    // const Node* tomNode = tagged_node.node; // Yitao for printing case One or Two...
+
     if (tagged_node.is_dead || !item.kernel_is_expensive) {
+      // LOG(INFO) << "[Yitao] in ScheduleReady(), Node " << tomNode->id() << " " << tomNode->type_string() << " " << tomNode->name() << " is case One";
       // Inline this inexpensive node.
       inline_ready->push_back(tagged_node);
     } else {
+      // LOG(INFO) << "[Yitao] in ScheduleReady(), Node " << tomNode->id() << " " << tomNode->type_string() << " " << tomNode->name() << " is case Two";
+
       if (curr_expensive_node) {
         // Dispatch to another thread since there is plenty of work to
         // do for this thread.
