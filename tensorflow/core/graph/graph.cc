@@ -276,6 +276,9 @@ Node* Graph::AddNode(const NodeDef& node_def, Status* status) {
 
   Node* node = AllocateNode(
       new Node::Properties(op_def, node_def, inputs, outputs), nullptr);
+
+  LOG(INFO) << "[Yitao] Graph::AddNode deal with Node " << node->id() << " " << node->type_string() << " " << node->name() << " " << node->in_edges().size() << " inputs!";
+
   return node;
 }
 

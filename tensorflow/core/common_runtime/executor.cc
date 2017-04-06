@@ -1140,12 +1140,23 @@ class ExecutorState {
     }
 
     void push_back(TaggedNode node) {
-      int id = node.node->id();
-      if (id <= 7) {
+      // int id = node.node->id();
+      // if (id <= 7) {
+      //   ready_[0].push_back(node);
+      // } else {
+      //   ready_[1].push_back(node);
+      // }
+      string tomNodeName(node.node->name());
+      string tomOne("-tom-1");
+      string tomTwo("-tom-2");
+      if (tomNodeName.find(tomTwo) != string::npos) {
         ready_[0].push_back(node);
-      } else {
+      } else if (tomNodeName.find(tomOne) != string::npos) {
         ready_[1].push_back(node);
+      } else {
+        ready_[0].push_back(node);
       }
+
     }
 
     TaggedNode front() const {

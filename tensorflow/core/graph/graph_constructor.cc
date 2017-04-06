@@ -408,6 +408,9 @@ Status GraphConstructor::MakeNode(const NodeDef& node_def, Node** node) {
   // Add the node to the graph.
   Status status;
   *node = g_->AddNode(node_def, &status);
+
+  LOG(INFO) << "[Yitao] called AddNode() to add Node " << (*node)->id() << " " << (*node)->type_string() << " " << (*node)->name() << " " << (*node)->in_edges().size() << " inputs!";
+
   if (!status.ok()) return status;
   if (opts_.expect_device_spec) {
     (*node)->set_assigned_device_name(node_def.device());

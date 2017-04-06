@@ -1,0 +1,1923 @@
+./python/util/kernel_registry.cc:  tensorflow::NodeDef node_def;
+./python/util/kernel_registry.cc:  AddDefaultsToNodeDef(op_reg_data->op_def, &node_def);
+./python/tools/optimize_for_inference_lib.py:    NodeDef of the node with the given name.
+./python/tools/optimize_for_inference_lib.py:  """Extracts the values from a const NodeDef as a numpy ndarray.
+./python/tools/optimize_for_inference_lib.py:    node_def: Const NodeDef that has the values we want to access.
+./python/tools/optimize_for_inference_lib.py:    scaled_weights_op = node_def_pb2.NodeDef()
+./python/tools/optimize_for_inference_lib.py:    new_conv_op = node_def_pb2.NodeDef()
+./python/tools/optimize_for_inference_lib.py:    offset_op = node_def_pb2.NodeDef()
+./python/tools/optimize_for_inference_lib.py:    bias_add_op = node_def_pb2.NodeDef()
+./python/tools/optimize_for_inference_lib.py:    new_node = node_def_pb2.NodeDef()
+./python/tools/optimize_for_inference_lib.py:    fused_conv_op = node_def_pb2.NodeDef()
+./python/tools/optimize_for_inference_lib.py:      paddings_op = node_def_pb2.NodeDef()
+./python/tools/optimize_for_inference_lib.py:    new_node = node_def_pb2.NodeDef()
+./python/tools/optimize_for_inference_test.py:    new_node = node_def_pb2.NodeDef()
+./python/tools/strip_unused_lib.py:      placeholder_node = node_def_pb2.NodeDef()
+./python/ops/control_flow_ops.py:    **kwargs: Optional parameters to pass when constructing the NodeDef.
+./python/ops/control_flow_ops_test.py:    snode = node_def_pb2.NodeDef(name=nd.name, op=nd.op, input=nd.input)
+./python/training/device_setter.py:      node_def = op if isinstance(op, node_def_pb2.NodeDef) else op.node_def
+./python/framework/ops.py:    """Return a value to use for the NodeDef "input" attribute.
+./python/framework/ops.py:    The returned string can be used in a NodeDef "input" attribute
+./python/framework/ops.py:    to indicate that the NodeDef uses this Tensor as input.
+./python/framework/ops.py:def _NodeDef(op_type, name, device=None, attrs=None):
+./python/framework/ops.py:  """Create a NodeDef proto.
+./python/framework/ops.py:    op_type: Value for the "op" attribute of the NodeDef proto.
+./python/framework/ops.py:    name: Value for the "name" attribute of the NodeDef proto.
+./python/framework/ops.py:    device: string, device, or function from NodeDef to string.
+./python/framework/ops.py:      Value for the "device" attribute of the NodeDef proto.
+./python/framework/ops.py:      and the value is the respective "attr" attribute of the NodeDef proto (an
+./python/framework/ops.py:    A node_def_pb2.NodeDef protocol buffer.
+./python/framework/ops.py:  node_def = node_def_pb2.NodeDef()
+./python/framework/ops.py:      node_def: `node_def_pb2.NodeDef`.  `NodeDef` for the `Operation`.
+./python/framework/ops.py:        Used for attributes of `node_def_pb2.NodeDef`, typically `name`,
+./python/framework/ops.py:        or if `node_def` is not a `NodeDef`,
+./python/framework/ops.py:    if not isinstance(node_def, node_def_pb2.NodeDef):
+./python/framework/ops.py:      raise TypeError("node_def needs to be a NodeDef: %s" % node_def)
+./python/framework/ops.py:  # Methods below are used when building the NodeDef and Graph proto.
+./python/framework/ops.py:    """Returns a serialized `NodeDef` representation of this operation.
+./python/framework/ops.py:      [`NodeDef`](https://www.tensorflow.org/code/tensorflow/core/framework/node_def.proto)
+./python/framework/ops.py:  methods like get_tensor_by_name to help calculate the results, and a NodeDef
+./python/framework/ops.py:  If the NodeDef is for an op with a registered doohickey function, you'll get
+./python/framework/ops.py:  This function takes a Graph object and a NodeDef from a GraphDef, and if
+./python/framework/ops.py:    node: A NodeDef describing the operator.
+./python/framework/ops.py:        `NodeDef` proto that will represent the operation (an `AttrValue`
+./python/framework/ops.py:    node_def = _NodeDef(op_type, name, device=None, attrs=attrs)
+./python/framework/meta_graph.py:  """Create a `NodeDef` proto with export_scope stripped.
+./python/framework/meta_graph.py:    from_node_def: A `node_def_pb2.NodeDef` protocol buffer.
+./python/framework/meta_graph.py:    A `node_def_pb2.NodeDef` protocol buffer.
+./python/framework/ops_test.py:        ops._NodeDef("noop", "myop"), ops.Graph(), [], [dtypes.float32])
+./python/framework/ops_test.py:        ops._NodeDef("noop", "myop"), ops.Graph(), [], [dtypes.float32])
+./python/framework/ops_test.py:class NodeDefConstructorTest(test_util.TensorFlowTestCase):
+./python/framework/ops_test.py:    nodedef = ops._NodeDef("noop", "bar")
+./python/framework/ops_test.py:    nodedef = ops._NodeDef("foo", "bar", device="/device:baz:*")
+./python/framework/ops_test.py:    nodedef = ops._NodeDef("foo", "bar", device=pydev.DeviceSpec(job="j"))
+./python/framework/ops_test.py:        ops._NodeDef("noop", "myop"),
+./python/framework/ops_test.py:    op1 = ops.Operation(ops._NodeDef("noop", "myop1"), g, [], [dtypes.float32])
+./python/framework/ops_test.py:    op2 = ops.Operation(ops._NodeDef("reop", "myop2"), g, [float_t], [])
+./python/framework/ops_test.py:    op1 = ops.Operation(ops._NodeDef("noop", "myop1"), g, [], [dtypes.float32])
+./python/framework/ops_test.py:        ops._NodeDef("reop", "myop2"), g, [], [dtypes.float32, dtypes.string])
+./python/framework/ops_test.py:        ops._NodeDef("add", "myop3"), g, [float1_t, label2_str_t, label2_str_t],
+./python/framework/ops_test.py:    op = ops.Operation(ops._NodeDef("noop", "myop"), ops.Graph(), [], [])
+./python/framework/ops_test.py:    op = ops.Operation(ops._NodeDef("noop", "op2"), ops.Graph(), [], [])
+./python/framework/ops_test.py:        ops._NodeDef("noop", "op1"), g, [],
+./python/framework/ops_test.py:        ops._NodeDef("refop", "op2"),
+./python/framework/ops_test.py:        ops._NodeDef("nonrefop", "op3"), g, [ref_t, nonref_t], [])
+./python/framework/ops_test.py:      ops.Operation(ops._NodeDef("op", ""), g)
+./python/framework/ops_test.py:      ops.Operation(ops._NodeDef("op", "_invalid"), g)
+./python/framework/ops_test.py:      ops.Operation(ops._NodeDef("op", "-invalid"), g)
+./python/framework/ops_test.py:      ops.Operation(ops._NodeDef("op", "/invalid"), g)
+./python/framework/ops_test.py:      ops.Operation(ops._NodeDef("op", "invalid:0"), g)
+./python/framework/ops_test.py:    ops.Operation(ops._NodeDef("op", "an_op"), g, output_types=[dtypes.float32])
+./python/framework/ops_test.py:    node_def = ops._NodeDef("noop", "op1")
+./python/framework/ops_test.py:        ops._NodeDef("noop", "op1"), ops.Graph(), [], [dtypes.float32])
+./python/framework/ops_test.py:  def testNodeDefArgs(self):
+./python/framework/ops_test.py:  def testNodeDefArgs(self):
+./python/framework/ops_test.py:    node = ops._NodeDef("a", "an_a")
+./python/framework/ops_test.py:    node = ops._NodeDef("b", "a_b")
+./python/framework/ops_test.py:        ops._NodeDef("noop", "myop"), ops.Graph(), [], [dtypes.float32])
+./python/framework/graph_util_test.py:    new_node = node_def_pb2.NodeDef()
+./python/framework/cpp_shape_inference.h:// NodeDef).
+./python/framework/cpp_shape_inference.cc:  tensorflow::NodeDef node;
+./python/framework/errors_impl.py:      node_def: The `node_def_pb2.NodeDef` proto representing the op that
+./python/framework/errors_impl.py:    """The `NodeDef` proto representing the op that failed."""
+./python/framework/test_util_test.py:      node_def = ops._NodeDef("op_type", "name")
+./python/framework/test_util_test.py:      node_def_orig = ops._NodeDef("op_type_orig", "orig")
+./python/framework/graph_util_impl.py:      or NodeDef.
+./python/framework/graph_util_impl.py:    assert isinstance(node, node_def_pb2.NodeDef)
+./python/framework/graph_util_impl.py:  """Convenience function to get a shape from a NodeDef's input string."""
+./python/framework/graph_util_impl.py:    output_node = node_def_pb2.NodeDef()
+./python/framework/graph_util_impl.py:    new_node = node_def_pb2.NodeDef()
+./python/framework/graph_util_impl.py:    new_node = node_def_pb2.NodeDef()
+./python/framework/gen_docs_combined.py:                   "HistogramProto", "ConfigProto", "NodeDef", "GraphDef",
+./python/debug/lib/debug_data.py:      node: (NodeDef) A partition-graph node to be processed.
+./python/summary/summary.py:  metadata is stored in its NodeDef. This method retrieves the description.
+./python/summary/summary.py:    node_def: the node_def_pb2.NodeDef of a TensorSummary op
+./python/__init__.py:    'NodeDef',
+./python/kernel_tests/shape_ops_test.py:          new_node = node_def_pb2.NodeDef()
+./python/client/session_test.py:  def testErrorCodeWithNoNodeDef(self):
+./core/kernels/conditional_accumulator_base_op.h:    TF_RETURN_IF_ERROR(accumulator->MatchesNodeDef(def()));
+./core/kernels/cast_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("cast_op", "Cast")
+./core/kernels/conditional_accumulator_base.cc:Status ConditionalAccumulatorBase::MatchesNodeDef(const NodeDef& node_def) {
+./core/kernels/restore_v2_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "RestoreV2")
+./core/kernels/restore_v2_op_test.cc:      NodeDef save;
+./core/kernels/restore_v2_op_test.cc:            NodeDefBuilder("myop", save_op_to_use)
+./core/kernels/restore_v2_op_test.cc:            NodeDefBuilder("myop", save_op_to_use)
+./core/kernels/segment_reduction_ops_test.cc:  NodeDef reduction_node_def;
+./core/kernels/segment_reduction_ops_test.cc:  TF_CHECK_OK(NodeDefBuilder(reduction, reduction)
+./core/kernels/xsmm_conv2d_test.cc:    TF_CHECK_OK(NodeDefBuilder("xsmm", "Conv2D")
+./core/kernels/sparse_to_dense_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("sparsetodense", "SparseToDense")
+./core/kernels/sparse_to_dense_op_test.cc:  NodeDef sparse_node_def;
+./core/kernels/sparse_to_dense_op_test.cc:  TF_CHECK_OK(NodeDefBuilder("sparsetodense", "SparseToDense")
+./core/kernels/fake_quant_ops_test.cc:using tensorflow::NodeDefBuilder;
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxArgs")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxArgs")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxArgs")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxArgs")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxArgsGradient")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVars")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVars")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVars")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsGradient")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannel")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannel")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannel")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannel")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannel")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannel")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannelGradient")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannelGradient")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannelGradient")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannelGradient")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannelGradient")
+./core/kernels/fake_quant_ops_test.cc:  TF_EXPECT_OK(NodeDefBuilder("op", "FakeQuantWithMinMaxVarsPerChannelGradient")
+./core/kernels/sparse_dense_binary_op_shared_test.cc:    TF_ASSERT_OK(NodeDefBuilder("cdiv", "SparseDenseCwiseDiv")
+./core/kernels/sparse_dense_binary_op_shared_test.cc:    TF_ASSERT_OK(NodeDefBuilder("cmul", "SparseDenseCwiseMul")
+./core/kernels/fused_batch_norm_op_test.cc:  TF_EXPECT_OK(NodeDefBuilder("batch_norm_op", "FusedBatchNorm")
+./core/kernels/fused_batch_norm_op_test.cc:  TF_EXPECT_OK(NodeDefBuilder("batch_norm_op", "FusedBatchNorm")
+./core/kernels/fused_batch_norm_op_test.cc:  TF_EXPECT_OK(NodeDefBuilder("batch_norm_grad_op", "FusedBatchNormGrad")
+./core/kernels/gather_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "Gather")
+./core/kernels/priority_queue.h:  Status MatchesNodeDef(const NodeDef& node_def) override;
+./core/kernels/priority_queue.h:  Status MatchesPriorityNodeDefTypes(const NodeDef& node_def) const;
+./core/kernels/priority_queue.h:  Status MatchesPriorityNodeDefShapes(const NodeDef& node_def) const;
+./core/kernels/fifo_queue.cc:Status FIFOQueue::MatchesNodeDef(const NodeDef& node_def) {
+./core/kernels/fifo_queue.cc:  if (!MatchesNodeDefOp(node_def, "FIFOQueue").ok() &&
+./core/kernels/fifo_queue.cc:      !MatchesNodeDefOp(node_def, "FIFOQueueV2").ok()) {
+./core/kernels/fifo_queue.cc:  TF_RETURN_IF_ERROR(MatchesNodeDefCapacity(node_def, capacity_));
+./core/kernels/fifo_queue.cc:  TF_RETURN_IF_ERROR(MatchesNodeDefTypes(node_def));
+./core/kernels/fifo_queue.cc:  TF_RETURN_IF_ERROR(MatchesNodeDefShapes(node_def));
+./core/kernels/logging_ops_test.cc:    TF_CHECK_OK(NodeDefBuilder("op", "Print")
+./core/kernels/control_flow_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("op", "Switch")
+./core/kernels/control_flow_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("abort_op", "Abort")
+./core/kernels/control_flow_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("abort_op", "Abort").Finalize(node_def()));
+./core/kernels/control_flow_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("abort_op", "Abort")
+./core/kernels/queue_base.cc:Status QueueBase::MatchesNodeDefOp(const NodeDef& node_def,
+./core/kernels/queue_base.cc:Status QueueBase::MatchesNodeDefCapacity(const NodeDef& node_def,
+./core/kernels/queue_base.cc:Status QueueBase::MatchesNodeDefTypes(const NodeDef& node_def) const {
+./core/kernels/queue_base.cc:Status QueueBase::MatchesNodeDefShapes(const NodeDef& node_def) const {
+./core/kernels/quantized_matmul_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_mat_mul_op", "QuantizedMatMul")
+./core/kernels/quantized_matmul_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_mat_mul_op", "QuantizedMatMul")
+./core/kernels/quantized_matmul_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_mat_mul_op", "QuantizedMatMul")
+./core/kernels/quantized_matmul_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_mat_mul_op", "QuantizedMatMul")
+./core/kernels/quantized_matmul_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_mat_mul_op", "QuantizedMatMul")
+./core/kernels/resize_area_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("resize_area_op", "ResizeArea")
+./core/kernels/conditional_accumulator_base.h:  Status MatchesNodeDef(const NodeDef& node_def);
+./core/kernels/scatter_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "ScatterUpdate")
+./core/kernels/scatter_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", op)
+./core/kernels/summary_audio_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "AudioSummaryV2")
+./core/kernels/hexagon/quantized_matmul_op_for_hexagon_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_mat_mul_op", "QuantizedMatMul")
+./core/kernels/remote_fused_graph_execute_utils_test.cc:static NodeDef* GetNodeDef(const string& name, GraphDef* def) {
+./core/kernels/remote_fused_graph_execute_utils_test.cc:  for (NodeDef& node_def : *def->mutable_node()) {
+./core/kernels/remote_fused_graph_execute_utils_test.cc:    NodeDef* node_def = GetNodeDef(NAME_B, &def);
+./core/kernels/remote_fused_graph_execute_utils_test.cc:    NodeDef* node_def = GetNodeDef(NAME_A_PLUS_B, &def);
+./core/kernels/queue_op.h:    return queue->MatchesNodeDef(def());
+./core/kernels/random_shuffle_queue_op.cc:  Status MatchesNodeDef(const NodeDef& node_def) override;
+./core/kernels/random_shuffle_queue_op.cc:Status RandomShuffleQueue::MatchesNodeDef(const NodeDef& node_def) {
+./core/kernels/random_shuffle_queue_op.cc:  if (!MatchesNodeDefOp(node_def, "RandomShuffleQueue").ok() &&
+./core/kernels/random_shuffle_queue_op.cc:      !MatchesNodeDefOp(node_def, "RandomShuffleQueueV2").ok()) {
+./core/kernels/random_shuffle_queue_op.cc:  TF_RETURN_IF_ERROR(MatchesNodeDefCapacity(node_def, capacity_));
+./core/kernels/random_shuffle_queue_op.cc:  TF_RETURN_IF_ERROR(MatchesNodeDefTypes(node_def));
+./core/kernels/random_shuffle_queue_op.cc:  TF_RETURN_IF_ERROR(MatchesNodeDefShapes(node_def));
+./core/kernels/dynamic_partition_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "DynamicPartition")
+./core/kernels/stage_op.cc:Status GetBuffer(OpKernelContext* ctx, const NodeDef& ndef, Buffer** buf) {
+./core/kernels/lrn_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("lrn_op", "LRN")
+./core/kernels/lrn_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("lrn_op", "LRN")
+./core/kernels/lrn_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("lrn_op", "LRN")                             \
+./core/kernels/queue_base.h:  // Helpers for implementing MatchesNodeDef().
+./core/kernels/queue_base.h:  Status MatchesNodeDefOp(const NodeDef& node_def, const string& op) const;
+./core/kernels/queue_base.h:  Status MatchesNodeDefCapacity(const NodeDef& node_def, int32 capacity) const;
+./core/kernels/queue_base.h:  Status MatchesNodeDefTypes(const NodeDef& node_def) const;
+./core/kernels/queue_base.h:  Status MatchesNodeDefShapes(const NodeDef& node_def) const;
+./core/kernels/padding_fifo_queue.cc:Status PaddingFIFOQueue::CompatibleNodeDefShapes(
+./core/kernels/padding_fifo_queue.cc:    const NodeDef& node_def) const {
+./core/kernels/padding_fifo_queue.cc:Status PaddingFIFOQueue::MatchesNodeDef(const NodeDef& node_def) {
+./core/kernels/padding_fifo_queue.cc:  if (!MatchesNodeDefOp(node_def, "PaddingFIFOQueue").ok() &&
+./core/kernels/padding_fifo_queue.cc:      !MatchesNodeDefOp(node_def, "PaddingFIFOQueueV2").ok()) {
+./core/kernels/padding_fifo_queue.cc:  TF_RETURN_IF_ERROR(MatchesNodeDefCapacity(node_def, capacity_));
+./core/kernels/padding_fifo_queue.cc:  TF_RETURN_IF_ERROR(MatchesNodeDefTypes(node_def));
+./core/kernels/padding_fifo_queue.cc:  TF_RETURN_IF_ERROR(CompatibleNodeDefShapes(node_def));
+./core/kernels/quantized_batch_norm_op_test.cc:  TF_EXPECT_OK(NodeDefBuilder("quantized_batch_norm_op",
+./core/kernels/quantized_batch_norm_op_test.cc:  TF_EXPECT_OK(NodeDefBuilder("quantized_batch_norm_op",
+./core/kernels/debug_ops_test.cc:    TF_CHECK_OK(NodeDefBuilder("op", "DebugIdentity")
+./core/kernels/debug_ops_test.cc:    TF_CHECK_OK(NodeDefBuilder("op", "DebugNanCount")
+./core/kernels/debug_ops_test.cc:    TF_CHECK_OK(NodeDefBuilder("op", "DebugNumericSummary")
+./core/kernels/merge_v2_checkpoints_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "MergeV2Checkpoints")
+./core/kernels/quantized_bias_add_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_bias_add_op", "QuantizedBiasAdd")
+./core/kernels/quantized_bias_add_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_bias_add_op", "QuantizedBiasAdd")
+./core/kernels/resize_bilinear_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("resize_bilinear_op", "ResizeBilinear")
+./core/kernels/resize_bilinear_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("resize_bilinear_op", "ResizeBilinear")
+./core/kernels/padding_fifo_queue.h:  Status MatchesNodeDef(const NodeDef& node_def) override;
+./core/kernels/padding_fifo_queue.h:  Status CompatibleNodeDefShapes(const NodeDef& node_def) const;
+./core/kernels/restore_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "Restore")
+./core/kernels/restore_op_test.cc:    NodeDef save;
+./core/kernels/restore_op_test.cc:        NodeDefBuilder("myop", "Save")
+./core/kernels/restore_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "RestoreSlice")
+./core/kernels/restore_op_test.cc:    NodeDef save;
+./core/kernels/restore_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("save", "Save")
+./core/kernels/quantize_down_and_shrink_range_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantize_down_and_shrink_range_op",
+./core/kernels/batch_norm_op_test.cc:      NodeDefBuilder("batch_norm_op", "BatchNormWithGlobalNormalization")
+./core/kernels/batch_norm_op_test.cc:      NodeDefBuilder("batch_norm_op", "BatchNormWithGlobalNormalization")
+./core/kernels/ops_testutil.h:  void set_node_def(const NodeDef& node_def) { node_def_.CopyFrom(node_def); }
+./core/kernels/ops_testutil.h:  // Clients can manipulate the underlying NodeDef via this accessor.
+./core/kernels/ops_testutil.h:  NodeDef* node_def() { return &node_def_; }
+./core/kernels/ops_testutil.h:  NodeDef node_def_;
+./core/kernels/scatter_nd_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "ScatterNdUpdate")
+./core/kernels/scatter_nd_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", op)
+./core/kernels/save_v2_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "SaveV2")
+./core/kernels/cross_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("cross_op", "Cross")
+./core/kernels/cross_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("cross_int_op", "Cross")
+./core/kernels/colorspace_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("rgb_to_hsv_op", "RGBToHSV")
+./core/kernels/colorspace_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("hsv_to_rgb_op", "HSVToRGB")
+./core/kernels/resize_nearest_neighbor_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("resize_nn", "ResizeNearestNeighbor")
+./core/kernels/resize_nearest_neighbor_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("resize_nn", "ResizeNearestNeighbor")
+./core/kernels/quantized_pooling_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_avg_pool_op", "QuantizedAvgPool")
+./core/kernels/quantized_pooling_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_max_pool_op", "QuantizedMaxPool")
+./core/kernels/resize_bicubic_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("resize_bicubic_op", "ResizeBicubic")
+./core/kernels/reverse_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "Reverse")
+./core/kernels/sparse_reduce_sum_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("sparse_reduce_sum", "SparseReduceSum")
+./core/kernels/sparse_reduce_sum_op_test.cc:        NodeDefBuilder("sparse_reduce_sum_sparse", "SparseReduceSumSparse")
+./core/kernels/dynamic_stitch_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "DynamicStitch")
+./core/kernels/summary_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "ScalarSummary")
+./core/kernels/summary_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "HistogramSummary")
+./core/kernels/summary_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "MergeSummary")
+./core/kernels/conv_ops_test.cc:    TF_EXPECT_OK(NodeDefBuilder("fused_resize_op", "FusedResizeAndPadConv2D")
+./core/kernels/quantized_concat_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_concat_op", "QuantizedConcat")
+./core/kernels/quantized_concat_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_concat_op", "QuantizedConcat")
+./core/kernels/quantized_concat_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_concat_op", "QuantizedConcat")
+./core/kernels/summary_image_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "ImageSummary")
+./core/kernels/crop_and_resize_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("crop_and_resize_op", "CropAndResize")
+./core/kernels/quantized_conv_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_conv_op", "QuantizedConv2D")
+./core/kernels/quantized_conv_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_conv_op", "QuantizedConv2D")
+./core/kernels/quantized_conv_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_conv_op", "QuantizedConv2D")
+./core/kernels/quantized_conv_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_conv_op", "QuantizedConv2D")
+./core/kernels/quantized_conv_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_conv_op", "QuantizedConv2D")
+./core/kernels/requantize_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("requantize", "Requantize")
+./core/kernels/ops_testutil_test.cc:  TF_EXPECT_OK(NodeDefBuilder("identity", "Identity")
+./core/kernels/priority_queue.cc:Status PriorityQueue::MatchesNodeDef(const NodeDef& node_def) {
+./core/kernels/priority_queue.cc:  if (!MatchesNodeDefOp(node_def, "PriorityQueue").ok() &&
+./core/kernels/priority_queue.cc:      !MatchesNodeDefOp(node_def, "PriorityQueueV2").ok()) {
+./core/kernels/priority_queue.cc:  TF_RETURN_IF_ERROR(MatchesNodeDefCapacity(node_def, capacity_));
+./core/kernels/priority_queue.cc:  TF_RETURN_IF_ERROR(MatchesPriorityNodeDefTypes(node_def));
+./core/kernels/priority_queue.cc:  TF_RETURN_IF_ERROR(MatchesPriorityNodeDefShapes(node_def));
+./core/kernels/priority_queue.cc:Status PriorityQueue::MatchesPriorityNodeDefTypes(
+./core/kernels/priority_queue.cc:    const NodeDef& node_def) const {
+./core/kernels/priority_queue.cc:Status PriorityQueue::MatchesPriorityNodeDefShapes(
+./core/kernels/priority_queue.cc:    const NodeDef& node_def) const {
+./core/kernels/non_max_suppression_op_test.cc:    TF_EXPECT_OK(NodeDefBuilder("non_max_suppression_op", "NonMaxSuppression")
+./core/kernels/fifo_queue.h:  Status MatchesNodeDef(const NodeDef& node_def) override;
+./core/kernels/gather_nd_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "GatherNd")
+./core/kernels/save_op_test.cc:        NodeDefBuilder("myop", "Save")
+./core/kernels/save_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "SaveSlices")
+./core/kernels/save_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("myop", "SaveSlices")
+./core/kernels/adjust_contrast_op_test.cc:  TF_EXPECT_OK(NodeDefBuilder("adjust_constrast_op", "AdjustContrastv2")
+./core/kernels/adjust_contrast_op_test.cc:  TF_EXPECT_OK(NodeDefBuilder("adjust_constrast_op", "AdjustContrastv2")
+./core/kernels/adjust_contrast_op_test.cc:  TF_EXPECT_OK(NodeDefBuilder("adjust_constrast_op", "AdjustContrastv2")
+./core/kernels/requantization_range_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("requantization_range", "RequantizationRange")
+./core/kernels/quantize_and_dequantize_op_test.cc:      NodeDefBuilder("quantize_and_dequantize_op", "QuantizeAndDequantizeV2")
+./core/kernels/quantize_and_dequantize_op_test.cc:      NodeDefBuilder("quantize_and_dequantize_op", "QuantizeAndDequantizeV2")
+./core/kernels/quantize_and_dequantize_op_test.cc:      NodeDefBuilder("quantize_and_dequantize_op", "QuantizeAndDequantizeV2")
+./core/kernels/quantize_and_dequantize_op_test.cc:      NodeDefBuilder("quantize_and_dequantize_op", "QuantizeAndDequantizeV2")
+./core/kernels/quantize_and_dequantize_op_test.cc:      NodeDefBuilder("quantize_and_dequantize_op", "QuantizeAndDequantizeV2")
+./core/kernels/quantize_and_dequantize_op_test.cc:      NodeDefBuilder("quantize_and_dequantize_op", "QuantizeAndDequantizeV2")
+./core/kernels/quantize_and_dequantize_op_test.cc:      NodeDefBuilder("quantize_and_dequantize_Op", "QuantizeAndDequantizeV2")
+./core/kernels/quantized_reshape_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_reshape", "QuantizedReshape")
+./core/kernels/nn_ops_test.cc:                       DataType data_type, NodeDef* node) {
+./core/kernels/nn_ops_test.cc:  TF_CHECK_OK(NodeDefBuilder(name, "Const")
+./core/kernels/nn_ops_test.cc:                            NodeDef* node) {
+./core/kernels/nn_ops_test.cc:  TF_CHECK_OK(NodeDefBuilder(name, "Const")
+./core/kernels/nn_ops_test.cc:  TF_CHECK_OK(NodeDefBuilder("paddings", "Const")
+./core/kernels/nn_ops_test.cc:  NodeDef* conv = graph.add_node();
+./core/kernels/nn_ops_test.cc:      TF_CHECK_OK(NodeDefBuilder("conv2d", "Conv2D")
+./core/kernels/nn_ops_test.cc:      TF_CHECK_OK(NodeDefBuilder("conv2d", "Conv2DBackpropInput")
+./core/kernels/nn_ops_test.cc:      TF_CHECK_OK(NodeDefBuilder("conv2d", "Conv2DBackpropFilter")
+./core/kernels/nn_ops_test.cc:      TF_CHECK_OK(NodeDefBuilder("conv2d", "FusedResizeAndPadConv2D")
+./core/kernels/nn_ops_test.cc:  NodeDef* conv = graph.add_node();
+./core/kernels/nn_ops_test.cc:      TF_CHECK_OK(NodeDefBuilder("depthwise_conv2d", "DepthwiseConv2dNative")
+./core/kernels/nn_ops_test.cc:      TF_CHECK_OK(NodeDefBuilder("depthwise_conv2d_backprop_input",
+./core/kernels/nn_ops_test.cc:      TF_CHECK_OK(NodeDefBuilder("depthwise_conv2d_backprop_filter",
+./core/kernels/nn_ops_test.cc:  NodeDef lrn_node_def;
+./core/kernels/nn_ops_test.cc:  TF_CHECK_OK(NodeDefBuilder("lrn_op", "LRN")
+./core/kernels/nn_ops_test.cc:  NodeDef avgpool_node_def;
+./core/kernels/nn_ops_test.cc:  Status status = NodeDefBuilder("avgpool_op", "AvgPool")
+./core/kernels/nn_ops_test.cc:  NodeDef avgpool_grad_node_def;
+./core/kernels/nn_ops_test.cc:  Status status = NodeDefBuilder("avgpool_grad_op", "AvgPoolGrad")
+./core/kernels/nn_ops_test.cc:  NodeDef maxpool_node_def;
+./core/kernels/nn_ops_test.cc:  Status status = NodeDefBuilder("maxpool_op", "MaxPool")
+./core/kernels/nn_ops_test.cc:  NodeDef relu_node_def;
+./core/kernels/nn_ops_test.cc:  Status status = NodeDefBuilder("relu_op", "Relu")
+./core/kernels/nn_ops_test.cc:  NodeDef softmax_node_def;
+./core/kernels/nn_ops_test.cc:  TF_CHECK_OK(NodeDefBuilder("softmax_op", "Softmax")
+./core/kernels/identity_op_test.cc:    TF_CHECK_OK(NodeDefBuilder("op", "Identity")
+./core/kernels/remote_fused_graph_execute_utils.h:                                       NodeDef* node_def);
+./core/kernels/remote_fused_graph_execute_utils.h:      const TensorShapeMap& tensor_shape_map, NodeDef* node_def);
+./core/kernels/quantized_activation_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_relu_op", "QuantizedRelu")
+./core/kernels/quantized_activation_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantized_relu6_op", "QuantizedRelu6")
+./core/kernels/sparse_add_op_test.cc:    TF_ASSERT_OK(NodeDefBuilder("sparseadd", "SparseAdd")
+./core/kernels/remote_fused_graph_execute_utils.cc:  for (const NodeDef& node : graph_def.node()) {
+./core/kernels/remote_fused_graph_execute_utils.cc:    const std::vector<TensorShape>& shapes, NodeDef* node_def) {
+./core/kernels/remote_fused_graph_execute_utils.cc:    const TensorShapeMap& tensor_shape_map, NodeDef* node_def) {
+./core/kernels/quantize_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantize_op", "QuantizeV2")
+./core/kernels/quantize_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantize_op", "QuantizeV2")
+./core/kernels/quantize_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantize_op", "QuantizeV2")
+./core/kernels/quantize_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("quantize_op", "QuantizeV2")
+./core/kernels/quantize_op_test.cc:  TF_ASSERT_OK(NodeDefBuilder("dequantize_op", "Dequantize")
+./core/kernels/remote_fused_graph_execute_op_test.cc:      NodeDefBuilder("remote_fused_graph_execute_op", "RemoteFusedGraphExecute")
+./core/kernels/remote_fused_graph_execute_op_test.cc:  for (const NodeDef& node : original_graph.node()) {
+./core/kernels/remote_fused_graph_execute_op_test.cc:    NodeDef& copied_node = *execute_info.add_node();
+./core/kernels/remote_fused_graph_execute_op_test.cc:    for (const NodeDef& node_def : info.node()) {
+./core/kernels/remote_fused_graph_execute_op_test.cc:    const NodeDef& node_b = *node_def_map_.at(NAME_B);
+./core/kernels/remote_fused_graph_execute_op_test.cc:  std::unordered_map<string, const NodeDef*> node_def_map_;
+./core/grappler/grappler_item.h:  std::vector<const NodeDef*> MainOpsFanin() const;
+./core/grappler/grappler_item.h:  std::vector<const NodeDef*> InitOpsFanin() const;
+./core/grappler/grappler_item.h:std::vector<const NodeDef*> ComputeTransitiveFanin(
+./core/grappler/grappler_item.cc:std::vector<const NodeDef*> GrapplerItem::MainOpsFanin() const {
+./core/grappler/grappler_item.cc:std::vector<const NodeDef*> GrapplerItem::InitOpsFanin() const {
+./core/grappler/grappler_item.cc:std::vector<const NodeDef*> ComputeTransitiveFanin(
+./core/grappler/grappler_item.cc:  std::unordered_map<string, const NodeDef*> name_to_node;
+./core/grappler/grappler_item.cc:  std::vector<const NodeDef*> queue;
+./core/grappler/grappler_item.cc:    const NodeDef* node = name_to_node[NodeName(root)];
+./core/grappler/grappler_item.cc:  std::vector<const NodeDef*> result;
+./core/grappler/grappler_item.cc:  std::unordered_set<const NodeDef*> visited;
+./core/grappler/grappler_item.cc:    const NodeDef* node = queue.back();
+./core/grappler/grappler_item.cc:      const NodeDef* in = name_to_node[NodeName(input)];
+./core/grappler/costs/utils.cc:    const NodeDef& node,
+./core/grappler/costs/utils.h:    const NodeDef& node,
+./core/grappler/costs/graph_memory.cc:    const std::vector<const NodeDef*>& nodes, GraphProperties* properties,
+./core/grappler/costs/graph_memory.h:  void InferMemUsageForNodes(const std::vector<const NodeDef*>& nodes,
+./core/grappler/optimizers/layout_optimizer.cc:  NodeDef* GetNode(const string& name) {
+./core/grappler/optimizers/layout_optimizer.cc:  std::set<NodeDef*> GetOutputs(const string& name) { return outputs_[name]; }
+./core/grappler/optimizers/layout_optimizer.cc:  void AddNode(const string& name, NodeDef* node) {
+./core/grappler/optimizers/layout_optimizer.cc:  std::unordered_map<string, NodeDef*> nodes_;
+./core/grappler/optimizers/layout_optimizer.cc:  std::unordered_map<string, std::set<NodeDef*>> outputs_;
+./core/grappler/optimizers/layout_optimizer.cc:  NodeProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  bool IsDimsN(NodeDef* node, int n) const {
+./core/grappler/optimizers/layout_optimizer.cc:  bool IsDimsFour(NodeDef* node) const { return IsDimsN(node, 4); }
+./core/grappler/optimizers/layout_optimizer.cc:    NodeDef* node = node_map_->GetNode(name);
+./core/grappler/optimizers/layout_optimizer.cc:    NodeDef* node = graph_->add_node();
+./core/grappler/optimizers/layout_optimizer.cc:  NodeDef* node_;
+./core/grappler/optimizers/layout_optimizer.cc:  AvgPoolGradProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  BiasAddGradProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  Conv2DBackpropFilterProcessor(GraphDef* graph, NodeDef* node,
+./core/grappler/optimizers/layout_optimizer.cc:  Conv2DBackpropInputProcessor(GraphDef* graph, NodeDef* node,
+./core/grappler/optimizers/layout_optimizer.cc:  FusedBatchNormGradProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  MaxPoolGradProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  AgnosticNodeProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  AddNProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  BinaryOpProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:    NodeDef* node = graph_->add_node();
+./core/grappler/optimizers/layout_optimizer.cc:    NodeDef* node = graph_->add_node();
+./core/grappler/optimizers/layout_optimizer.cc:  ConcatProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  ReluGradProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  SliceProcessorGatherBased(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:    NodeDef* node = graph_->add_node();
+./core/grappler/optimizers/layout_optimizer.cc:  SliceProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  SqueezeProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:  SumProcessor(GraphDef* graph, NodeDef* node, NodeMap* node_map)
+./core/grappler/optimizers/layout_optimizer.cc:    NodeDef* node = node_map_->GetNode(node_->input(1));
+./core/grappler/optimizers/layout_optimizer.cc:    NodeDef* node = graph_->add_node();
+./core/grappler/optimizers/layout_optimizer.cc:    NodeDef* node = graph_->add_node();
+./core/grappler/optimizers/layout_optimizer.cc:    NodeDef* node = graph_->add_node();
+./core/grappler/optimizers/layout_optimizer.cc:          NodeDef* output = *outputs.begin();
+./core/grappler/optimizers/layout_optimizer.cc:            [nodes_removable](const NodeDef& node) {
+./core/platform/env_test.cc:  NodeDef* node = g.add_node();
+./core/util/mirror_pad_mode.cc:Status GetNodeAttr(const NodeDef& node_def, StringPiece attr_name,
+./core/util/mirror_pad_mode.h:class NodeDef;
+./core/util/mirror_pad_mode.h:Status GetNodeAttr(const NodeDef& node_def, StringPiece attr_name,
+./core/util/padding.h:Status GetNodeAttr(const NodeDef& node_def, StringPiece attr_name,
+./core/util/padding.cc:Status GetNodeAttr(const NodeDef& node_def, StringPiece attr_name,
+./core/example/example_parser_configuration_test.cc:  NodeDef* parse_example_node() {
+./core/example/example_parser_configuration_test.cc:  NodeDef* node = parse_example_node();
+./core/example/example_parser_configuration_test.cc:  NodeDef* node = parse_example_node();
+./core/ops/string_ops_test.cc:  std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/string_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "StringJoin")
+./core/ops/data_flow_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "DynamicPartition")
+./core/ops/data_flow_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "DynamicPartition")
+./core/ops/data_flow_ops_test.cc:      NodeDefBuilder("test", "DynamicStitch")
+./core/ops/data_flow_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "TensorArrayV3")
+./core/ops/control_flow_ops_test.cc:  std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/control_flow_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Merge")
+./core/ops/control_flow_ops_test.cc:  std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/control_flow_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "RefSelect")
+./core/ops/parsing_ops_test.cc:    std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/parsing_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "DecodeCSV")
+./core/ops/parsing_ops_test.cc:    using NodeOutList = std::vector<NodeDefBuilder::NodeOut>;
+./core/ops/parsing_ops_test.cc:    NodeDefBuilder::NodeOut string_in{"a", 0, DT_STRING};
+./core/ops/parsing_ops_test.cc:        NodeDefBuilder("test", "ParseExample")
+./core/ops/parsing_ops_test.cc:    using NodeOutList = std::vector<NodeDefBuilder::NodeOut>;
+./core/ops/parsing_ops_test.cc:    NodeDefBuilder::NodeOut string_in{"a", 0, DT_STRING};
+./core/ops/parsing_ops_test.cc:        NodeDefBuilder("test", "ParseSingleSequenceExample")
+./core/ops/state_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Assign")
+./core/ops/state_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Assign")
+./core/ops/state_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "ScatterUpdate")
+./core/ops/state_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "TemporaryVariable")
+./core/ops/state_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Variable")
+./core/ops/state_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Variable")
+./core/ops/state_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Variable")
+./core/ops/state_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "VariableV2")
+./core/ops/state_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "VariableV2")
+./core/ops/state_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "VariableV2")
+./core/ops/sparse_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "SparseSplit")
+./core/ops/sparse_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "SparseTensorDenseMatMul")
+./core/ops/sparse_ops_test.cc:  std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/sparse_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "SparseConcat")
+./core/ops/candidate_sampling_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", op.name)
+./core/ops/candidate_sampling_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", op.name)
+./core/ops/array_ops_test.cc:    std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Pack")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Unpack")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Const")
+./core/ops/array_ops_test.cc:  std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "ShapeN")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "ImmutableConst")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "ImmutableConst")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "ImmutableConst")
+./core/ops/array_ops_test.cc:    std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Concat")
+./core/ops/array_ops_test.cc:    std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "ConcatV2")
+./core/ops/array_ops_test.cc:  std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "ConcatOffset")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Placeholder")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Placeholder")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Placeholder")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "PlaceholderWithDefault")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "PlaceholderV2")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "PlaceholderV2")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "PlaceholderV2")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "PlaceholderV2")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Bitcast")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Squeeze")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "ReverseSequence")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Split")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Tile")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "OneHot")
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "ExtractImagePatches")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "SpaceToBatch")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "SpaceToBatchND")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "BatchToSpace")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "BatchToSpaceND")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "SpaceToDepth")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "DepthToSpace")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "DepthToSpace")
+./core/ops/array_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Slice")
+./core/ops/array_ops_test.cc:    std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/array_ops_test.cc:    std::vector<NodeDefBuilder::NodeOut> limit_list;
+./core/ops/array_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "QuantizedConcat")
+./core/ops/functional_ops_test.cc:  std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/functional_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "SymbolicGradient")
+./core/ops/linalg_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Pack")
+./core/ops/linalg_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Qr")
+./core/ops/linalg_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Svd")
+./core/ops/nn_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Pack")
+./core/ops/nn_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "FusedBatchNorm")
+./core/ops/nn_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "FusedBatchNormGrad")
+./core/ops/nn_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "Dilation2D")
+./core/ops/nn_ops_test.cc:      TF_ASSERT_OK(NodeDefBuilder("test", op_name)
+./core/ops/io_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", op.name)
+./core/ops/io_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", op.name)
+./core/ops/ctc_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "CTCBeamSearchDecoder")
+./core/ops/math_ops_test.cc:    std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/math_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "AddN")
+./core/ops/math_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Range")
+./core/ops/math_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "BatchMatMul")
+./core/ops/remote_fused_graph_ops_test.cc:    std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/ops/remote_fused_graph_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", "RemoteFusedGraphExecute")
+./core/ops/image_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", op_name)
+./core/ops/image_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", op_name)
+./core/ops/image_ops_test.cc:    TF_ASSERT_OK(NodeDefBuilder("test", op_name)
+./core/distributed_runtime/master_session.cc:  string DetailText(const NodeDef& def, const NodeExecStats& ns) {
+./core/distributed_runtime/master_session.cc:    const NodeDef& ndef = graph_def.node(i);
+./core/distributed_runtime/executor_test.cc:    params.create_kernel = [this, version](const NodeDef& ndef,
+./core/distributed_runtime/rpc/grpc_session.cc:  for (NodeDef& ndef : *(gdef->mutable_node())) {
+./core/distributed_runtime/rpc/grpc_session.cc:        // usage on the server side where GraphDef/NodeDef are copied
+./core/distributed_runtime/graph_mgr.cc:// expects that NodeDef in GraphDef given to workers fully specifies
+./core/distributed_runtime/graph_mgr.cc:                                     SummarizeNodeDef(ndef));
+./core/distributed_runtime/graph_mgr.cc:    params.create_kernel = [session, lib, opseg](const NodeDef& ndef,
+./core/framework/shape_inference_testutil.cc:  std::unique_ptr<const NodeDef> new_node_def;
+./core/framework/memory_types_test.cc:  NodeDef node_def;
+./core/framework/memory_types_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "HostMemoryTest")
+./core/framework/queue_interface.h:  virtual Status MatchesNodeDef(const NodeDef& node_def) = 0;
+./core/framework/function.h:    // When constructing a NodeDef, the first entry in ret is used as
+./core/framework/function.h:    NodeDef ToNodeDef() const;
+./core/framework/function.h:  // The Create() function uses the new NodeDef field.  `ret_def`
+./core/framework/function.h:  Status GetAttr(const NodeDef& ndef, const string& attr, T* value) const;
+./core/framework/function.h:  const FunctionDef* GetAttrImpl(const NodeDef& ndef) const;
+./core/framework/function.h:  virtual Status CreateKernel(const NodeDef& ndef, OpKernel** kernel) = 0;
+./core/framework/function.h:Status FunctionLibraryDefinition::GetAttr(const NodeDef& ndef,
+./core/framework/function.proto:  // Unlike the NodeDefs in GraphDef, we need to be able to specify a
+./core/framework/function.proto:  // The body of the function.  Unlike the NodeDefs in a GraphDef, attrs
+./core/framework/function.proto:  repeated NodeDef node_def = 3;
+./core/framework/op_kernel_test.cc:  NodeDef CreateNodeDef(const string& op_type, const DataTypeVector& inputs) {
+./core/framework/op_kernel_test.cc:    NodeDefBuilder builder(op_type + "-op", op_type);
+./core/framework/op_kernel_test.cc:    NodeDef node_def;
+./core/framework/op_kernel_test.cc:        device_type, &device_, cpu_allocator(), CreateNodeDef(op_type, inputs),
+./core/framework/op_kernel_test.cc:    NodeDef node_def;
+./core/framework/op_kernel_test.cc:  NodeDef ndef = CreateNodeDef("Test1", {DT_FLOAT, DT_INT32});
+./core/framework/op_kernel_test.cc:    NodeDef ndef = CreateNodeDef("Test3", {DT_INT8, DT_INT8});
+./core/framework/op_kernel_test.cc:    NodeDef ndef = CreateNodeDef("Test3", {DT_FLOAT, DT_FLOAT});
+./core/framework/op_kernel_test.cc:    NodeDef ndef = CreateNodeDef("Test3", {DT_STRING, DT_STRING});
+./core/framework/op_kernel_test.cc:    NodeDef ndef = CreateNodeDef("Test4", {DT_FLOAT});
+./core/framework/op_kernel_test.cc:  ExpectFailure(CreateNodeDef("Test1", {DT_FLOAT, DT_INT32}).DebugString(),
+./core/framework/op_kernel_test.cc:  ExpectFailure(CreateNodeDef("Test3", {DT_INT8, DT_INT8}).DebugString(),
+./core/framework/op_kernel_test.cc:  ExpectFailure(CreateNodeDef("Test3", {DT_FLOAT, DT_FLOAT}).DebugString(),
+./core/framework/op_kernel_test.cc:  ExpectFailure(CreateNodeDef("Test3", {DT_INT32, DT_INT32}).DebugString(),
+./core/framework/op_kernel_test.cc:  NodeDef node_def = CreateNodeDef("Test1", {DT_FLOAT, DT_INT32});
+./core/framework/op_kernel_test.cc:  NodeDef node_def = CreateNodeDef("Test1", {DT_FLOAT, DT_INT32});
+./core/framework/op_kernel_test.cc:  ExpectFailure(CreateNodeDef("Test2", {DT_FLOAT}).DebugString(), DEVICE_GPU,
+./core/framework/op_kernel_test.cc:                     CreateNodeDef("Test1", {DT_FLOAT, DT_INT32}),
+./core/framework/op_kernel_test.cc:                     CreateNodeDef("Test1", {DT_FLOAT, DT_INT32}),
+./core/framework/op_kernel_test.cc:                     CreateNodeDef("Test1", {DT_FLOAT, DT_INT32}),
+./core/framework/op_kernel_test.cc:  NodeDef CreateNodeDef(const string& op_type,
+./core/framework/op_kernel_test.cc:    NodeDef node_def;
+./core/framework/op_kernel_test.cc:    NodeDef def = CreateNodeDef(op_type, attrs);
+./core/framework/op_kernel_test.cc:    const NodeDef def = CreateNodeDef(op_type, attrs);
+./core/framework/op_kernel_test.cc:    NodeDef def = CreateNodeDef(op_type, attrs);
+./core/framework/op_kernel_test.cc:  const NodeDef ndef = CreateNodeDef("DuplicateKernel", {});
+./core/framework/op_kernel_test.cc:                  .contains("Multiple OpKernel registrations match NodeDef"));
+./core/framework/op_kernel_test.cc:  const NodeDef ndef =
+./core/framework/op_kernel_test.cc:      CreateNodeDef("DuplicateKernelForT", {"T|type|DT_FLOAT"});
+./core/framework/op_kernel_test.cc:                  .contains("Multiple OpKernel registrations match NodeDef"));
+./core/framework/op_kernel_test.cc:  const NodeDef ndef = CreateNodeDef("BadConstraint", {});
+./core/framework/op_kernel_test.cc:                            "'T' not in NodeDef"));
+./core/framework/fake_input.cc:  FakeInputImpl(const OpDef* op_def, int in_index, const NodeDef* node_def,
+./core/framework/fake_input.cc:                NodeDefBuilder* builder);
+./core/framework/fake_input.cc:  const NodeDef* const node_def_;
+./core/framework/fake_input.cc:  NodeDefBuilder* const builder_;
+./core/framework/fake_input.cc:                             const NodeDef* node_def, NodeDefBuilder* builder)
+./core/framework/fake_input.cc:  std::vector<NodeDefBuilder::NodeOut> srcs;
+./core/framework/fake_input.cc:  builder_->Input(gtl::ArraySlice<NodeDefBuilder::NodeOut>(srcs));
+./core/framework/fake_input.cc:  std::vector<NodeDefBuilder::NodeOut> srcs;
+./core/framework/fake_input.cc:  builder_->Input(gtl::ArraySlice<NodeDefBuilder::NodeOut>(srcs));
+./core/framework/fake_input.cc:  return [](const OpDef& op_def, int in_index, const NodeDef& node_def,
+./core/framework/fake_input.cc:            NodeDefBuilder* builder) {
+./core/framework/fake_input.cc:  return [dt](const OpDef& op_def, int in_index, const NodeDef& node_def,
+./core/framework/fake_input.cc:              NodeDefBuilder* builder) {
+./core/framework/fake_input.cc:  return [n](const OpDef& op_def, int in_index, const NodeDef& node_def,
+./core/framework/fake_input.cc:             NodeDefBuilder* builder) {
+./core/framework/fake_input.cc:  return [n, dt](const OpDef& op_def, int in_index, const NodeDef& node_def,
+./core/framework/fake_input.cc:                 NodeDefBuilder* builder) {
+./core/framework/fake_input.cc:  return [dtv](const OpDef& op_def, int in_index, const NodeDef& node_def,
+./core/framework/fake_input.cc:               NodeDefBuilder* builder) {
+./core/framework/graph.proto:  repeated NodeDef node = 1;
+./core/framework/node_def_util_test.cc:NodeDef ToNodeDef(const string& text) {
+./core/framework/node_def_util_test.cc:  NodeDef node_def;
+./core/framework/node_def_util_test.cc:NodeDef ToNodeDef(const NodeDefBuilder& builder) {
+./core/framework/node_def_util_test.cc:  NodeDef node_def;
+./core/framework/node_def_util_test.cc:void ExpectSuccess(const NodeDef& good, const OpDef& op_def) {
+./core/framework/node_def_util_test.cc:  EXPECT_EQ(Status::OK(), ValidateNodeDef(good, op_def))
+./core/framework/node_def_util_test.cc:      << "NodeDef: " << SummarizeNodeDef(good)
+./core/framework/node_def_util_test.cc:void ExpectFailure(const NodeDef& bad, const OpDef& op_def,
+./core/framework/node_def_util_test.cc:  Status status = ValidateNodeDef(bad, op_def);
+./core/framework/node_def_util_test.cc:  EXPECT_FALSE(status.ok()) << "NodeDef: " << SummarizeNodeDef(bad)
+./core/framework/node_def_util_test.cc:      << status << "; NodeDef: " << SummarizeNodeDef(bad)
+./core/framework/node_def_util_test.cc:      << "NodeDef: " << SummarizeNodeDef(bad)
+./core/framework/node_def_util_test.cc:TEST(NodeDefUtilTest, In) {
+./core/framework/node_def_util_test.cc:  const NodeDef node_def = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  EXPECT_EQ("n = In[T=DT_FLOAT](a)", SummarizeNodeDef(node_def));
+./core/framework/node_def_util_test.cc:  NodeDef bad = node_def;
+./core/framework/node_def_util_test.cc:  ExpectFailure(bad, op, "NodeDef op 'Wrong' does not match Op<name=In;");
+./core/framework/node_def_util_test.cc:  ExpectFailure(bad, op, "NodeDef missing attr 'T' from Op<name=In;");
+./core/framework/node_def_util_test.cc:  ExpectFailure(bad, op, "NodeDef mentions attr 'EXTRA' not in Op<name=In;");
+./core/framework/node_def_util_test.cc:      "'T'\n\t; NodeDef: ");
+./core/framework/node_def_util_test.cc:      "NodeDef expected inputs 'float' do not match 2 inputs specified;");
+./core/framework/node_def_util_test.cc:      "NodeDef expected inputs 'float' do not match 0 inputs specified;");
+./core/framework/node_def_util_test.cc:  NodeDef good = node_def;
+./core/framework/node_def_util_test.cc:                "in NodeDef:");
+./core/framework/node_def_util_test.cc:  ExpectFailure(bad, op, "Control input '^b:0' must not have ':' in NodeDef:");
+./core/framework/node_def_util_test.cc:TEST(NodeDefUtilTest, Out) {
+./core/framework/node_def_util_test.cc:  const NodeDef node_def = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  EXPECT_EQ("n = Out[T=DT_INT32]()", SummarizeNodeDef(node_def));
+./core/framework/node_def_util_test.cc:  NodeDef bad = node_def;
+./core/framework/node_def_util_test.cc:TEST(NodeDefUtilTest, Enum) {
+./core/framework/node_def_util_test.cc:  const NodeDef node_def = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  EXPECT_EQ("n = Enum[e=\"apple\"]()", SummarizeNodeDef(node_def));
+./core/framework/node_def_util_test.cc:  NodeDef good = node_def;
+./core/framework/node_def_util_test.cc:  NodeDef bad = node_def;
+./core/framework/node_def_util_test.cc:TEST(NodeDefUtilTest, SameIn) {
+./core/framework/node_def_util_test.cc:  const NodeDef node_def = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  EXPECT_EQ("n = SameIn[N=2, T=DT_DOUBLE](a, b)", SummarizeNodeDef(node_def));
+./core/framework/node_def_util_test.cc:  NodeDef bad = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  bad = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:TEST(NodeDefUtilTest, AnyIn) {
+./core/framework/node_def_util_test.cc:  const NodeDef node_def = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:            SummarizeNodeDef(node_def));
+./core/framework/node_def_util_test.cc:  const NodeDef bad = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef bad2 = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:TEST(NodeDefUtilTest, Device) {
+./core/framework/node_def_util_test.cc:  const NodeDef node_def1 =
+./core/framework/node_def_util_test.cc:      ToNodeDef(NodeDefBuilder("d", &op_def1).Device("/cpu:17"));
+./core/framework/node_def_util_test.cc:  EXPECT_EQ("d = None[_device=\"/cpu:17\"]()", SummarizeNodeDef(node_def1));
+./core/framework/node_def_util_test.cc:  const NodeDef node_def2 =
+./core/framework/node_def_util_test.cc:      ToNodeDef(NodeDefBuilder("d", &op_def2).Attr("v", 7).Device("/cpu:5"));
+./core/framework/node_def_util_test.cc:            SummarizeNodeDef(node_def2));
+./core/framework/node_def_util_test.cc:void ExpectValidSyntax(const NodeDef& good) {
+./core/framework/node_def_util_test.cc:  EXPECT_EQ(Status::OK(), ValidateExternalNodeDefSyntax(good))
+./core/framework/node_def_util_test.cc:      << "NodeDef: " << SummarizeNodeDef(good);
+./core/framework/node_def_util_test.cc:void ExpectInvalidSyntax(const NodeDef& bad, const string& message) {
+./core/framework/node_def_util_test.cc:  Status status = ValidateExternalNodeDefSyntax(bad);
+./core/framework/node_def_util_test.cc:  ASSERT_FALSE(status.ok()) << "NodeDef: " << SummarizeNodeDef(bad);
+./core/framework/node_def_util_test.cc:      << status << "; NodeDef: " << SummarizeNodeDef(bad);
+./core/framework/node_def_util_test.cc:      << "NodeDef: " << SummarizeNodeDef(bad) << ", " << status << ", "
+./core/framework/node_def_util_test.cc:TEST(NodeDefUtilTest, ValidSyntax) {
+./core/framework/node_def_util_test.cc:  const NodeDef node_def = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_explicit_inputs = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:            SummarizeNodeDef(node_def_explicit_inputs));
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_partial_shape = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_control_input = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_invalid_name = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_internal_name = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_slash_in_name = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_internal_input_name = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_input_name_slash = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_invalid_control_input_name = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_control_input_name_slash = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_data_input_after_control = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_data_input_invalid_port = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def_data_input_invalid_port2 = ToNodeDef(R"proto(
+./core/framework/node_def_util_test.cc:  const NodeDef node_def = ToNodeDef(
+./core/framework/node_def_util_test.cc:      NodeDefBuilder("simple", &op_def).Input(FakeInput()).Input(FakeInput()));
+./core/framework/node_def_util_test.cc:  EXPECT_EQ("simple = Simple[](a, b)", SummarizeNodeDef(node_def));
+./core/framework/node_def_util_test.cc:  const NodeDef node_def1 = ToNodeDef(NodeDefBuilder("poly", &op_def)
+./core/framework/node_def_util_test.cc:            SummarizeNodeDef(node_def1));
+./core/framework/node_def_util_test.cc:  const NodeDef node_def2 = ToNodeDef(NodeDefBuilder("poly", &op_def)
+./core/framework/node_def_util_test.cc:  EXPECT_EQ("poly = Polymorphic[T=DT_BOOL](a, b)", SummarizeNodeDef(node_def2));
+./core/framework/node_def_util_test.cc:  const NodeDef node_def1 = ToNodeDef(NodeDefBuilder("nr", &op_def)
+./core/framework/node_def_util_test.cc:      SummarizeNodeDef(node_def1));
+./core/framework/node_def_util_test.cc:  const NodeDef node_def2 = ToNodeDef(NodeDefBuilder("nr", &op_def)
+./core/framework/node_def_util_test.cc:            SummarizeNodeDef(node_def2));
+./core/framework/node_def_util_test.cc:  NodeDef bad_node_def = node_def2;
+./core/framework/node_def_util_test.cc:  const NodeDef node_def1 =
+./core/framework/node_def_util_test.cc:      ToNodeDef(NodeDefBuilder("tl", &op_def)
+./core/framework/node_def_util_test.cc:      SummarizeNodeDef(node_def1));
+./core/framework/node_def_util_test.cc:  const NodeDef node_def2 = ToNodeDef(NodeDefBuilder("tl", &op_def)
+./core/framework/node_def_util_test.cc:      SummarizeNodeDef(node_def2));
+./core/framework/node_def_util_test.cc:  NodeDef bad_node_def = node_def2;
+./core/framework/node_def_builder_test.cc:class NodeDefBuilderTest : public ::testing::Test {
+./core/framework/node_def_builder_test.cc:  // Resets builder_ with a new NodeDefBuilder using the Op from the last call
+./core/framework/node_def_builder_test.cc:  NodeDefBuilder& Builder() {
+./core/framework/node_def_builder_test.cc:    builder_.reset(new NodeDefBuilder("n", &op_def_));
+./core/framework/node_def_builder_test.cc:  void ExpectSuccess(const NodeDefBuilder& builder,
+./core/framework/node_def_builder_test.cc:    NodeDef node_def;
+./core/framework/node_def_builder_test.cc:    NodeDef expected;
+./core/framework/node_def_builder_test.cc:    status = ValidateNodeDef(node_def, op_def_);
+./core/framework/node_def_builder_test.cc:  void ExpectFailures(const NodeDefBuilder& builder,
+./core/framework/node_def_builder_test.cc:    NodeDef node_def;
+./core/framework/node_def_builder_test.cc:    EXPECT_FALSE(status.ok()) << SummarizeNodeDef(node_def);
+./core/framework/node_def_builder_test.cc:  void ExpectFailure(const NodeDefBuilder& builder, const string& message) {
+./core/framework/node_def_builder_test.cc:  // ValidateNodeDef().
+./core/framework/node_def_builder_test.cc:  void ExpectInvalid(const NodeDefBuilder& builder, const string& message) {
+./core/framework/node_def_builder_test.cc:    NodeDef node_def;
+./core/framework/node_def_builder_test.cc:      status = ValidateNodeDef(node_def, op_def_);
+./core/framework/node_def_builder_test.cc:    EXPECT_FALSE(status.ok()) << SummarizeNodeDef(node_def);
+./core/framework/node_def_builder_test.cc:  std::unique_ptr<NodeDefBuilder> builder_;
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, Simple) {
+./core/framework/node_def_builder_test.cc:                "NodeDef 'n' using Op<name=Simple; signature=a:int32 -> "
+./core/framework/node_def_builder_test.cc:    NodeDefBuilder& builder = Builder();
+./core/framework/node_def_builder_test.cc:    NodeDefBuilder& builder = Builder();
+./core/framework/node_def_builder_test.cc:                "Control input '^z:2' must not have ':' in NodeDef:");
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, OpDoesNotExist) {
+./core/framework/node_def_builder_test.cc:  NodeDefBuilder builder("n", "Op Does Not Exist");
+./core/framework/node_def_builder_test.cc:      "Op type not registered 'Op Does Not Exist' while building NodeDef 'n'");
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, Polymorphic) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, PolymorphicOut) {
+./core/framework/node_def_builder_test.cc:  ExpectInvalid(Builder(), "NodeDef missing attr 'T' from");
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, PolymorphicDefaultOut) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, Binary) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, Restrict) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, TypeList) {
+./core/framework/node_def_builder_test.cc:                 {"2 errors while building NodeDef",
+./core/framework/node_def_builder_test.cc:                  "No attr named 'T' in NodeDef:",
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, TypeListNoMin) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, TypeListTwice) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, OutTypeList) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, TypeListRestrict) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, OutTypeListRestrict) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, Attr) {
+./core/framework/node_def_builder_test.cc:  ExpectInvalid(Builder(), "NodeDef missing attr 'a' from Op<");
+./core/framework/node_def_builder_test.cc:                "NodeDef mentions attr 'b' not in Op<");
+./core/framework/node_def_builder_test.cc:                "NodeDef mentions attr 'extra' not in Op<");
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrFloat) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrBoolList) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrMin) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrListMin) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrEnum) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrEnumList) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrShape) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrDefault) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrManyDefault) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrListDefault) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, AttrEmptyListDefault) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NIntsIn) {
+./core/framework/node_def_builder_test.cc:                 {"2 errors while building NodeDef",
+./core/framework/node_def_builder_test.cc:      {"2 errors while building NodeDef",
+./core/framework/node_def_builder_test.cc:       "Could not infer length of input 'a': No attr named 'N' in NodeDef:",
+./core/framework/node_def_builder_test.cc:      {"2 errors while building NodeDef",
+./core/framework/node_def_builder_test.cc:       "Could not infer length of input 'a': No attr named 'N' in NodeDef:",
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NPolymorphicIn) {
+./core/framework/node_def_builder_test.cc:      {"2 errors while building NodeDef",
+./core/framework/node_def_builder_test.cc:       "Could not infer type for input 'a': No attr named 'T' in NodeDef:",
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NPolymorphicRestrictIn) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NInTwice) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NInPolymorphicTwice) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NInTwoTypeVariables) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, InPolymorphicTwice) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NIntsOut) {
+./core/framework/node_def_builder_test.cc:  ExpectInvalid(Builder(), "NodeDef missing attr 'N' from");
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NIntsOutDefault) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NPolymorphicOut) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NPolymorphicOutDefault) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, NPolymorphicRestrictOut) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, RefIn) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, PolymorphicRefIn) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, RefOut) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, PolymorphicRefOut) {
+./core/framework/node_def_builder_test.cc:TEST_F(NodeDefBuilderTest, SpecifyDevice) {
+./core/framework/resource_op_kernel_test.cc:    NodeDef node_def;
+./core/framework/resource_op_kernel_test.cc:        NodeDefBuilder(strings::StrCat("test-node", count_++), "StubResourceOp")
+./core/framework/shape_inference_testutil.h:class NodeDef;
+./core/framework/shape_inference_testutil.h:  NodeDef node_def;
+./core/framework/node_def_builder.h:class NodeDefBuilder;
+./core/framework/node_def_builder.h:typedef std::function<Status(const OpDef&, int, const NodeDef&,
+./core/framework/node_def_builder.h:                             NodeDefBuilder*)>
+./core/framework/node_def_builder.h:// This is a helper for creating a NodeDef.  Automatically sets attrs
+./core/framework/node_def_builder.h://  NodeDef node_def;
+./core/framework/node_def_builder.h://  Status status = NodeDefBuilder(node_name, op_name)
+./core/framework/node_def_builder.h:class NodeDefBuilder {
+./core/framework/node_def_builder.h:  // the Op plus a registry) for the NodeDef.  Other fields are
+./core/framework/node_def_builder.h:  NodeDefBuilder(StringPiece name, StringPiece op_name,
+./core/framework/node_def_builder.h:  NodeDefBuilder(StringPiece name, const OpDef* op_def);
+./core/framework/node_def_builder.h:  NodeDefBuilder& Input(StringPiece src_node, int src_index, DataType dt) {
+./core/framework/node_def_builder.h:  NodeDefBuilder& Input(const NodeOut& src) {
+./core/framework/node_def_builder.h:  NodeDefBuilder& Input(gtl::ArraySlice<NodeOut> src_list) {
+./core/framework/node_def_builder.h:  NodeDefBuilder& Input(FakeInputFunctor fake_input);
+./core/framework/node_def_builder.h:  NodeDefBuilder& ControlInput(StringPiece src_node);
+./core/framework/node_def_builder.h:  NodeDefBuilder& Device(StringPiece device_spec);
+./core/framework/node_def_builder.h:  NodeDefBuilder& Attr(StringPiece attr_name, T&& value);
+./core/framework/node_def_builder.h:  NodeDefBuilder& Attr(StringPiece attr_name, std::initializer_list<T> value) {
+./core/framework/node_def_builder.h:  // Finish building the NodeDef, returning any errors or setting
+./core/framework/node_def_builder.h:  // WARNING: Not all problems are detected!  The resulting NodeDef may
+./core/framework/node_def_builder.h:  // not be valid!  Call ValidateNodeDef() from node_def_utils to be sure.
+./core/framework/node_def_builder.h:  Status Finalize(NodeDef* node_def) const;
+./core/framework/node_def_builder.h:  NodeDef node_def_;
+./core/framework/node_def_builder.h:NodeDefBuilder& NodeDefBuilder::Attr(StringPiece attr_name, T&& value) {
+./core/framework/node_def_util.h:// Produce a human-readable version of a NodeDef that is more concise
+./core/framework/node_def_util.h:string SummarizeNodeDef(const NodeDef& node_def);
+./core/framework/node_def_util.h:void AddNodeAttr(StringPiece name, T&& value, NodeDef* node_def) {
+./core/framework/node_def_util.h:                 NodeDef* node_def) {
+./core/framework/node_def_util.h:  AttrSlice(const NodeDef& node_def);  // NOLINT(runtime/explicit)
+./core/framework/node_def_util.h:  const NodeDef* ndef_;
+./core/framework/node_def_util.h:Status InOutTypesForNode(const NodeDef& node_def, const OpDef& op_def,
+./core/framework/node_def_util.h:// Validates that the NodeDef:
+./core/framework/node_def_util.h:Status ValidateNodeDef(const NodeDef& node_def, const OpDef& op_def);
+./core/framework/node_def_util.h:Status NameRangesForNode(const NodeDef& node_def, const OpDef& op_def,
+./core/framework/node_def_util.h:void AddDefaultsToNodeDef(const OpDef& op_def, NodeDef* node_def);
+./core/framework/node_def_util.h:// Validates the syntax of a NodeDef provided externally.
+./core/framework/node_def_util.h:// The following is an EBNF-style syntax for NodeDef objects. Note that
+./core/framework/node_def_util.h:// Node objects are actually specified as tensorflow::NodeDef protocol buffers,
+./core/framework/node_def_util.h:Status ValidateExternalNodeDefSyntax(const NodeDef& node_def);
+./core/framework/node_def_util.h:// Returns "status" with kernel's NodeDef attached as additional text
+./core/framework/node_def_util.h:Status AttachDef(const Status& status, const NodeDef& node_def);
+./core/framework/resource_mgr_test.cc:  NodeDef ndef;
+./core/framework/shape_inference.cc:    int graph_def_version, const NodeDef* node_def, const OpDef& op_def,
+./core/framework/shape_inference.cc:    int graph_def_version, const NodeDef* node_def, const OpDef& op_def,
+./core/framework/shape_inference.cc:        num_inputs_from_node_def, " expected based on NodeDef");
+./core/framework/memory_types.h://           * def has all attrs specified (e.g. using AddDefaultsToNodeDef()).
+./core/framework/memory_types.h:                          DeviceType device_type, const NodeDef& ndef,
+./core/framework/graph_def_util.cc:  for (const NodeDef& node : graph_def.node()) {
+./core/framework/graph_def_util.cc:    strings::StrAppend(&ret, SummarizeNodeDef(node), ";\n");
+./core/framework/graph_def_util.cc:  for (const NodeDef& node : graph_def.node()) {
+./core/framework/graph_def_util.cc:    TF_RETURN_IF_ERROR(ValidateExternalNodeDefSyntax(node));
+./core/framework/graph_def_util.cc:    NodeDef* node_def = graph_def->mutable_node(i);
+./core/framework/graph_def_util.cc:    AddDefaultsToNodeDef(*op_def, node_def);
+./core/framework/graph_def_util.cc:static Status RemoveNewDefaultAttrsFromNodeDef(
+./core/framework/graph_def_util.cc:    NodeDef* node_def, const OpRegistryInterface& consumer_op_registry,
+./core/framework/graph_def_util.cc:            SummarizeNodeDef(*node_def));
+./core/framework/graph_def_util.cc:    NodeDef* node_def = graph_def->mutable_node(n);
+./core/framework/graph_def_util.cc:      TF_RETURN_IF_ERROR(RemoveNewDefaultAttrsFromNodeDef(
+./core/framework/graph_def_util.cc:      NodeDef* node_def = func_def->mutable_node_def(n);
+./core/framework/graph_def_util.cc:        TF_RETURN_IF_ERROR(RemoveNewDefaultAttrsFromNodeDef(
+./core/framework/node_def_builder.cc:NodeDefBuilder::NodeOut::NodeOut(StringPiece n, int i, DataType dt)
+./core/framework/node_def_builder.cc:NodeDefBuilder::NodeOut::NodeOut() {
+./core/framework/node_def_builder.cc:void NodeDefBuilder::NodeOut::Reset(StringPiece n, int i, DataType dt) {
+./core/framework/node_def_builder.cc:NodeDefBuilder::NodeDefBuilder(StringPiece name, StringPiece op_name,
+./core/framework/node_def_builder.cc:NodeDefBuilder::NodeDefBuilder(StringPiece name, const OpDef* op_def)
+./core/framework/node_def_builder.cc:void NodeDefBuilder::Initialize() {
+./core/framework/node_def_builder.cc:const OpDef::ArgDef* NodeDefBuilder::NextArgDef() {
+./core/framework/node_def_builder.cc:bool NodeDefBuilder::NextArgAvailable() {
+./core/framework/node_def_builder.cc:NodeDefBuilder& NodeDefBuilder::Input(FakeInputFunctor fake_input) {
+./core/framework/node_def_builder.cc:void NodeDefBuilder::SingleInput(const OpDef::ArgDef* input_arg,
+./core/framework/node_def_builder.cc:void NodeDefBuilder::ListInput(const OpDef::ArgDef* input_arg,
+./core/framework/node_def_builder.cc:void NodeDefBuilder::AddInput(StringPiece src_node, int src_index) {
+./core/framework/node_def_builder.cc:void NodeDefBuilder::VerifyInputType(const OpDef::ArgDef* input_arg,
+./core/framework/node_def_builder.cc:void NodeDefBuilder::VerifyInputRef(const OpDef::ArgDef* input_arg,
+./core/framework/node_def_builder.cc:NodeDefBuilder& NodeDefBuilder::ControlInput(StringPiece src_node) {
+./core/framework/node_def_builder.cc:NodeDefBuilder& NodeDefBuilder::Device(StringPiece device_spec) {
+./core/framework/node_def_builder.cc:Status NodeDefBuilder::Finalize(NodeDef* node_def) const {
+./core/framework/node_def_builder.cc:                                       " while building NodeDef '",
+./core/framework/node_def_builder.cc:          (*errors_ptr)[0], " while building NodeDef '", node_def_.name(),
+./core/framework/node_def_builder.cc:          errors_ptr->size(), " errors while building NodeDef '",
+./core/framework/node_def_builder.cc:    NodeDef node_def_backup;
+./core/framework/node_def_builder.cc:    AddDefaultsToNodeDef(*op_def_, node_def);
+./core/framework/node_def_builder.cc:void NodeDefBuilder::CheckInconsistency(StringPiece attr_name,
+./core/framework/fake_input.h:// NodeDefBuilder::Input() to add an input for a test.  Use them when
+./core/framework/node_def.proto:message NodeDef {
+./core/framework/node_def.proto:  // COLOCATED_NODE ::= "@" NODE_NAME  // See NodeDef.name above.
+./core/framework/node_def.proto:  // NodeDefs easier to interpret on their own.  However, if
+./core/framework/function.cc:void AddAttr(const string& name, const T& val, NodeDef* ndef) {
+./core/framework/function.cc:    NodeDef* gnode = gdef->add_node();
+./core/framework/function.cc:Status BuildNodeOutputIndex(const NodeDef& node,
+./core/framework/function.cc:Status InstantiateNode(const NodeDef& fnode,
+./core/framework/function.cc:  NodeDef* gnode = gdef->add_node();
+./core/framework/function.cc:                                       SummarizeNodeDef(fnode));
+./core/framework/function.cc:    NodeDef* gnode = gdef->add_node();
+./core/framework/function.cc:// TODO(josh11b): Merge this with SummarizeNodeDef().
+./core/framework/function.cc:string Print(const NodeDef& n) {
+./core/framework/function.cc:  std::vector<const NodeDef*> arg;
+./core/framework/function.cc:  std::vector<const NodeDef*> ret;
+./core/framework/function.cc:  std::vector<const NodeDef*> body;
+./core/framework/function.cc:  for (const NodeDef& n : gdef.node()) {
+./core/framework/function.cc:  auto comp = [](const NodeDef* x, const NodeDef* y) {
+./core/framework/function.cc:  auto get_type = [](const NodeDef& n) {
+./core/framework/function.cc:    const NodeDef* n = arg[i];
+./core/framework/function.cc:    const NodeDef* n = ret[i];
+./core/framework/function.cc:      errors::AppendToMessage(&s, "In ", SummarizeNodeDef(fdef.node_def(i)));
+./core/framework/function.cc:      errors::AppendToMessage(&s, "In ", SummarizeNodeDef(fdef.node_def(i)));
+./core/framework/function.cc:    const NodeDef& ndef) const {
+./core/framework/function.cc:NodeDef FunctionDefHelper::Node::ToNodeDef() const {
+./core/framework/function.cc:  NodeDef n;
+./core/framework/function.cc:    *(fdef.add_node_def()) = n.ToNodeDef();
+./core/framework/function.cc:  // Mapping from legacy output names to NodeDef outputs.
+./core/framework/function.cc:    NodeDef* n = fdef.add_node_def();
+./core/framework/function_test.cc:  NodeDef ndef;
+./core/framework/function_test.cc:  NodeDef ndef;
+./core/framework/function_test.cc:  NodeDef ndef;
+./core/framework/node_def_util.cc:AttrSlice::AttrSlice(const NodeDef& node_def)
+./core/framework/node_def_util.cc:string SummarizeNodeDef(const NodeDef& node_def) {
+./core/framework/node_def_util.cc:  Status s = errors::NotFound("No attr named '", attr_name, "' in NodeDef:");
+./core/framework/node_def_util.cc:  // in a NodeDef.
+./core/framework/node_def_util.cc:Status AddArgToSig(const NodeDef& node_def, const OpDef::ArgDef& arg_def,
+./core/framework/node_def_util.cc:Status InOutTypesForNode(const NodeDef& node_def, const OpDef& op_def,
+./core/framework/node_def_util.cc:Status ValidateNodeDef(const NodeDef& node_def, const OpDef& op_def) {
+./core/framework/node_def_util.cc:    return errors::InvalidArgument("NodeDef op '", node_def.op(),
+./core/framework/node_def_util.cc:                                   "; NodeDef: ", SummarizeNodeDef(node_def));
+./core/framework/node_def_util.cc:                                       "' must not have ':' in NodeDef: ",
+./core/framework/node_def_util.cc:                                       SummarizeNodeDef(node_def));
+./core/framework/node_def_util.cc:                                     "' after control input in NodeDef: ",
+./core/framework/node_def_util.cc:                                     SummarizeNodeDef(node_def));
+./core/framework/node_def_util.cc:      return errors::InvalidArgument("NodeDef mentions attr '", attr.first,
+./core/framework/node_def_util.cc:                                     "; NodeDef: ", SummarizeNodeDef(node_def));
+./core/framework/node_def_util.cc:        ValidateAttrValue(attr.second, *iter->second), "; NodeDef: ",
+./core/framework/node_def_util.cc:        SummarizeNodeDef(node_def), "; ", SummarizeOpDef(op_def));
+./core/framework/node_def_util.cc:    // Keep track of which attr names have (not) been found in the NodeDef.
+./core/framework/node_def_util.cc:  // Were all attrs in the OpDef found in the NodeDef?
+./core/framework/node_def_util.cc:    return errors::InvalidArgument("NodeDef missing attr",
+./core/framework/node_def_util.cc:                                   "; NodeDef: ", SummarizeNodeDef(node_def));
+./core/framework/node_def_util.cc:        "NodeDef expected inputs '", DataTypeVectorString(inputs),
+./core/framework/node_def_util.cc:        SummarizeOpDef(op_def), "; NodeDef: ", SummarizeNodeDef(node_def));
+./core/framework/node_def_util.cc:Status ComputeArgRange(const NodeDef& node_def, const OpDef::ArgDef& arg_def,
+./core/framework/node_def_util.cc:Status NameRangesHelper(const NodeDef& node_def,
+./core/framework/node_def_util.cc:Status NameRangesForNode(const NodeDef& node_def, const OpDef& op_def,
+./core/framework/node_def_util.cc:void AddDefaultsToNodeDef(const OpDef& op_def, NodeDef* node_def) {
+./core/framework/node_def_util.cc:Status ValidateExternalNodeDefSyntax(const NodeDef& node_def) {
+./core/framework/node_def_util.cc:Status AttachDef(const Status& status, const NodeDef& node_def) {
+./core/framework/node_def_util.cc:      &ret, strings::StrCat(" [[Node: ", SummarizeNodeDef(node_def), "]]"));
+./core/framework/shape_inference_testutil_test.cc:  std::vector<NodeDefBuilder::NodeOut> src_list;
+./core/framework/shape_inference_testutil_test.cc:  NodeDef node_def;
+./core/framework/shape_inference_testutil_test.cc:  TF_CHECK_OK(NodeDefBuilder("dummy", op_name)
+./core/framework/remote_fused_graph_execute_info.proto:  repeated NodeDef node = 1;
+./core/framework/remote_fused_graph_execute_info.proto:  // in NodeDef
+./core/framework/memory_types.cc:                          DeviceType device_type, const NodeDef& ndef,
+./core/framework/op_kernel.cc:// Returns whether the attrs in the NodeDef satisfy the constraints in
+./core/framework/op_kernel.cc:Status AttrsMatch(const NodeDef& node_def, const KernelDef& kernel_def,
+./core/framework/op_kernel.cc:              "' that does not have type 'type' or 'list(type)' in NodeDef "
+./core/framework/op_kernel.cc:              SummarizeNodeDef(node_def), "'");
+./core/framework/op_kernel.cc:          constraint.name(), "' not in NodeDef '", SummarizeNodeDef(node_def),
+./core/framework/op_kernel.cc:Status FindKernelRegistration(DeviceType device_type, const NodeDef& node_def,
+./core/framework/op_kernel.cc:  string label;  // Label defaults to empty if not found in NodeDef.
+./core/framework/op_kernel.cc:            "Multiple OpKernel registrations match NodeDef '",
+./core/framework/op_kernel.cc:            SummarizeNodeDef(node_def), "': '",
+./core/framework/op_kernel.cc:Status FindKernelDef(DeviceType device_type, const NodeDef& node_def,
+./core/framework/op_kernel.cc:        SummarizeNodeDef(node_def));
+./core/framework/op_kernel.cc:    const std::vector<DeviceType>& prioritized_types, const NodeDef& def,
+./core/framework/op_kernel.cc:    const NodeDef& node_def, int graph_def_version, Status* status) {
+./core/framework/op_kernel.cc:                      const NodeDef& node_def, int graph_def_version,
+./core/framework/op_kernel.cc:  VLOG(1) << "Instantiating kernel for node: " << SummarizeNodeDef(node_def);
+./core/framework/op_kernel.cc:  s = ValidateNodeDef(node_def, *op_def);
+./core/framework/op_kernel.cc:                              SummarizeNodeDef(node_def)));
+./core/framework/op_kernel.cc:  // Get signature from the OpDef & NodeDef
+./core/framework/op_kernel.cc:    errors::AppendToMessage(&s, " for node: ", SummarizeNodeDef(node_def));
+./core/framework/op_def.proto:// Defines an operation. A NodeDef in a GraphDef specifies an Op by
+./core/framework/op_def.proto:  // be specified in the NodeDef.
+./core/framework/op_segment_test.cc:  std::vector<NodeDef> int32_nodedefs_;
+./core/framework/op_segment_test.cc:  std::vector<NodeDef> float_nodedefs_;
+./core/framework/op_segment_test.cc:      NodeDef def;
+./core/framework/op_segment_test.cc:      TF_CHECK_OK(NodeDefBuilder(strings::StrCat("op", i), "Mul")
+./core/framework/op_segment_test.cc:      TF_CHECK_OK(NodeDefBuilder(strings::StrCat("op", i), "Mul")
+./core/framework/op_segment_test.cc:  void ValidateOpAndTypes(OpKernel* op, const NodeDef& expected, DataType dt) {
+./core/framework/op_segment_test.cc:  OpSegment::CreateKernelFn GetFn(const NodeDef* ndef) {
+./core/framework/op_segment_test.cc:  NodeDef def = float_nodedefs_[0];
+./core/framework/op_segment_test.cc:  NodeDef def = float_nodedefs_[0];
+./core/framework/graph_def_util.h:// Node objects are actually specified as tensorflow::NodeDef protocol buffers,
+./core/framework/graph_def_util.h:// Adds default attributes to NodeDefs in 'graph_def' starting
+./core/framework/graph_def_util.h:// Returns OK on success, an error if 'graph_def' has a NodeDef
+./core/framework/op_kernel.h:  const NodeDef& def() const { return def_; }
+./core/framework/op_kernel.h:  const NodeDef def_;
+./core/framework/op_kernel.h:                       Allocator* allocator, const NodeDef* node_def,
+./core/framework/op_kernel.h:  const NodeDef& def() const { return *def_; }
+./core/framework/op_kernel.h:  const NodeDef* def_;
+./core/framework/op_kernel.h:// REQUIRES: def has all attrs specified (e.g. using AddDefaultsToNodeDef()).
+./core/framework/op_kernel.h:                                         const NodeDef& def,
+./core/framework/op_kernel.h:                      const NodeDef& def, int graph_def_version,
+./core/framework/op_kernel.h:// binary has registered for the given NodeDef.
+./core/framework/op_kernel.h://           * def has all attrs specified (e.g. using AddDefaultsToNodeDef()).
+./core/framework/op_kernel.h:    const std::vector<DeviceType>& prioritized_types, const NodeDef& def,
+./core/framework/op_kernel.h:Status FindKernelDef(DeviceType device_type, const NodeDef& node_def,
+./core/framework/function_testlib.h:// Helper to construct a NodeDef.
+./core/framework/function_testlib.h:NodeDef NDef(
+./core/framework/function_testlib.h:GraphDef GDef(gtl::ArraySlice<NodeDef> nodes,
+./core/framework/graph_def_util_test.cc:  TF_ASSERT_OK(NodeDefBuilder("ncwd", "NoChangeWithDefault", &registry)
+./core/framework/graph_def_util_test.cc:  TF_ASSERT_OK(NodeDefBuilder("ncnd", "NoChangeNoDefault", &registry)
+./core/framework/graph_def_util_test.cc:  TF_ASSERT_OK(NodeDefBuilder("uses_default", "UsesDefault", &producer_registry)
+./core/framework/graph_def_util_test.cc:  TF_ASSERT_OK(NodeDefBuilder("uses_default", "UsesDefault", &consumer_registry)
+./core/framework/graph_def_util_test.cc:  TF_ASSERT_OK(NodeDefBuilder("changed_from_default", "ChangedFromDefault",
+./core/framework/graph_def_util_test.cc:  TF_ASSERT_OK(NodeDefBuilder("node", "Underscore", &producer_registry)
+./core/framework/graph_def_util_test.cc:  TF_ASSERT_OK(NodeDefBuilder("call_func", "my_func", &function_registry)
+./core/framework/graph_def_util_test.cc:  TF_ASSERT_OK(NodeDefBuilder("call_func", "my_func", &function_registry)
+./core/framework/graph_def_util_test.cc:          NodeDef* node = graph_def.add_node();
+./core/framework/resource_mgr.h:  Status Init(ResourceMgr* rmgr, const NodeDef& ndef,
+./core/framework/resource_mgr.h:  Status Init(ResourceMgr* rmgr, const NodeDef& ndef) {
+./core/framework/op_compatibility_test.cc:    out_tensor->scalar<string>()() = SummarizeNodeDef(def());
+./core/framework/op_compatibility_test.cc:    AddDefaultsToNodeDef(*new_op_def, node_def());
+./core/framework/op_compatibility_test.cc:    TF_ASSERT_OK(ValidateNodeDef(*node_def(), *new_op_def));
+./core/framework/op_compatibility_test.cc:    AddDefaultsToNodeDef(*new_op_def, node_def());
+./core/framework/op_compatibility_test.cc:    Status status = ValidateNodeDef(*node_def(), *new_op_def);
+./core/framework/op_compatibility_test.cc:      ADD_FAILURE() << SummarizeNodeDef(*node_def());
+./core/framework/op_compatibility_test.cc:    AddDefaultsToNodeDef(*new_op_def, node_def());
+./core/framework/op_compatibility_test.cc:    TF_ASSERT_OK(ValidateNodeDef(*node_def(), *new_op_def));
+./core/framework/op_compatibility_test.cc:      ADD_FAILURE() << SummarizeNodeDef(*node_def()) << "\n"
+./core/framework/op_compatibility_test.cc:    AddDefaultsToNodeDef(*new_op_def, node_def());
+./core/framework/op_compatibility_test.cc:    // Validate that the NodeDef is valid.  This will ignore
+./core/framework/op_compatibility_test.cc:    TF_ASSERT_OK(ValidateNodeDef(*node_def(), *new_op_def));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("same", "Same")
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("add_attr", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("less_strict", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("remove_restriction", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("attr_order", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("add_default", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:      NodeDefBuilder("remove_default", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("type_polymorphic", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("make_list", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("make_poly_list", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("make_any_list", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("poly_into_list", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("make_list", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("make_list", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("change_name", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:      NodeDefBuilder("add_n_ints", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:      NodeDefBuilder("add_n_same", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("add_n_same_as_existing", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:      NodeDefBuilder("add_any_list", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("shorter_any_list", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("shorter_same_list", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("remove_restriction", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("less_restrictive", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("remove_min", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("lower_min", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("remove_input_ref", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:      NodeDefBuilder("add_output_ref", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  ExpectInvalid(old_op.op_def, "NodeDef mentions attr 'a' not in",
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  ExpectInvalid(old_op.op_def, "NodeDef missing attr 'a'",
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("fails", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("add_restriction", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("more_restrictive", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("add_min", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("raise_min", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("add_input_ref", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:      NodeDefBuilder("remove_output_ref", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:      NodeDefBuilder("rename_output", &old_op.op_def).Finalize(node_def()));
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("rename_n_outputs", &old_op.op_def)
+./core/framework/op_compatibility_test.cc:  TF_ASSERT_OK(NodeDefBuilder("rename_output_list", &old_op.op_def)
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  auto s = NodeDefBuilder("dummy", &op_def)
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:    NodeDef def;
+./core/framework/shape_inference_test.cc:    NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  CHECK(NodeDefBuilder("dummy", &op_reg_data.op_def)
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/shape_inference_test.cc:  NodeDef def;
+./core/framework/function_testlib.cc:GraphDef GDef(gtl::ArraySlice<NodeDef> nodes,
+./core/framework/function_testlib.cc:// Helper to construct a NodeDef.
+./core/framework/function_testlib.cc:NodeDef NDef(const string& name, const string& op,
+./core/framework/function_testlib.cc:  NodeDef n;
+./core/framework/resource_mgr.cc:Status ContainerInfo::Init(ResourceMgr* rmgr, const NodeDef& ndef,
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  TF_CHECK_OK(NodeDefBuilder("test", "Assert")
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:      NodeDefBuilder("test", "L2Loss").Input("t", 0, DT_FLOAT).Finalize(&def));
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  TF_CHECK_OK(NodeDefBuilder("test", "MatMul")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "MatMul")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "MatMul")
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  TF_CHECK_OK(NodeDefBuilder("test", "BiasAdd")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "BiasAdd")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "BiasAdd")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "BiasAdd")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "BiasAdd")
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  TF_CHECK_OK(NodeDefBuilder("test", "BiasAddGrad")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "BiasAddGrad")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "BiasAddGrad")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "BiasAddGrad")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "BiasAddGrad")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "Conv2D")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "Conv3D")
+./core/framework/common_shape_fns_test.cc:  TF_CHECK_OK(NodeDefBuilder("test", "DepthwiseConv2dNative")
+./core/framework/common_shape_fns_test.cc:  TF_CHECK_OK(NodeDefBuilder("test", "DepthwiseConv2dNative")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "AvgPool")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "MaxPool")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "MaxPool3D")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "QueueDequeue")
+./core/framework/common_shape_fns_test.cc:    TF_CHECK_OK(NodeDefBuilder("test", "QueueDequeue")
+./core/framework/common_shape_fns_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Sum")
+./core/framework/common_shape_fns_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "Sum")
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/common_shape_fns_test.cc:  NodeDef def;
+./core/framework/shape_inference.h:  InferenceContext(int graph_def_version, const NodeDef* node_def,
+./core/framework/shape_inference.h:  InferenceContext(int graph_def_version, const NodeDef* node_def,
+./core/framework/shape_inference.h:  // Returns the NodeDef. The returned reference does not outlive the
+./core/framework/shape_inference.h:  const NodeDef& node_def() { return node_def_; }
+./core/framework/shape_inference.h:  // Look up the attr for the NodeDef being evaluated with name attr_name and
+./core/framework/shape_inference.h:  const NodeDef& node_def_;
+./core/debug/debug_graph_utils.cc:  NodeDef node_def;
+./core/debug/debug_graph_utils.cc:  auto builder = NodeDefBuilder(copy_node_name, copy_op_name)
+./core/debug/debug_graph_utils.cc:  NodeDef node_def;
+./core/debug/debug_graph_utils.cc:  auto builder = NodeDefBuilder(debug_node_name, debug_op_name)
+./core/common_runtime/executor.h:  // create_kernel returns an instance of op kernel based on NodeDef.
+./core/common_runtime/executor.h:  std::function<Status(const NodeDef&, OpKernel**)> create_kernel;
+./core/common_runtime/executor.h:                             const NodeDef& ndef, int graph_def_version,
+./core/common_runtime/simple_placer.cc:// the kColocationAttrName attribute of the NodeDef.
+./core/common_runtime/simple_placer.cc:      // in the NodeDef.
+./core/common_runtime/simple_placer.cc:      // If the NodeDef contains a device, then we interpret it as a
+./core/common_runtime/simple_placer.cc:        // The user has specified a device in the NodeDef, try to find a
+./core/common_runtime/function.h:typedef std::function<Status(FunctionLibraryRuntime*, const NodeDef&,
+./core/common_runtime/constant_folding.cc:  auto builder = NodeDefBuilder(strings::StrCat(graph->NewName(node_name),
+./core/common_runtime/constant_folding.cc:  NodeDef def;
+./core/common_runtime/direct_session.cc:    params.create_kernel = [this, lib, opseg](const NodeDef& ndef,
+./core/common_runtime/constant_folding_test.cc:  NodeDef def;
+./core/common_runtime/constant_folding_test.cc:  TF_ASSERT_OK(NodeDefBuilder("times_two", "XTimesTwo", g->op_registry())
+./core/common_runtime/constant_folding_test.cc:  NodeDef def;
+./core/common_runtime/constant_folding_test.cc:      NodeDefBuilder("testop", "ConstantFoldingTestOp", g->op_registry())
+./core/common_runtime/function.cc:  NodeDef ndef;
+./core/common_runtime/function.cc:  NodeDef ndef;
+./core/common_runtime/function.cc:  NodeDef ndef;
+./core/common_runtime/function.cc:  NodeDef ndef;
+./core/common_runtime/function.cc:  Status CreateKernel(const NodeDef& ndef, OpKernel** kernel) override;
+./core/common_runtime/function.cc:  std::function<Status(const NodeDef&, OpKernel**)> create_kernel_;
+./core/common_runtime/function.cc:  create_kernel_ = [this](const NodeDef& ndef, OpKernel** kernel) {
+./core/common_runtime/function.cc:Status FunctionLibraryRuntimeImpl::CreateKernel(const NodeDef& ndef,
+./core/common_runtime/function.cc:    NodeDef ndef = n->def();
+./core/common_runtime/function.cc:// and stash the original NodeDef name as an attr for documentation
+./core/common_runtime/function.cc:    NodeDef* ndef = gdef->add_node();
+./core/common_runtime/function.cc:    // node->name() is merely NodeDef::name, which are not guaranteed
+./core/common_runtime/function_test.cc:    params.create_kernel = [this, version](const NodeDef& ndef,
+./core/common_runtime/function_test.cc:TEST_F(FunctionLibraryRuntimeTest, ManySwapsNodeDef) {
+./core/common_runtime/function_test.cc:  auto func = FDH::Create(  // Creates a FunctionDef using NodeDefs
+./core/common_runtime/function_test.cc:      "ManySwapsNodeDef",
+./core/common_runtime/function_test.cc:  std::unique_ptr<Graph> g(GetFuncBody("ManySwapsNodeDef", {}));
+./core/common_runtime/kernel_benchmark_testlib.cc:  params.create_kernel = [this, graph_def_version](const NodeDef& ndef,
+./core/common_runtime/graph_runner.cc:  params.create_kernel = [&device, g](const NodeDef& ndef, OpKernel** kernel) {
+./core/common_runtime/simple_graph_execution_state.cc:  for (const NodeDef& node : extension_def.node()) {
+./core/common_runtime/simple_graph_execution_state.cc:  for (const NodeDef& node : original_graph_def_.node()) {
+./core/common_runtime/executor.cc:  const NodeDef& def = node->def();
+./core/common_runtime/executor.cc:              << SummarizeNodeDef(node->def())
+./core/common_runtime/executor.cc:                    << SummarizeNodeDef(state->item->node->def());
+./core/common_runtime/executor.cc:                                  SummarizeNodeDef(node->def())));
+./core/common_runtime/executor.cc:                                  " for node ", SummarizeNodeDef(node->def())));
+./core/common_runtime/executor.cc:                             const NodeDef& ndef, int graph_def_version,
+./core/graph/graph_partition.cc:  NodeDef* recv;
+./core/graph/graph_partition.cc:  NodeDef* real_recv;
+./core/graph/graph_partition.cc:void AddInput(NodeDef* dst, StringPiece src_name, int src_slot) {
+./core/graph/graph_partition.cc:void AddReadControl(const std::vector<NodeDef*>& recvs,
+./core/graph/graph_partition.cc:  for (NodeDef* recv : recvs) {
+./core/graph/graph_partition.cc:                      NodeDefBuilder* builder) {
+./core/graph/graph_partition.cc:NodeDef* AddSend(const PartitionOptions& opts, const GraphInfo& g_info,
+./core/graph/graph_partition.cc:                 NodeDefBuilder::NodeOut send_from, int64 start_time,
+./core/graph/graph_partition.cc:    NodeDefBuilder cast_builder(opts.new_name(src->name()), cast_op);
+./core/graph/graph_partition.cc:    NodeDef* cast = gdef->add_node();
+./core/graph/graph_partition.cc:  NodeDefBuilder send_builder(opts.new_name(src->name()), send_op);
+./core/graph/graph_partition.cc:  NodeDef* send = gdef->add_node();
+./core/graph/graph_partition.cc:NodeDef* AddRecv(const PartitionOptions& opts, const GraphInfo& g_info,
+./core/graph/graph_partition.cc:                 GraphDef* gdef, const Edge* edge, NodeDef** real_recv,
+./core/graph/graph_partition.cc:  NodeDefBuilder recv_builder(opts.new_name(src->name()), recv_op);
+./core/graph/graph_partition.cc:  NodeDef* recv = gdef->add_node();
+./core/graph/graph_partition.cc:    NodeDefBuilder cast_builder(opts.new_name(src->name()), cast_op);
+./core/graph/graph_partition.cc:    NodeDef* cast = gdef->add_node();
+./core/graph/graph_partition.cc:    NodeDefBuilder id_builder(opts.new_name(src->name()), "Identity");
+./core/graph/graph_partition.cc:    NodeDef* id = gdef->add_node();
+./core/graph/graph_partition.cc:NodeDef* AddDummyConst(const PartitionOptions& opts, GraphDef* gdef,
+./core/graph/graph_partition.cc:  NodeDef* result = gdef->add_node();
+./core/graph/graph_partition.cc:  *status = NodeDefBuilder(opts.new_name(src->name()), "Const")
+./core/graph/graph_partition.cc:NodeDef* AddControlTrigger(const PartitionOptions& opts, GraphDef* gdef,
+./core/graph/graph_partition.cc:  NodeDef* result = gdef->add_node();
+./core/graph/graph_partition.cc:  *status = NodeDefBuilder(opts.new_name(strings::StrCat("synch_", epoch)),
+./core/graph/graph_partition.cc:  typedef std::pair<const NodeDef*, int64> NodeStartTime;
+./core/graph/graph_partition.cc:      const NodeDef& ndef = gdef->node(n);
+./core/graph/graph_partition.cc:    std::vector<NodeDef*> dummys;
+./core/graph/graph_partition.cc:        NodeDef* dummy = AddControlTrigger(opts, gdef, device_name, i,
+./core/graph/graph_partition.cc:      NodeDef* ndef = gdef->mutable_node(n);
+./core/graph/graph_partition.cc:          NodeDef* dummy = dummys[recv_epoch - prefetch];
+./core/graph/graph_partition.cc:  std::vector<NodeDef*> ref_recvs;
+./core/graph/graph_partition.cc:    NodeDef* dst_def = dst_graph->add_node();
+./core/graph/graph_partition.cc:      NodeDefBuilder::NodeOut send_from;
+./core/graph/graph_partition.cc:        NodeDef* dummy = AddDummyConst(opts, src_graph, edge, &status);
+./core/graph/graph_partition.cc:      NodeDef* send = AddSend(opts, g_info, src_graph, edge, send_from,
+./core/graph/graph_partition.cc:      NodeDef* real_recv = nullptr;
+./core/graph/graph_partition.cc:      NodeDef* recv =
+./core/graph/graph.cc:    strings::StrAppend(&ret, " def:{", SummarizeNodeDef(def()), "}}");
+./core/graph/graph.cc:Node::Properties::Properties(const OpDef* op_def, const NodeDef& node_def,
+./core/graph/graph.cc:  NodeDef def;
+./core/graph/graph.cc:Node* Graph::AddNode(const NodeDef& node_def, Status* status) {
+./core/graph/graph.cc:void AddInput(NodeDef* dst, StringPiece src_name, int src_slot) {
+./core/graph/graph.cc:    NodeDef* node_def = graph_def->add_node();
+./core/graph/graph.cc:    // in the NodeDef.
+./core/graph/equal_graph_def_test.cc:  // Have to call EqualNodeDef() directly here, since EqualGraphDef()
+./core/graph/equal_graph_def_test.cc:  // only calls EqualNodeDef() with nodes that have matching names.
+./core/graph/equal_graph_def_test.cc:  EXPECT_FALSE(EqualNodeDef(a->def(), b->def(), &diff_));
+./core/graph/equal_graph_def_test.cc:  NodeDef same(a->def());
+./core/graph/equal_graph_def_test.cc:  EXPECT_TRUE(EqualNodeDef(same, same, &diff_)) << diff_;
+./core/graph/equal_graph_def_test.cc:  NodeDef actual(a->def());
+./core/graph/equal_graph_def_test.cc:  EXPECT_FALSE(EqualNodeDef(actual, a->def(), &diff_));
+./core/graph/equal_graph_def_test.cc:  NodeDef expected(a->def());
+./core/graph/equal_graph_def_test.cc:  EXPECT_FALSE(EqualNodeDef(a->def(), expected, &diff_));
+./core/graph/equal_graph_def_test.cc:  NodeDef actual(a->def());
+./core/graph/equal_graph_def_test.cc:  NodeDef expected(a->def());
+./core/graph/equal_graph_def_test.cc:  EXPECT_TRUE(EqualNodeDef(actual, expected, &diff_)) << diff_;
+./core/graph/equal_graph_def_test.cc:  NodeDef actual(a->def());
+./core/graph/equal_graph_def_test.cc:  NodeDef expected(a->def());
+./core/graph/equal_graph_def_test.cc:  EXPECT_FALSE(EqualNodeDef(actual, expected, &diff_));
+./core/graph/equal_graph_def_test.cc:  NodeDef actual(a->def());
+./core/graph/equal_graph_def_test.cc:  NodeDef expected(a->def());
+./core/graph/equal_graph_def_test.cc:  EXPECT_TRUE(EqualNodeDef(actual, expected, &diff_));
+./core/graph/quantize_training_test.cc:  NodeDef identity_q = identity_q_node->def();
+./core/graph/quantize_training_test.cc:  NodeDef relu_q = relu_q_node->def();
+./core/graph/quantize_training_test.cc:  NodeDef identity_q = relu6_q_node->def();
+./core/graph/quantize_training_test.cc:  NodeDef relu_q = relu_q_node->def();
+./core/graph/node_builder.cc:NodeBuilder::NodeBuilder(const NodeDefBuilder& def_builder)
+./core/graph/node_builder.cc:  std::vector<NodeDefBuilder::NodeOut> srcs;
+./core/graph/node_builder.cc:  def_builder_.Input(gtl::ArraySlice<NodeDefBuilder::NodeOut>(srcs));
+./core/graph/node_builder.cc:  NodeDef node_def;
+./core/graph/node_builder.cc:  TF_RETURN_IF_ERROR(ValidateNodeDef(node_def, def_builder_.op_def()));
+./core/graph/graph_constructor_test.cc:// TODO(josh11b): Test setting the "device" field of a NodeDef.
+./core/graph/graph_constructor_test.cc:  // Check that t1's NodeDef is consistent with graph
+./core/graph/graph_constructor_test.cc:  // Check that NodeDefs are consistent with graph
+./core/graph/graph_constructor_test.cc:              {"return_tensors argument to ImportNodeDef() must be non-null "
+./core/graph/graph_constructor_test.cc:              {"return_tensors argument to ImportNodeDef() should be empty "
+./core/graph/graph_constructor_test.cc:      NodeDefBuilder("scope/A", "TestParams").Finalize(def.add_node()));
+./core/graph/graph_constructor.cc:inline bool IsMerge(const NodeDef& node_def) {
+./core/graph/graph_constructor.cc:  Status ValidateColocationConstraints(const NodeDef& node_def);
+./core/graph/graph_constructor.cc:  Status MakeNode(const NodeDef& node_def, Node** node);
+./core/graph/graph_constructor.cc:  Status ModifyNodeDefForImport(NodeDef* node_def);
+./core/graph/graph_constructor.cc:  void RemapNodeDefInputs(NodeDef* node_def,
+./core/graph/graph_constructor.cc:  void AddControlDependencies(NodeDef* node_def,
+./core/graph/graph_constructor.cc:  void AddPrefixToNodeDef(const std::vector<bool>& input_already_exists,
+./core/graph/graph_constructor.cc:                          NodeDef* node_def);
+./core/graph/graph_constructor.cc:    Node* node;  // nullptr until the NodeDef is converted to a Node.
+./core/graph/graph_constructor.cc:  // Index of NodeDefs in gdef_ with all inputs already converted.
+./core/graph/graph_constructor.cc:    const NodeDef& node_def(gdef_->node(n));
+./core/graph/graph_constructor.cc:    const NodeDef& node_def(gdef_->node(n));
+./core/graph/graph_constructor.cc:    const NodeDef& node_def) {
+./core/graph/graph_constructor.cc:Status GraphConstructor::MakeNode(const NodeDef& node_def, Node** node) {
+./core/graph/graph_constructor.cc:Status GraphConstructor::ModifyNodeDefForImport(NodeDef* node_def) {
+./core/graph/graph_constructor.cc:  AddDefaultsToNodeDef(*op_def, node_def);
+./core/graph/graph_constructor.cc:  TF_RETURN_IF_ERROR(ValidateNodeDef(*node_def, *op_def));
+./core/graph/graph_constructor.cc:void RemoveInputs(NodeDef* node_def, const std::vector<int>& inputs_to_remove) {
+./core/graph/graph_constructor.cc:void GraphConstructor::RemapNodeDefInputs(
+./core/graph/graph_constructor.cc:    NodeDef* node_def, std::vector<bool>* input_already_exists) {
+./core/graph/graph_constructor.cc:    NodeDef* node_def, std::vector<bool>* input_already_exists) {
+./core/graph/graph_constructor.cc:void GraphConstructor::AddPrefixToNodeDef(
+./core/graph/graph_constructor.cc:    const std::vector<bool>& input_already_exists, NodeDef* node_def) {
+./core/graph/graph_constructor.cc:  // Process the NodeDefs in topological order.
+./core/graph/graph_constructor.cc:    const NodeDef& original_node_def = gdef_->node(o);
+./core/graph/graph_constructor.cc:    NodeDef imported_node_def;
+./core/graph/graph_constructor.cc:    const NodeDef* node_def;
+./core/graph/graph_constructor.cc:      // TODO(ashankar): The line below means an additional copy of the NodeDef,
+./core/graph/graph_constructor.cc:      // which can be expensive if the NodeDef contains large tensors in it.
+./core/graph/graph_constructor.cc:        RemapNodeDefInputs(&imported_node_def, &input_already_exists);
+./core/graph/graph_constructor.cc:      AddPrefixToNodeDef(input_already_exists, &imported_node_def);
+./core/graph/graph_constructor.cc:      TF_RETURN_IF_ERROR(ModifyNodeDefForImport(&imported_node_def));
+./core/graph/graph_constructor.cc:          "return_tensors argument to ImportNodeDef() must be non-null if "
+./core/graph/graph_constructor.cc:          "return_tensors argument to ImportNodeDef() should be empty (has "
+./core/graph/graph_partition_test.cc:    for (const NodeDef& ndef : gdef.node()) {
+./core/graph/graph_partition_test.cc:    for (const NodeDef& ndef : gdef.node()) {
+./core/graph/graph_partition_test.cc:  NodeDef ndef;
+./core/graph/subgraph_test.cc:// TODO(josh11b): Test setting the "device" field of a NodeDef.
+./core/graph/validate_test.cc:  EXPECT_TRUE(StringPiece(s.ToString()).contains("NodeDef missing attr"));
+./core/graph/validate_test.cc:  EXPECT_TRUE(StringPiece(s.ToString()).contains("NodeDef missing attr"));
+./core/graph/validate_test.cc:  EXPECT_TRUE(StringPiece(s.ToString()).contains("NodeDef missing attr"));
+./core/graph/equal_graph_def.h:// If the NodeDefs are different and
+./core/graph/equal_graph_def.h:bool EqualNodeDef(const NodeDef& actual, const NodeDef& expected, string* diff,
+./core/graph/graph.h:  // def() provides the NodeDef the user supplied, but the specifics
+./core/graph/graph.h:  const NodeDef& def() const { return props_->node_def_; }
+./core/graph/graph.h:    Properties(const OpDef* op_def, const NodeDef& node_def,
+./core/graph/graph.h:    NodeDef node_def_;
+./core/graph/graph.h:  Node* AddNode(const NodeDef& node_def, Status* status);
+./core/graph/validate.cc:  for (const NodeDef& node_def : graph_def.node()) {
+./core/graph/validate.cc:    TF_RETURN_IF_ERROR(ValidateNodeDef(node_def, *op_def));
+./core/graph/gradients.cc:  NodeDef ndef;
+./core/graph/gradients.cc:  NodeDef ndef;
+./core/graph/gradients.cc:  NodeDef ndef;
+./core/graph/equal_graph_def.cc:  std::unordered_map<string, const NodeDef*> actual_index;
+./core/graph/equal_graph_def.cc:  for (const NodeDef& node : actual.node()) {
+./core/graph/equal_graph_def.cc:  for (const NodeDef& expected_node : expected.node()) {
+./core/graph/equal_graph_def.cc:                                SummarizeNodeDef(expected_node), "'");
+./core/graph/equal_graph_def.cc:    if (!EqualNodeDef(*actual_iter->second, expected_node, diff, options)) {
+./core/graph/equal_graph_def.cc:                              SummarizeNodeDef(*actual_index.begin()->second),
+./core/graph/equal_graph_def.cc:bool EqualNodeDef(const NodeDef& actual, const NodeDef& expected, string* diff,
+./core/graph/validate.h:// Returns OK if every NodeDef in `graph_def` is valid with respect to
+./core/graph/validate.h:// its corresponding OpDef (as defined by ValidateNodeDef()) as
+./core/graph/algorithm_test.cc:// TODO(josh11b): Test setting the "device" field of a NodeDef.
+./core/graph/subgraph.cc:    VLOG(1) << "Created fetch node: " << SummarizeNodeDef(send_node->def());
+./core/graph/node_builder.h:// Internally, it uses a NodeDefBuilder to automatically set attrs
+./core/graph/node_builder.h:  // Create a NodeBuilder from an existing NodeDefBuilder.
+./core/graph/node_builder.h:  NodeBuilder(const NodeDefBuilder& def_builder);
+./core/graph/node_builder.h:  // Sets the "requested device spec" in the NodeDef (not the
+./core/graph/node_builder.h:  NodeDefBuilder def_builder_;
+./core/graph/graph_test.cc:  Node* FromNodeDef(const string& name, const string& node_type,
+./core/graph/graph_test.cc:    auto builder = NodeDefBuilder(name, node_type);
+./core/graph/graph_test.cc:    NodeDef node_def;
+./core/graph/graph_test.cc:  Node* a = FromNodeDef("A", "OneOutput", 0);
+./core/graph/graph_test.cc:  Node* c = FromNodeDef("C", "OneInput", 1);
+./core/graph/graph_test.cc:  Node* a = FromNodeDef("A", "OneOutput", 0);
+./core/graph/graph_test.cc:  Node* c = FromNodeDef("C", "OneInput", 1);
+./core/graph/graph_test.cc:  Node* t = FromNodeDef("T", "TwoInputsOneOutput", 2);
+./core/graph/graph_test.cc:  Node* a_new = FromNodeDef("A_new", "OneOutput", 0);
+./core/graph/graph_test.cc:  Node* b_new = FromNodeDef("B_new", "OneOutput", 0);
+./core/graph/graph_test.cc:  Node* a = FromNodeDef("A", "OneOutput", 0);
+./core/graph/graph_test.cc:  Node* c = FromNodeDef("C", "OneInput", 1);
+./core/graph/graph_test.cc:  Node* a = FromNodeDef("A", "OneInputTwoOutputs", 1);
+./core/graph/graph_test.cc:  Node* b = FromNodeDef("B", "OneInput", 1);
+./core/graph/graph_test.cc:  Node* a = FromNodeDef("A", "OneOutput", 0);
+./core/graph/graph_test.cc:  Node* b = FromNodeDef("B", "TwoInputsOneOutput", 2);
+./docs_src/extend/tool_developers/index.md:Each node is a `NodeDef` object, defined in
+./docs_src/extend/tool_developers/index.md:`NodeDef`, and what they mean.
+./docs_src/extend/tool_developers/index.md:Python, you get a `TensorProto` object from a `NodeDef` representing a `Const`
+./tools/benchmark/benchmark_model.cc:  for (const NodeDef& node : graph.node()) {
+./tools/benchmark/benchmark_model.cc:  for (const NodeDef& node : graph.node()) {
+./tools/graph_transforms/fold_old_batch_norms_test.cc:    NodeDef batch_norm_node;
+./tools/graph_transforms/fold_old_batch_norms_test.cc:    for (const NodeDef& node : fused_graph_def.node()) {
+./tools/graph_transforms/sparsify_gather_test.cc:  NodeDef* CreateNode(const string& name, const string& op,
+./tools/graph_transforms/sparsify_gather_test.cc:                      const std::vector<NodeDef*>& inputs,
+./tools/graph_transforms/sparsify_gather_test.cc:    NodeDef* node_def = graph_def->add_node();
+./tools/graph_transforms/sparsify_gather_test.cc:    std::for_each(inputs.begin(), inputs.end(), [&node_def](NodeDef* input) {
+./tools/graph_transforms/sparsify_gather_test.cc:    NodeDef* input_node = CreateNode("ids", "Const", {}, &graph_def);
+./tools/graph_transforms/sparsify_gather_test.cc:    NodeDef* const_node = CreateNode("const", "Const", {}, &graph_def);
+./tools/graph_transforms/sparsify_gather_test.cc:    NodeDef* identity_node =
+./tools/graph_transforms/sparsify_gather_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/sparsify_gather_test.cc:    NodeDef* input_node = CreateNode("ids", "Const", {}, &graph_def);
+./tools/graph_transforms/sparsify_gather_test.cc:    NodeDef* const_node1 = CreateNode("const1", "Const", {}, &graph_def);
+./tools/graph_transforms/sparsify_gather_test.cc:    NodeDef* const_node2 = CreateNode("const2", "Const", {}, &graph_def);
+./tools/graph_transforms/sparsify_gather_test.cc:    NodeDef* identity_node1 =
+./tools/graph_transforms/sparsify_gather_test.cc:    NodeDef* identity_node2 =
+./tools/graph_transforms/sparsify_gather_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/set_device.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/set_device.cc:    NodeDef* new_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/quantize_weights_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/quantize_weights_test.cc:    const NodeDef* q_input_op = node_lookup.at("input_op");
+./tools/graph_transforms/quantize_weights_test.cc:    const NodeDef* q_weights_op = node_lookup.at("weights_op");
+./tools/graph_transforms/quantize_weights_test.cc:    const NodeDef* q_weights_const = node_lookup.at(weights_const_name);
+./tools/graph_transforms/fold_batch_norms_test.cc:    for (const NodeDef& node : fused_graph_def.node()) {
+./tools/graph_transforms/fold_batch_norms_test.cc:    for (const NodeDef& node : fused_graph_def.node()) {
+./tools/graph_transforms/README.md:output a new GraphDef. Each GraphDef is just a list of NodeDefs, each defining
+./tools/graph_transforms/README.md:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/README.md:    NodeDef* new_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/README.md:       std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/README.md:      const NodeDef& conv_node = match.node;
+./tools/graph_transforms/README.md:      const NodeDef& resize_node = match.inputs[0].node;
+./tools/graph_transforms/README.md:      const NodeDef& weights_node = match.inputs[1].node;
+./tools/graph_transforms/README.md:      NodeDef pad_dims_node;
+./tools/graph_transforms/README.md:      NodeDef fused_conv;
+./tools/graph_transforms/freeze_requantization_ranges_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/rename_attribute.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/rename_attribute.cc:    NodeDef* new_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/set_device_test.cc:  NodeDef* mul_node1 = graph_def.add_node();
+./tools/graph_transforms/set_device_test.cc:  NodeDef* add_node2 = graph_def.add_node();
+./tools/graph_transforms/set_device_test.cc:  NodeDef* add_node3 = graph_def.add_node();
+./tools/graph_transforms/set_device_test.cc:  NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/set_device_test.cc:  NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/set_device_test.cc:  NodeDef* const_node3 = graph_def.add_node();
+./tools/graph_transforms/set_device_test.cc:  NodeDef* add_node4 = graph_def.add_node();
+./tools/graph_transforms/set_device_test.cc:  std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/set_device_test.cc:  std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/fold_constants_lib.cc:  std::map<string, const NodeDef*> original_map;
+./tools/graph_transforms/fold_constants_lib.cc:  for (const NodeDef& node : rewritten_graph_def.node()) {
+./tools/graph_transforms/fold_constants_lib.cc:  std::vector<NodeDef> nodes_to_add;
+./tools/graph_transforms/fold_constants_lib.cc:  for (const NodeDef& node : rewritten_graph_def.node()) {
+./tools/graph_transforms/fold_constants_lib.cc:    NodeDef new_node;
+./tools/graph_transforms/fold_constants_lib.cc:    const NodeDef* removed_node = original_map[removed_node_name];
+./tools/graph_transforms/fold_constants_lib.cc:    NodeDef new_node;
+./tools/graph_transforms/fold_constants_lib.cc:  for (const NodeDef& node : nodes_to_add) {
+./tools/graph_transforms/fold_constants_lib.cc:  std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/fold_constants_lib.cc:      const NodeDef& node = *(node_map[node_name]);
+./tools/graph_transforms/fold_constants_lib.cc:      [&](const NodeDef& node) { return used_nodes.count(node.name()) > 0; },
+./tools/graph_transforms/remove_attribute.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/remove_attribute.cc:    NodeDef* new_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/remove_nodes.cc:              std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/remove_nodes.cc:            const NodeDef& replace_node = match.node;
+./tools/graph_transforms/remove_nodes.cc:            const NodeDef& input_node = match.inputs[0].node;
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* add_node1 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* add_node2 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* add_node3 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* identity_node1 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* identity_node2 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* identity_node3 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* const_node3 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* add_node4 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* add_node = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* identity_node = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* identity_node1 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* identity_node2 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* identity_node3 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    NodeDef* add_node = graph_def.add_node();
+./tools/graph_transforms/remove_nodes_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/quantize_nodes.cc:bool AreAttrsEqual(const NodeDef* current_node, const NodeDef* other_node) {
+./tools/graph_transforms/quantize_nodes.cc:    std::map<uint64, std::vector<const NodeDef*>> hashed_nodes;
+./tools/graph_transforms/quantize_nodes.cc:    for (const NodeDef& node : current_graph_def.node()) {
+./tools/graph_transforms/quantize_nodes.cc:      NodeDef nameless_node = node;
+./tools/graph_transforms/quantize_nodes.cc:      const uint64 hash = HashNodeDef(nameless_node);
+./tools/graph_transforms/quantize_nodes.cc:    for (const std::pair<uint64, std::vector<const NodeDef*>> hashed_node_info :
+./tools/graph_transforms/quantize_nodes.cc:      const std::vector<const NodeDef*>& hash_node_list =
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef* current_node = hash_node_list[i];
+./tools/graph_transforms/quantize_nodes.cc:          NodeDef* new_node = merged_graph_def.mutable_node()->Add();
+./tools/graph_transforms/quantize_nodes.cc:                                          std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& quantize_node = match.node;
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& dequantize_node = match.inputs[0].node;
+./tools/graph_transforms/quantize_nodes.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/quantize_nodes.cc:      NodeDef quantized_placeholder;
+./tools/graph_transforms/quantize_nodes.cc:      NodeDef min_node;
+./tools/graph_transforms/quantize_nodes.cc:      NodeDef max_node;
+./tools/graph_transforms/quantize_nodes.cc:      NodeDef dequantize_node;
+./tools/graph_transforms/quantize_nodes.cc:         std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& fake_quant_node = match.node;
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& original_op_node = match.inputs[0].node;
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& fake_quant_min_node = match.inputs[1].node;
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& fake_quant_max_node = match.inputs[2].node;
+./tools/graph_transforms/quantize_nodes.cc:        NodeDef quantize_node;
+./tools/graph_transforms/quantize_nodes.cc:        NodeDef requantize_node;
+./tools/graph_transforms/quantize_nodes.cc:        NodeDef dequantize_node;
+./tools/graph_transforms/quantize_nodes.cc:         std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& fake_requantize_node = match.node;
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& original_op_node =
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& fake_requantize_min_node = match.inputs[3].node;
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& fake_requantize_max_node = match.inputs[4].node;
+./tools/graph_transforms/quantize_nodes.cc:        NodeDef requantize_node;
+./tools/graph_transforms/quantize_nodes.cc:                std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/quantize_nodes.cc:          const NodeDef& fake_quant_node = match.node;
+./tools/graph_transforms/quantize_nodes.cc:          const NodeDef& fake_quant_min_node = match.inputs[1].node;
+./tools/graph_transforms/quantize_nodes.cc:          const NodeDef& fake_quant_max_node = match.inputs[2].node;
+./tools/graph_transforms/quantize_nodes.cc:          std::vector<NodeDef> linear_nodes;
+./tools/graph_transforms/quantize_nodes.cc:          NodeDef new_fake_quant_node;
+./tools/graph_transforms/quantize_nodes.cc:          for (const NodeDef& linear_node : linear_nodes) {
+./tools/graph_transforms/quantize_nodes.cc:          std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/quantize_nodes.cc:        const NodeDef& float_node = match.node;
+./tools/graph_transforms/quantize_nodes.cc:          NodeDef reshape_dims;
+./tools/graph_transforms/quantize_nodes.cc:          NodeDef reduction_dims;
+./tools/graph_transforms/quantize_nodes.cc:          NodeDef reshape_node;
+./tools/graph_transforms/quantize_nodes.cc:          NodeDef min_node;
+./tools/graph_transforms/quantize_nodes.cc:          NodeDef max_node;
+./tools/graph_transforms/quantize_nodes.cc:          NodeDef quantize_node;
+./tools/graph_transforms/quantize_nodes.cc:        NodeDef quantized_main_node;
+./tools/graph_transforms/quantize_nodes.cc:            NodeDef fallback_min_node;
+./tools/graph_transforms/quantize_nodes.cc:            NodeDef fallback_max_node;
+./tools/graph_transforms/quantize_nodes.cc:            NodeDef requant_range_node;
+./tools/graph_transforms/quantize_nodes.cc:          NodeDef requantize_node;
+./tools/graph_transforms/quantize_nodes.cc:        NodeDef dequantize_node;
+./tools/graph_transforms/fuse_convolutions.cc:         std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& conv_node = match.node;
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& mirror_pad_node = match.inputs[0].node;
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& weights_node = match.inputs[1].node;
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& resize_node = match.inputs[0].inputs[0].node;
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& pad_dims_node = match.inputs[0].inputs[1].node;
+./tools/graph_transforms/fuse_convolutions.cc:        NodeDef fused_conv;
+./tools/graph_transforms/fuse_convolutions.cc:         std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& conv_node = match.node;
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& resize_node = match.inputs[0].node;
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& weights_node = match.inputs[1].node;
+./tools/graph_transforms/fuse_convolutions.cc:        NodeDef pad_dims_node;
+./tools/graph_transforms/fuse_convolutions.cc:        NodeDef fused_conv;
+./tools/graph_transforms/fuse_convolutions.cc:         std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& conv_node = match.node;
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& mirror_pad_node = match.inputs[0].node;
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& weights_node = match.inputs[1].node;
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& input_node = match.inputs[0].inputs[0].node;
+./tools/graph_transforms/fuse_convolutions.cc:        const NodeDef& pad_dims_node = match.inputs[0].inputs[1].node;
+./tools/graph_transforms/fuse_convolutions.cc:        NodeDef fused_conv;
+./tools/graph_transforms/rename_op.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/rename_op.cc:    NodeDef* new_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/sparsify_gather.cc:                     NodeDef* node_def) {
+./tools/graph_transforms/sparsify_gather.cc:            std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/sparsify_gather.cc:          const NodeDef& gather_node = match.node;
+./tools/graph_transforms/sparsify_gather.cc:          const NodeDef& const_node = match.inputs[0].inputs[0].node;
+./tools/graph_transforms/sparsify_gather.cc:          NodeDef indices_node;
+./tools/graph_transforms/sparsify_gather.cc:          NodeDef values_node;
+./tools/graph_transforms/sparsify_gather.cc:          NodeDef hashtable_node;
+./tools/graph_transforms/sparsify_gather.cc:          NodeDef init_table_node;
+./tools/graph_transforms/sparsify_gather.cc:          NodeDef lookup_node;
+./tools/graph_transforms/sparsify_gather.cc:          NodeDef default_value_node;
+./tools/graph_transforms/sparsify_gather.cc:          NodeDef dim_idx_node;
+./tools/graph_transforms/sparsify_gather.cc:          NodeDef expand_dims_node;
+./tools/graph_transforms/sparsify_gather.cc:    NodeDef* init_op = nullptr;
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* add_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* a_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* b_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* c_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* add_node1 = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* add_node2 = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* add_node3 = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* const_node3 = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* dangling_input = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* add_node4 = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* add_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* mul_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* a_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* b_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* c_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* add_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* mul_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* a_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* b_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* c_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* add_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* mul_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* a_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* b_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    NodeDef* c_node = graph_def.add_node();
+./tools/graph_transforms/strip_unused_nodes_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/freeze_requantization_ranges.cc:  std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/freeze_requantization_ranges.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/freeze_requantization_ranges.cc:      NodeDef* min_node = frozen_graph_def.mutable_node()->Add();
+./tools/graph_transforms/freeze_requantization_ranges.cc:      NodeDef* max_node = frozen_graph_def.mutable_node()->Add();
+./tools/graph_transforms/freeze_requantization_ranges.cc:      NodeDef* new_node = frozen_graph_def.mutable_node()->Add();
+./tools/graph_transforms/insert_logging_test.cc:    for (const NodeDef& node : result.node()) {
+./tools/graph_transforms/insert_logging_test.cc:    for (const NodeDef& node : result.node()) {
+./tools/graph_transforms/insert_logging_test.cc:    for (const NodeDef& node : result.node()) {
+./tools/graph_transforms/obfuscate_names.cc:  for (const NodeDef& input_node : input_graph_def.node()) {
+./tools/graph_transforms/obfuscate_names.cc:  for (const NodeDef& input_node : input_graph_def.node()) {
+./tools/graph_transforms/obfuscate_names.cc:    NodeDef* node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/remove_attribute_test.cc:    NodeDef* mul_node1 = graph_def.add_node();
+./tools/graph_transforms/remove_attribute_test.cc:    NodeDef* add_node2 = graph_def.add_node();
+./tools/graph_transforms/remove_attribute_test.cc:    NodeDef* add_node3 = graph_def.add_node();
+./tools/graph_transforms/remove_attribute_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/remove_attribute_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/remove_attribute_test.cc:    NodeDef* const_node3 = graph_def.add_node();
+./tools/graph_transforms/remove_attribute_test.cc:    NodeDef* add_node4 = graph_def.add_node();
+./tools/graph_transforms/remove_attribute_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/obfuscate_names_test.cc:    NodeDef* add_node1 = graph_def.add_node();
+./tools/graph_transforms/obfuscate_names_test.cc:    NodeDef* add_node2 = graph_def.add_node();
+./tools/graph_transforms/obfuscate_names_test.cc:    NodeDef* add_node3 = graph_def.add_node();
+./tools/graph_transforms/obfuscate_names_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/obfuscate_names_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/obfuscate_names_test.cc:    NodeDef* const_node3 = graph_def.add_node();
+./tools/graph_transforms/obfuscate_names_test.cc:    NodeDef* const_node4 = graph_def.add_node();
+./tools/graph_transforms/obfuscate_names_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/obfuscate_names_test.cc:      NodeDef* const_node = graph_def.add_node();
+./tools/graph_transforms/obfuscate_names_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/obfuscate_names_test.cc:      NodeDef* const_node = graph_def.add_node();
+./tools/graph_transforms/obfuscate_names_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/obfuscate_names_test.cc:    for (const NodeDef& node : result.node()) {
+./tools/graph_transforms/remove_device.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/remove_device.cc:    NodeDef* new_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/round_weights.cc:                  std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/round_weights.cc:        const NodeDef& old_const_node = match.node;
+./tools/graph_transforms/round_weights.cc:        NodeDef rounded_const_node;
+./tools/graph_transforms/quantize_nodes_test.cc:    for (const NodeDef& node : quantized_graph_def.node()) {
+./tools/graph_transforms/quantize_nodes_test.cc:      for (const NodeDef& node : quantized_graph_def.node()) {
+./tools/graph_transforms/quantize_nodes_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/quantize_nodes_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/quantize_nodes_test.cc:    for (const NodeDef& node : removed_graph_def.node()) {
+./tools/graph_transforms/quantize_nodes_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/quantize_nodes_test.cc:    for (const NodeDef& node : quantized_graph_def.node()) {
+./tools/graph_transforms/quantize_nodes_test.cc:    for (const NodeDef& node : converted_graph_def.node()) {
+./tools/graph_transforms/quantize_nodes_test.cc:    for (const NodeDef& node : converted_graph_def.node()) {
+./tools/graph_transforms/quantize_nodes_test.cc:    for (const NodeDef& node : converted_graph_def.node()) {
+./tools/graph_transforms/quantize_nodes_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/quantize_nodes_test.cc:    for (const NodeDef& node : merged_graph_def.node()) {
+./tools/graph_transforms/quantize_nodes_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/quantize_nodes_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/quantize_nodes_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/quantize_nodes_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/insert_logging.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/insert_logging.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/insert_logging.cc:    NodeDef* new_node = logged_graph_def.mutable_node()->Add();
+./tools/graph_transforms/insert_logging.cc:      NodeDef* print_node = logged_graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils_test.cc:    std::map<string, std::vector<const NodeDef*>> outputs_map;
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef node;
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef node;
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef copied_node;
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef node;
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef node;
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef node;
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef node;
+./tools/graph_transforms/transform_utils_test.cc:        [](const NodeDef& node) { return (node.name() != "remove_me"); },
+./tools/graph_transforms/transform_utils_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef* removed_placeholder = node_map["placeholder"];
+./tools/graph_transforms/transform_utils_test.cc:           std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/transform_utils_test.cc:          NodeDef original_copy;
+./tools/graph_transforms/transform_utils_test.cc:          NodeDef identity_node;
+./tools/graph_transforms/transform_utils_test.cc:    for (const NodeDef& node : replaced_graph_def.node()) {
+./tools/graph_transforms/transform_utils_test.cc:    std::vector<NodeDef> result;
+./tools/graph_transforms/transform_utils_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* mul_node = graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* add_node1 = graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* add_node2 = graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* const_node1 = graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* const_node2 = graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* mul_node = invalid_graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* add_node1 = invalid_graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* add_node2 = invalid_graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* const_node1 = invalid_graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* const_node2 = invalid_graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef* const_node3 = valid_graph_def.mutable_node()->Add();
+./tools/graph_transforms/transform_utils_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef* float_const_def = node_map.at("float_const");
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef* int_const_def = node_map.at("int_const");
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef* float_relu_def = node_map.at("float_relu");
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef* int_relu_def = node_map.at("int_relu");
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef a;
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef b;
+./tools/graph_transforms/transform_utils_test.cc:    std::vector<NodeDef> new_nodes;
+./tools/graph_transforms/transform_utils_test.cc:  void TestHashNodeDef() {
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef& a_node_def = a_graph_def.node(0);
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef& b_node_def = b_graph_def.node(0);
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef& c_node_def = c_graph_def.node(0);
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef& d_node_def = d_graph_def.node(0);
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef& e_node_def = e_graph_def.node(0);
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef& f_node_def = f_graph_def.node(0);
+./tools/graph_transforms/transform_utils_test.cc:    const NodeDef& g_node_def = g_graph_def.node(0);
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef relu1_node_def;
+./tools/graph_transforms/transform_utils_test.cc:    NodeDef relu2_node_def;
+./tools/graph_transforms/transform_utils_test.cc:    EXPECT_EQ(HashNodeDef(a_node_def), HashNodeDef(b_node_def));
+./tools/graph_transforms/transform_utils_test.cc:    EXPECT_NE(HashNodeDef(a_node_def), HashNodeDef(c_node_def));
+./tools/graph_transforms/transform_utils_test.cc:    EXPECT_NE(HashNodeDef(a_node_def), HashNodeDef(d_node_def));
+./tools/graph_transforms/transform_utils_test.cc:    EXPECT_NE(HashNodeDef(a_node_def), HashNodeDef(e_node_def));
+./tools/graph_transforms/transform_utils_test.cc:    EXPECT_NE(HashNodeDef(a_node_def), HashNodeDef(f_node_def));
+./tools/graph_transforms/transform_utils_test.cc:    EXPECT_NE(HashNodeDef(a_node_def), HashNodeDef(g_node_def));
+./tools/graph_transforms/transform_utils_test.cc:    EXPECT_NE(HashNodeDef(a_node_def), HashNodeDef(relu1_node_def));
+./tools/graph_transforms/transform_utils_test.cc:    EXPECT_NE(HashNodeDef(relu1_node_def), HashNodeDef(relu2_node_def));
+./tools/graph_transforms/transform_utils_test.cc:TEST_F(TransformUtilsTest, TestHashNodeDef) { TestHashNodeDef(); }
+./tools/graph_transforms/fuse_convolutions_test.cc:    for (const NodeDef& node : fused_graph_def.node()) {
+./tools/graph_transforms/fuse_convolutions_test.cc:    for (const NodeDef& node : fused_graph_def.node()) {
+./tools/graph_transforms/fuse_convolutions_test.cc:    for (const NodeDef& node : fused_graph_def.node()) {
+./tools/graph_transforms/sort_by_execution_order_test.cc:      const NodeDef& node = graph_def.node(i);
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* add_node = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* b_node = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* a_node = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* negative_node = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* relu_node = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* sqrt_node = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* const_node = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* add_node1 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* add_node2 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* add_node3 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* const_node3 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* const_node4 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* add_node1 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* add_node2 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* add_node3 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/sort_by_execution_order_test.cc:    NodeDef* const_node3 = graph_def.add_node();
+./tools/graph_transforms/transform_utils.cc:inline bool IsMerge(const NodeDef& node_def) {
+./tools/graph_transforms/transform_utils.cc:void MatchedNodesAsArray(const NodeMatch& match, std::vector<NodeDef>* result) {
+./tools/graph_transforms/transform_utils.cc:                     std::map<string, const NodeDef*>* result) {
+./tools/graph_transforms/transform_utils.cc:  for (const NodeDef& node : graph_def.node()) {
+./tools/graph_transforms/transform_utils.cc:                       std::map<string, std::vector<const NodeDef*>>* result) {
+./tools/graph_transforms/transform_utils.cc:  std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils.cc:  for (const NodeDef& node : graph_def.node()) {
+./tools/graph_transforms/transform_utils.cc:uint64 HashNodeDef(const NodeDef& node) {
+./tools/graph_transforms/transform_utils.cc:void AddNodeInput(const string& input_name, NodeDef* node) {
+./tools/graph_transforms/transform_utils.cc:void CopyNodeAttr(const NodeDef& source, const string& source_key,
+./tools/graph_transforms/transform_utils.cc:                  const string& dest_key, NodeDef* dest) {
+./tools/graph_transforms/transform_utils.cc:Tensor GetNodeTensorAttr(const NodeDef& node, const string& key) {
+./tools/graph_transforms/transform_utils.cc:                    std::function<bool(const NodeDef&)> selector,
+./tools/graph_transforms/transform_utils.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/transform_utils.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/transform_utils.cc:    NodeDef* new_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/transform_utils.cc:    const NodeDef& node(input_graph_def.node(i));
+./tools/graph_transforms/transform_utils.cc:    const NodeDef& node_def(input_graph_def.node(n));
+./tools/graph_transforms/transform_utils.cc:  // Process the NodeDefs in topological order.
+./tools/graph_transforms/transform_utils.cc:    const NodeDef& node_def(input_graph_def.node(o));
+./tools/graph_transforms/transform_utils.cc:  for (const NodeDef& node : graph_def_.node()) {
+./tools/graph_transforms/transform_utils.cc:    const NodeDef& node, const OpTypePattern& pattern,
+./tools/graph_transforms/transform_utils.cc:    const NodeDef& input_node = *(node_map_[input_node_name]);
+./tools/graph_transforms/transform_utils.cc:                               const std::set<string>&, std::vector<NodeDef>*)>&
+./tools/graph_transforms/transform_utils.cc:  std::map<string, std::vector<const NodeDef*>> outputs_map;
+./tools/graph_transforms/transform_utils.cc:  for (const NodeDef& input_node : input_graph_def.node()) {
+./tools/graph_transforms/transform_utils.cc:      std::vector<NodeDef> matched_nodes_array;
+./tools/graph_transforms/transform_utils.cc:      for (const NodeDef& matched_node : matched_nodes_array) {
+./tools/graph_transforms/transform_utils.cc:      for (const NodeDef& matched_node : matched_nodes_array) {
+./tools/graph_transforms/transform_utils.cc:          for (const NodeDef* dependent_node :
+./tools/graph_transforms/transform_utils.cc:      std::vector<NodeDef> new_nodes;
+./tools/graph_transforms/transform_utils.cc:      for (const NodeDef& new_node : new_nodes) {
+./tools/graph_transforms/transform_utils.cc:        std::vector<NodeDef> old_nodes;
+./tools/graph_transforms/transform_utils.cc:        for (const NodeDef& old_node : old_nodes) {
+./tools/graph_transforms/transform_utils.cc:          NodeDef* added_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/transform_utils.cc:        for (const NodeDef& new_node : new_nodes) {
+./tools/graph_transforms/transform_utils.cc:          NodeDef* added_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/transform_utils.cc:      NodeDef* added_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/transform_utils.cc:  for (const NodeDef& node : input_graph_def.node()) {
+./tools/graph_transforms/transform_utils.cc:    NodeDef* new_node = output_graph_def->mutable_node()->Add();
+./tools/graph_transforms/transform_utils.cc:                       std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/transform_utils.cc:  std::vector<NodeDef> old_nodes;
+./tools/graph_transforms/transform_utils.cc:  for (const NodeDef& old_node : old_nodes) {
+./tools/graph_transforms/transform_utils.cc:  std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils.cc:  for (const NodeDef& node : graph_def.node()) {
+./tools/graph_transforms/transform_utils.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils.cc:Status GetInOutTypes(const NodeDef& node_def, DataTypeVector* inputs,
+./tools/graph_transforms/rename_attribute_test.cc:    NodeDef* mul_node1 = graph_def.add_node();
+./tools/graph_transforms/rename_attribute_test.cc:    NodeDef* add_node2 = graph_def.add_node();
+./tools/graph_transforms/rename_attribute_test.cc:    NodeDef* add_node3 = graph_def.add_node();
+./tools/graph_transforms/rename_attribute_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/rename_attribute_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/rename_attribute_test.cc:    NodeDef* const_node3 = graph_def.add_node();
+./tools/graph_transforms/rename_attribute_test.cc:    NodeDef* add_node4 = graph_def.add_node();
+./tools/graph_transforms/rename_attribute_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/round_weights_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/round_weights_test.cc:    const NodeDef* r_input_op = node_lookup.at("input_op");
+./tools/graph_transforms/round_weights_test.cc:    const NodeDef* r_weights_op = node_lookup.at("weights_op");
+./tools/graph_transforms/fold_constants_test.cc:    std::map<string, const NodeDef*> folded_node_map;
+./tools/graph_transforms/fold_constants_test.cc:    for (const NodeDef& node : folded_graph_def.node()) {
+./tools/graph_transforms/fold_constants_test.cc:    for (const NodeDef& node : graph_def.node()) {
+./tools/graph_transforms/fold_constants_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/fold_constants_test.cc:    std::map<string, const NodeDef*> node_map;
+./tools/graph_transforms/transform_utils.h:                     std::map<string, const NodeDef*>* result);
+./tools/graph_transforms/transform_utils.h:                       std::map<string, std::vector<const NodeDef*>>* result);
+./tools/graph_transforms/transform_utils.h:// NodeDef input strings can contain other information besides the name of an
+./tools/graph_transforms/transform_utils.h:// a string pulled from a NodeDef input, and return the plain node name.
+./tools/graph_transforms/transform_utils.h:// Returns a stable hash for the contents of the NodeDef, so that equivalent
+./tools/graph_transforms/transform_utils.h:uint64 HashNodeDef(const NodeDef& node);
+./tools/graph_transforms/transform_utils.h:void AddNodeInput(const string& input_name, NodeDef* node);
+./tools/graph_transforms/transform_utils.h:// Copies an attribute from one NodeDef to another.
+./tools/graph_transforms/transform_utils.h:void CopyNodeAttr(const NodeDef& source, const string& source_key,
+./tools/graph_transforms/transform_utils.h:                  const string& dest_key, NodeDef* dest);
+./tools/graph_transforms/transform_utils.h:// Inserts a value into a NodeDef's map of attributes.
+./tools/graph_transforms/transform_utils.h:inline void SetNodeAttr(const string& key, const T& value, NodeDef* node) {
+./tools/graph_transforms/transform_utils.h:                              NodeDef* node) {
+./tools/graph_transforms/transform_utils.h:// Inserts a Tensor into the specified attribute of a NodeDef.
+./tools/graph_transforms/transform_utils.h:                              const std::vector<T>& values, NodeDef* node) {
+./tools/graph_transforms/transform_utils.h:// Retrieves a tensor value from a NodeDef attribute.
+./tools/graph_transforms/transform_utils.h:Tensor GetNodeTensorAttr(const NodeDef& node, const string& key);
+./tools/graph_transforms/transform_utils.h:                    std::function<bool(const NodeDef&)> selector,
+./tools/graph_transforms/transform_utils.h:// Returns input and output types for a particular NodeDef.
+./tools/graph_transforms/transform_utils.h:Status GetInOutTypes(const NodeDef& node_def, DataTypeVector* inputs,
+./tools/graph_transforms/transform_utils.h:  NodeDef node;
+./tools/graph_transforms/transform_utils.h:  // matches so that no node appears in more than one match. The NodeDef
+./tools/graph_transforms/transform_utils.h:  bool DoesOpTypeMatch(const NodeDef& node, const OpTypePattern& pattern,
+./tools/graph_transforms/transform_utils.h:  std::map<string, const NodeDef*> node_map_;
+./tools/graph_transforms/transform_utils.h:                               const std::set<string>&, std::vector<NodeDef>*)>&
+./tools/graph_transforms/transform_utils.h:void MatchedNodesAsArray(const NodeMatch& match, std::vector<NodeDef>* result);
+./tools/graph_transforms/transform_utils.h:void CopyOriginalMatch(const NodeMatch& match, std::vector<NodeDef>* new_nodes);
+./tools/graph_transforms/transform_graph_test.cc:    std::map<string, const NodeDef*> out_node_map;
+./tools/graph_transforms/transform_graph_test.cc:    for (const NodeDef& node : out_graph_def.node()) {
+./tools/graph_transforms/fold_batch_norms.cc:         std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/fold_batch_norms.cc:        const NodeDef& mul_node = match.node;
+./tools/graph_transforms/fold_batch_norms.cc:        const NodeDef& conv_node = match.inputs[0].node;
+./tools/graph_transforms/fold_batch_norms.cc:        const NodeDef& input_node = match.inputs[0].inputs[0].node;
+./tools/graph_transforms/fold_batch_norms.cc:        const NodeDef& weights_node = match.inputs[0].inputs[1].node;
+./tools/graph_transforms/fold_batch_norms.cc:        const NodeDef& mul_values_node = match.inputs[1].node;
+./tools/graph_transforms/fold_batch_norms.cc:        NodeDef scaled_weights_node;
+./tools/graph_transforms/fold_batch_norms.cc:        NodeDef new_conv_node;
+./tools/graph_transforms/rename_op_test.cc:    NodeDef* mul_node1 = graph_def.add_node();
+./tools/graph_transforms/rename_op_test.cc:    NodeDef* add_node2 = graph_def.add_node();
+./tools/graph_transforms/rename_op_test.cc:    NodeDef* add_node3 = graph_def.add_node();
+./tools/graph_transforms/rename_op_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/rename_op_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/rename_op_test.cc:    NodeDef* const_node3 = graph_def.add_node();
+./tools/graph_transforms/rename_op_test.cc:    NodeDef* add_node4 = graph_def.add_node();
+./tools/graph_transforms/rename_op_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/strip_unused_nodes.cc:  std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/strip_unused_nodes.cc:      const NodeDef* current_node = node_lookup[current_input];
+./tools/graph_transforms/strip_unused_nodes.cc:                 [&](const NodeDef& node) {
+./tools/graph_transforms/strip_unused_nodes.cc:  for (const NodeDef& node : filtered_graph_def.node()) {
+./tools/graph_transforms/strip_unused_nodes.cc:      NodeDef placeholder_node;
+./tools/graph_transforms/remove_device_test.cc:    NodeDef* mul_node1 = graph_def.add_node();
+./tools/graph_transforms/remove_device_test.cc:    NodeDef* add_node2 = graph_def.add_node();
+./tools/graph_transforms/remove_device_test.cc:    NodeDef* add_node3 = graph_def.add_node();
+./tools/graph_transforms/remove_device_test.cc:    NodeDef* const_node1 = graph_def.add_node();
+./tools/graph_transforms/remove_device_test.cc:    NodeDef* const_node2 = graph_def.add_node();
+./tools/graph_transforms/remove_device_test.cc:    NodeDef* const_node3 = graph_def.add_node();
+./tools/graph_transforms/remove_device_test.cc:    NodeDef* add_node4 = graph_def.add_node();
+./tools/graph_transforms/remove_device_test.cc:    std::map<string, const NodeDef*> node_lookup;
+./tools/graph_transforms/add_default_attributes_test.cc:    NodeDef* lrn_node1 = graph_def.add_node();
+./tools/graph_transforms/add_default_attributes_test.cc:    NodeDef* lrn_node2 = graph_def.add_node();
+./tools/graph_transforms/add_default_attributes_test.cc:    std::map<string, const NodeDef*> nodes;
+./tools/graph_transforms/quantize_weights.cc:         std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/quantize_weights.cc:        const NodeDef& old_const_node = match.node;
+./tools/graph_transforms/quantize_weights.cc:        NodeDef quantized_const_node;
+./tools/graph_transforms/quantize_weights.cc:        NodeDef min_node;
+./tools/graph_transforms/quantize_weights.cc:        NodeDef max_node;
+./tools/graph_transforms/quantize_weights.cc:        NodeDef dequantize_node;
+./tools/graph_transforms/summarize_graph_main.cc:void PrintNodeInfo(const NodeDef* node) {
+./tools/graph_transforms/summarize_graph_main.cc:void PrintBenchmarkUsage(const std::vector<const NodeDef*> placeholders,
+./tools/graph_transforms/summarize_graph_main.cc:                         const std::vector<const NodeDef*> variables,
+./tools/graph_transforms/summarize_graph_main.cc:                         const std::vector<const NodeDef*> outputs,
+./tools/graph_transforms/summarize_graph_main.cc:  std::vector<const NodeDef*> all_inputs(placeholders);
+./tools/graph_transforms/summarize_graph_main.cc:  for (const NodeDef* node : all_inputs) {
+./tools/graph_transforms/summarize_graph_main.cc:  for (const NodeDef* node : outputs) {
+./tools/graph_transforms/summarize_graph_main.cc:  std::vector<const NodeDef*> placeholders;
+./tools/graph_transforms/summarize_graph_main.cc:  std::vector<const NodeDef*> variables;
+./tools/graph_transforms/summarize_graph_main.cc:  for (const NodeDef& node : graph.node()) {
+./tools/graph_transforms/summarize_graph_main.cc:    for (const NodeDef* node : placeholders) {
+./tools/graph_transforms/summarize_graph_main.cc:    for (const NodeDef* node : variables) {
+./tools/graph_transforms/summarize_graph_main.cc:  std::map<string, std::vector<const NodeDef*>> output_map;
+./tools/graph_transforms/summarize_graph_main.cc:  std::vector<const NodeDef*> outputs;
+./tools/graph_transforms/summarize_graph_main.cc:  for (const NodeDef& node : graph.node()) {
+./tools/graph_transforms/summarize_graph_main.cc:    for (const NodeDef* node : outputs) {
+./tools/graph_transforms/summarize_graph_main.cc:  for (const NodeDef& node : graph.node()) {
+./tools/graph_transforms/summarize_graph_main.cc:  for (const NodeDef& node : graph.node()) {
+./tools/graph_transforms/fold_old_batch_norms.cc:                            std::vector<NodeDef>* new_nodes) {
+./tools/graph_transforms/fold_old_batch_norms.cc:          const NodeDef& batch_norm_node = match.node;
+./tools/graph_transforms/fold_old_batch_norms.cc:          const NodeDef& conv_node = match.inputs[0].node;
+./tools/graph_transforms/fold_old_batch_norms.cc:          const NodeDef& input_node = match.inputs[0].inputs[0].node;
+./tools/graph_transforms/fold_old_batch_norms.cc:          const NodeDef& weights_node = match.inputs[0].inputs[1].node;
+./tools/graph_transforms/fold_old_batch_norms.cc:          const NodeDef& mean_node = match.inputs[1].node;
+./tools/graph_transforms/fold_old_batch_norms.cc:          const NodeDef& variance_node = match.inputs[2].node;
+./tools/graph_transforms/fold_old_batch_norms.cc:          const NodeDef& beta_node = match.inputs[3].node;
+./tools/graph_transforms/fold_old_batch_norms.cc:          const NodeDef& gamma_node = match.inputs[4].node;
+./tools/graph_transforms/fold_old_batch_norms.cc:          NodeDef scaled_weights_node;
+./tools/graph_transforms/fold_old_batch_norms.cc:          NodeDef bias_offset_node;
+./tools/graph_transforms/fold_old_batch_norms.cc:          NodeDef bias_add_node;
+./tools/tfprof/internal/tfprof_node.h:  TFNode(const NodeDef* node)
+./tools/tfprof/internal/tfprof_node.h:  const NodeDef* node_def() { return node_; }
+./tools/tfprof/internal/tfprof_node.h:  const NodeDef* node_;
+./tools/tfprof/internal/tfprof_scope.h:  std::vector<std::unique_ptr<NodeDef>> node_defs_;
+./tools/tfprof/internal/tfprof_graph.cc:  node_defs_.push_back(std::unique_ptr<NodeDef>(new NodeDef()));
+./tools/tfprof/internal/tfprof_scope.cc:  node_defs_.push_back(std::unique_ptr<NodeDef>(new NodeDef()));
+./tools/tfprof/internal/tfprof_stats.cc:  for (const NodeDef& node : graph_->node()) {
+./tools/tfprof/internal/tfprof_stats.cc:    const NodeDef* node_def = it->second.node_def();
+./tools/tfprof/internal/tfprof_graph.h:  std::vector<std::unique_ptr<NodeDef>> node_defs_;
+./tools/quantization/quantize_graph.py:  new_node = node_def_pb2.NodeDef()
+./tools/quantization/quantize_graph.py:      new_node = node_def_pb2.NodeDef()
+./tools/quantization/quantize_graph.py:      quantize_node = node_def_pb2.NodeDef()
+./tools/quantization/quantize_graph.py:      new_node = node_def_pb2.NodeDef()
+./tools/quantization/quantize_graph.py:      new_node = node_def_pb2.NodeDef()
+./tools/quantization/quantize_graph.py:    original_input_node = node_def_pb2.NodeDef()
+./tools/quantization/quantize_graph.py:        new_node = node_def_pb2.NodeDef()
+./tools/quantization/quantize_graph.py:      new_node = node_def_pb2.NodeDef()
+./tools/quantization/quantize_graph.py:    output_node = node_def_pb2.NodeDef()
+./tools/quantization/quantize_graph.py:        output_node = node_def_pb2.NodeDef()
+./c/c_api.cc:using tensorflow::NodeDef;
+./c/c_api.cc:void TF_OperationToNodeDef(TF_Operation* oper, TF_Buffer* output_node_def,
+./c/c_api.cc:          NodeDef* const node_def = graph_def.add_node();
+./c/c_api.h:extern void TF_OperationToNodeDef(TF_Operation* oper,
+./c/c_api_test.cc:using tensorflow::NodeDef;
+./c/c_api_test.cc:bool IsPlaceholder(const NodeDef& node_def) {
+./c/c_api_test.cc:bool IsScalarConst(const NodeDef& node_def, int v) {
+./c/c_api_test.cc:bool IsAddN(const NodeDef& node_def, int n) {
+./c/c_api_test.cc:bool IsNeg(const NodeDef& node_def, const string& input) {
+./c/c_api_test.cc:bool GetNodeDef(TF_Operation* oper, NodeDef* node_def) {
+./c/c_api_test.cc:  TF_OperationToNodeDef(oper, buffer, s);
+./c/c_api_test.cc:      ADD_FAILURE() << "Unexpected NodeDef: " << ProtoDebugString(n);
+./c/c_api_test.cc:  // Serialize to NodeDef.
+./c/c_api_test.cc:  NodeDef node_def;
+./c/c_api_test.cc:  ASSERT_TRUE(GetNodeDef(neg, &node_def));
+./c/c_api_test.cc:  // Validate NodeDef is what we expect.
+./c/c_api_test.cc:  // Compare with first GraphDef + added NodeDef.
+./c/c_api_test.cc:  NodeDef* added_node = graph_def.add_node();
+./c/c_api_test.cc:  NodeDef node_def2;
+./c/c_api_test.cc:  ASSERT_TRUE(GetNodeDef(neg2, &node_def2));
+./c/c_api_test.cc:  ASSERT_TRUE(GetNodeDef(feed, &node_def));
+./c/c_api_test.cc:  ASSERT_TRUE(GetNodeDef(feed2, &node_def2));
+./c/c_api_test.cc:      ASSERT_TRUE(GetNodeDef(oper, &node_def));
+./c/c_api_test.cc:                     "building NodeDef 'float_op'"),
+./contrib/util/convert_graphdef_memmapped_format_lib.cc:  Status ConvertConstantsToImmutable(NodeDef* node_def,
+./contrib/util/convert_graphdef_memmapped_format_lib.cc:    const NodeDef& node = graph_def.node(i);
+./contrib/tensor_forest/kernels/tensor_forest_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "CountExtremelyRandomStats")
+./contrib/tensor_forest/kernels/tensor_forest_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "CountExtremelyRandomStats")
+./contrib/tensor_forest/kernels/tensor_forest_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "TreePredictions")
+./contrib/rnn/ops/lstm_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "BlockLSTM")
+./contrib/rnn/ops/lstm_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "BlockLSTMGrad")
+./contrib/copy_graph/python/util/copy_elements.py:    #An instance of tensorflow.core.framework.node_def_pb2.NodeDef, it
+./contrib/cudnn_rnn/ops/cudnn_rnn_ops_test.cc:  TF_ASSERT_OK(NodeDefBuilder("test", "CudnnRNN")
+./tensorboard/components/tf_graph_common/lib/proto.ts:  export interface NodeDef {
+./tensorboard/components/tf_graph_common/lib/parser.ts:    Promise<tf.graph.proto.NodeDef[]> {
+./tensorboard/components/tf_graph_common/lib/graph.ts:  constructor(rawNode: tf.graph.proto.NodeDef) {
+./tensorboard/components/tf_graph_common/lib/graph.ts:    rawNodes: tf.graph.proto.NodeDef[], params: BuildParams,
+./compiler/jit/mark_for_compilation_pass.cc:bool IsCompilableCall(const NodeDef& call_def, DeviceType jit_device_type,
+./compiler/jit/mark_for_compilation_pass.cc:bool IsCompilableWhile(const NodeDef& while_def, DeviceType jit_device_type,
+./compiler/jit/mark_for_compilation_pass.cc:  NodeDef call;
+./compiler/jit/mark_for_compilation_pass.cc:bool IsCompilableCall(const NodeDef& call_def, DeviceType jit_device_type,
+./compiler/jit/mark_for_compilation_pass.cc:bool IsCompilable(FunctionLibraryRuntime* flr, const NodeDef& ndef) {
+./compiler/jit/encapsulate_subgraphs_pass.cc:    // NodeDef for the function call node.
+./compiler/jit/encapsulate_subgraphs_pass.cc:    NodeDef call_node_def;
+./compiler/jit/encapsulate_subgraphs_pass.cc:        NodeDef ret_def;
+./compiler/jit/encapsulate_subgraphs_pass.cc:        NodeDef arg_def;
+./compiler/jit/encapsulate_subgraphs_pass.cc:        NodeDefBuilder builder(dst_subgraph.graph->NewName("input"), kArgOp);
+./compiler/jit/encapsulate_subgraphs_pass.cc:  // Build a parallel check NodeDef.
+./compiler/jit/encapsulate_subgraphs_pass.cc:  std::vector<NodeDefBuilder::NodeOut> expected_outputs(num_results);
+./compiler/jit/encapsulate_subgraphs_pass.cc:  std::vector<NodeDefBuilder::NodeOut> actual_outputs(num_results);
+./compiler/jit/encapsulate_subgraphs_pass.cc:        NodeDefBuilder::NodeOut(node_images.at(node_slot.node)->name(),
+./compiler/jit/encapsulate_subgraphs_pass.cc:    actual_outputs[i] = NodeDefBuilder::NodeOut(subgraph.call_node_def.name(),
+./compiler/jit/encapsulate_subgraphs_pass.cc:  NodeDef check_def;
+./compiler/jit/encapsulate_subgraphs_pass.cc:      NodeDefBuilder(graph_out->NewName(strings::StrCat(
+./compiler/jit/encapsulate_subgraphs_pass.cc:  // pass Inputs to the NodeDefBuilder, but I have been unable to find a
+./compiler/jit/encapsulate_subgraphs_pass.cc:      std::vector<int>* output_permutation, NodeDef* node) {
+./compiler/jit/graph_to_functiondef.cc:    NodeDef* node_def = fdef->add_node_def();
+./compiler/jit/graph_to_functiondef.cc:    // Reset input names based on graph rather than the NodeDef.
+./compiler/jit/graph_to_functiondef.cc:    NodeDef* node_def = fdef->mutable_node_def(n_index);
+./compiler/jit/mark_for_compilation_pass.h:bool IsCompilable(FunctionLibraryRuntime* flr, const NodeDef& ndef);
+./compiler/jit/encapsulate_subgraphs_pass.h:// permutation. 'nodedef' is the NodeDef for the call to the function under
+./compiler/jit/encapsulate_subgraphs_pass.h:    std::vector<int>* output_permutation, NodeDef* node_def)>
+./compiler/jit/build_xla_launch_ops_pass.cc:  NodeDef def;
+./compiler/jit/build_xla_launch_ops_pass.cc:// Givens a NodeDef 'ndef' and the function library runtime 'flr', if
+./compiler/jit/build_xla_launch_ops_pass.cc:Status CreateXlaLaunchOp(FunctionLibraryRuntime* flr, const NodeDef& ndef,
+./compiler/jit/build_xla_launch_ops_pass.cc:  NodeDef launch_def;
+./compiler/tests/randomized_tests.cc:  // sets it to the NodeDef of the operator under test. Fills 'inputs' and
+./compiler/tests/randomized_tests.cc:                    GraphDef* graphdef, NodeDef** test_node_def,
+./compiler/tests/randomized_tests.cc:  NodeDef node_def_;
+./compiler/tests/randomized_tests.cc:                                 NodeDef** test_node_def,
+./compiler/tests/randomized_tests.cc:  NodeDef* test_def = graphdef->add_node();
+./compiler/tests/randomized_tests.cc:  AddDefaultsToNodeDef(*op_def, test_def);
+./compiler/tests/randomized_tests.cc:    NodeDef* def = graphdef->add_node();
+./compiler/tests/randomized_tests.cc:    TF_RETURN_IF_ERROR(NodeDefBuilder(name, "Placeholder")
+./compiler/tests/randomized_tests.cc:    NodeDef* def = graphdef->add_node();
+./compiler/tests/randomized_tests.cc:    TF_RETURN_IF_ERROR(NodeDefBuilder(name, "Identity")
+./compiler/tests/randomized_tests.cc:  NodeDef* node_def;
+./compiler/tests/jit_test.py:      node = node_def_pb2.NodeDef()
+./compiler/tf2xla/xla_compilation_device.cc:          << SummarizeNodeDef(op_kernel->def());
+./compiler/tf2xla/xla_compiler.cc:  exec_params.create_kernel = [flib](const NodeDef& ndef, OpKernel** kernel) {
+./cc/framework/scope.cc:  const NodeDef& node_def = colocate_with_op.node()->def();
