@@ -409,7 +409,7 @@ Status GraphConstructor::MakeNode(const NodeDef& node_def, Node** node) {
   Status status;
   *node = g_->AddNode(node_def, &status);
 
-  LOG(INFO) << "[Yitao] called AddNode() to add Node " << (*node)->id() << " " << (*node)->type_string() << " " << (*node)->name() << " " << (*node)->in_edges().size() << " inputs!";
+  LOG(INFO) << "[Yitao] called AddNode() from MakeNode() to add Node " << (*node)->id() << " " << (*node)->type_string() << " " << (*node)->name() << " " << (*node)->in_edges().size() << " inputs!";
 
   if (!status.ok()) return status;
   if (opts_.expect_device_spec) {
@@ -690,6 +690,9 @@ Status GraphConstructor::Convert() {
       TF_RETURN_IF_ERROR(ModifyNodeDefForImport(&imported_node_def));
     }
     TF_RETURN_IF_ERROR(MakeNode(*node_def, &node));
+
+    LOG(INFO) << "[Yitao] called MakeNode() from Convert() to add Node " << node->id() << " " << node->type_string() << " " << node->name() << " " << node->in_edges().size() << " inputs!";
+
     // Use original_node_def so name StringPiece remains valid
     gdef_nodes_[original_node_def.name()].node = node;
 
