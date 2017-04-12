@@ -1009,6 +1009,9 @@ class BaseSession(SessionInterface):
       # Ensure any changes to the graph are reflected in the runtime.
       self._extend_graph()
       with errors.raise_exception_on_not_ok_status() as status:
+
+        print("==========[Yitao]========== python code is calling tf_session.TF_Run()!")
+
         return tf_session.TF_Run(session, options,
                                  feed_dict, fetch_list, target_list,
                                  status, run_metadata)

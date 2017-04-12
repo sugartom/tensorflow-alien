@@ -350,6 +350,9 @@ void TF_ExtendGraph(TF_DeprecatedSession* s, const void* proto,
     status->status = InvalidArgument("Invalid GraphDef");
     return;
   }
+
+  LOG(INFO) << "[Yitao] TF_ExtendGraph() called DirectSession::Extend()..........";
+
   status->status = s->session->Extend(g);
 }
 
@@ -555,6 +558,9 @@ static void TF_Run_Helper(
     }
 
     RunMetadata run_metadata_proto;
+
+    LOG(INFO) << "[Yitao] TF_Run_Helper() is calling DirectSession::Run()..........";
+
     result = session->Run(run_options_proto, input_pairs, output_tensor_names,
                           target_oper_names, &outputs, &run_metadata_proto);
 
@@ -616,6 +622,9 @@ void TF_Run(TF_DeprecatedSession* s, const TF_Buffer* run_options,
   for (int i = 0; i < ntargets; ++i) {
     target_oper_names[i] = c_target_oper_names[i];
   }
+
+  LOG(INFO) << "[Yitao] TF_Run() called TF_Run_Helper()..........";
+
   TF_Run_Helper(s->session, nullptr, run_options, input_pairs, output_names,
                 c_outputs, target_oper_names, run_metadata, status);
 }
@@ -678,6 +687,9 @@ void TF_PRun(TF_DeprecatedSession* s, const char* handle,
   for (int i = 0; i < ntargets; ++i) {
     target_oper_names[i] = c_target_oper_names[i];
   }
+
+  LOG(INFO) << "[Yitao] TF_PRun() called TF_Run_Helper()..........";
+
   TF_Run_Helper(s->session, handle, nullptr, input_pairs, output_names,
                 c_outputs, target_oper_names, nullptr, status);
 }
@@ -2220,6 +2232,9 @@ static bool ExtendSessionGraphHelper(TF_Session* session, TF_Status* status) {
         }
       }
       session->graph->mu.unlock();
+
+      LOG(INFO) << "[Yitao] ExtendSessionGraphHelper called DirectSession::Extend()..........";
+
       // TODO(josh11b): Also send the function library if needed.
       status->status = session->session->Extend(graph_def);
       if (!status->status.ok()) {
@@ -2269,6 +2284,8 @@ void TF_SessionRun(TF_Session* session, const TF_Buffer* run_options,
   for (int i = 0; i < ntargets; ++i) {
     target_names[i] = target_opers[i]->node.name();
   }
+
+  LOG(INFO) << "[Yitao] TF_SessionRun() called TF_Run_Helper()..........";
 
   // Actually run.
   TF_Run_Helper(session->session, nullptr, run_options, input_pairs,
@@ -2347,6 +2364,8 @@ void TF_SessionPRun(TF_Session* session, const char* handle,
   for (int i = 0; i < ntargets; ++i) {
     target_names[i] = target_opers[i]->node.name();
   }
+
+  LOG(INFO) << "[Yitao] TF_SessionPRun() called TF_Run_Helper()..........";
 
   TF_Run_Helper(session->session, handle, nullptr, input_pairs, output_names,
                 output_values, target_names, nullptr, status);

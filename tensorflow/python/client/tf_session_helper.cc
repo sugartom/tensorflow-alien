@@ -572,6 +572,9 @@ void TF_Run_wrapper_helper(TF_DeprecatedSession* session, const char* handle,
   // 3. Actually call TF_Run().
   Py_BEGIN_ALLOW_THREADS;
   if (handle == nullptr) {
+
+    LOG(INFO) << "[Yitao] TF_Run_wrapper_helper() called TF_Run()!..........";
+
     TF_Run(session, run_options, input_names.data(), inputs_unsafe.data(),
            input_names.size(), const_cast<const char**>(output_names.data()),
            outputs.data(), output_names.size(),
@@ -625,6 +628,9 @@ void TF_Run_wrapper(TF_DeprecatedSession* session, const TF_Buffer* run_options,
                     PyObject* feed_dict, const NameVector& output_names,
                     const NameVector& target_nodes, TF_Status* out_status,
                     PyObjectVector* out_values, TF_Buffer* run_outputs) {
+
+  LOG(INFO) << "[Yitao] TF_Run_wrapper() called TF_Run_wrapper_helper()..........";
+
   TF_Run_wrapper_helper(session, nullptr, run_options, feed_dict, output_names,
                         target_nodes, out_status, out_values, run_outputs);
 }
@@ -651,6 +657,9 @@ void TF_PRunSetup_wrapper(TF_DeprecatedSession* session,
 void TF_PRun_wrapper(TF_DeprecatedSession* session, const char* handle,
                      PyObject* feed_dict, const NameVector& output_names,
                      TF_Status* out_status, PyObjectVector* out_values) {
+
+  LOG(INFO) << "[Yitao] TF_PRun_wrapper() called TF_Run_wrapper_helper()..........";
+
   TF_Run_wrapper_helper(session, handle, nullptr, feed_dict, output_names,
                         NameVector(), out_status, out_values, nullptr);
 }

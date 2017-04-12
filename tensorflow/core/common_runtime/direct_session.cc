@@ -228,6 +228,9 @@ DirectSession::DirectSession(const SessionOptions& options,
       factory_(factory),
       cancellation_manager_(new CancellationManager()),
       operation_timeout_in_ms_(options_.config.operation_timeout_in_ms()) {
+
+  LOG(INFO) << "[Yitao] DirectSession::DirectSession() My Test App is actually calling DirectSession()..............................";
+
   if (options_.config.session_inter_op_thread_pool_size() > 0) {
     for (int i = 0; i < options_.config.session_inter_op_thread_pool_size();
          ++i) {
@@ -267,6 +270,8 @@ DirectSession::DirectSession(const SessionOptions& options,
       device_set_.set_client_device(d);
     }
     ++devices_added;
+
+    LOG(INFO) << "[Yitao] in DirectSession::DirectSession(), we have device: " << d->name();
   }
 }
 
@@ -323,6 +328,9 @@ Status DirectSession::MaybeInitializeExecutionState(
 
 Status DirectSession::Create(const GraphDef& graph) {
   if (graph.node_size() > 0) {
+
+    LOG(INFO) << "[Yitao] DirectSession::Create() Case One..............................";
+
     mutex_lock l(graph_def_lock_);
     if (graph_created_) {
       return errors::AlreadyExists(
@@ -330,16 +338,25 @@ Status DirectSession::Create(const GraphDef& graph) {
     }
     return ExtendLocked(graph);
   }
+
+  LOG(INFO) << "[Yitao] DirectSession::Create() Case Two..............................";
+
   return Status::OK();
 }
 
 Status DirectSession::Extend(const GraphDef& graph) {
+
+  LOG(INFO) << "[Yitao] DirectSession::Extend()..............................";
+
   TF_RETURN_IF_ERROR(CheckNotClosed());
   mutex_lock l(graph_def_lock_);
   return ExtendLocked(graph);
 }
 
 Status DirectSession::ExtendLocked(const GraphDef& graph) {
+
+  LOG(INFO) << "[Yitao] DirectSession::ExtendLocked()..............................";
+
   bool already_initialized;
   // If this is the first call, we can initialize the execution state
   // with `graph` and do not need to call `Extend()`.
@@ -369,6 +386,9 @@ Status DirectSession::Run(const RunOptions& run_options,
                           const std::vector<string>& target_nodes,
                           std::vector<Tensor>* outputs,
                           RunMetadata* run_metadata) {
+
+  LOG(INFO) << "[Yitao] hahaha, we are in DirectSession::Run()!..........";
+
   TF_RETURN_IF_ERROR(CheckNotClosed());
   direct_session_runs->GetCell()->IncrementBy(1);
   {
@@ -573,6 +593,9 @@ Status DirectSession::PRunSetup(const std::vector<string>& input_names,
                                 const std::vector<string>& output_names,
                                 const std::vector<string>& target_nodes,
                                 string* handle) {
+
+  LOG(INFO) << "[Yitao] hahaha, we are in DirectSession::PRunSetup()!..........";
+
   TF_RETURN_IF_ERROR(CheckNotClosed());
   {
     mutex_lock l(graph_def_lock_);
@@ -650,6 +673,9 @@ Status DirectSession::PRunSetup(const std::vector<string>& input_names,
 Status DirectSession::PRun(const string& handle, const NamedTensorList& inputs,
                            const std::vector<string>& output_names,
                            std::vector<Tensor>* outputs) {
+
+  LOG(INFO) << "[Yitao] hahaha, we are in DirectSession::PRun()!..........";
+
   TF_RETURN_IF_ERROR(CheckNotClosed());
   std::vector<string> parts = str_util::Split(handle, ';');
   const string& key = parts[0];
@@ -1100,6 +1126,9 @@ Status DirectSession::CreateGraphs(
     std::unordered_map<string, std::unique_ptr<Graph>>* outputs,
     std::unique_ptr<FunctionLibraryDefinition>* flib_def,
     RunStateArgs* run_state_args) {
+
+  LOG(INFO) << "[Yitao] hahaha, we are in DirectSession::CreateGraphs()!..........";
+
   mutex_lock l(graph_def_lock_);
   std::unique_ptr<SimpleClientGraph> client_graph;
 
