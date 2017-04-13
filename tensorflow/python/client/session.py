@@ -894,6 +894,14 @@ class BaseSession(SessionInterface):
                          fetch_handler.fetches(), fetch_handler.targets())
 
   def _run(self, handle, fetches, feed_dict, options, run_metadata):
+
+    print("_run() log info:")
+    print("   handle        = %s" % str(handle))
+    print("   fetches       = %s" % str(fetches))
+    print("   feed_dict     = %s" % str(feed_dict))
+    print("   options       = %s" % str(options))
+    print("   run_metadata  = %s" % str(run_metadata))
+
     """Perform either run or partial_run, depending the presence of `handle`."""
     def _feed_fn(feed, feed_val):
       for tensor_type, _, feed_fn, _ in _REGISTERED_EXPANSIONS:
@@ -982,6 +990,15 @@ class BaseSession(SessionInterface):
 
   def _do_run(self, handle, target_list, fetch_list, feed_dict,
               options, run_metadata):
+
+    print("_do_run() log info:")
+    print("   handle        = %s" % str(handle))
+    print("   target_list   = %s" % str(target_list))
+    print("   fetch_list    = %s" % str(fetch_list))
+    print("   feed_dict     = %s" % str(feed_dict))
+    print("   options       = %s" % str(options))
+    print("   run_metadata  = %s" % str(run_metadata))
+
     """Runs a step based on the given fetches and feeds.
 
     Args:
