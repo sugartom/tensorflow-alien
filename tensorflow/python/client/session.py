@@ -549,11 +549,16 @@ class BaseSession(SessionInterface):
 
     self._session = None
     opts = tf_session.TF_NewSessionOptions(target=self._target, config=config)
+
+    print("=== prepare to start new Session ===")
+
     try:
       with errors.raise_exception_on_not_ok_status() as status:
         self._session = tf_session.TF_NewDeprecatedSession(opts, status)
     finally:
       tf_session.TF_DeleteSessionOptions(opts)
+
+    print("=== finish to start new Session ===")
 
   def close(self):
     """Closes this session.
@@ -1203,7 +1208,9 @@ class Session(BaseSession):
         protocol buffer with configuration options for the session.
 
     """
+    print("=== prepare to call BaseSession::__init__ ===")
     super(Session, self).__init__(target, graph, config=config)
+    print("=== finish to call BaseSession::__init__ ===")
     # NOTE(mrry): Create these on first `__enter__` to avoid a reference cycle.
     self._default_graph_context_manager = None
     self._default_session_context_manager = None
