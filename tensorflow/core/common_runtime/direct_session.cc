@@ -517,6 +517,8 @@ Status DirectSession::Run(const RunOptions& run_options,
     return errors::Cancelled("Run call was cancelled");
   }
 
+  LOG(INFO) << "[Yitao] There are " << num_executors << " items in executors_and_keys, and we are ready to run RunAsync() on each item!...";
+
   for (const auto& item : executors_and_keys->items) {
     item.executor->RunAsync(args, barrier->Get());
   }

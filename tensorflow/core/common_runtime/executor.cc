@@ -1617,7 +1617,7 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
     const int id = node->id();
     const NodeItem& item = *gview.node(id);
 
-    LOG(INFO) << "[Yitao] pop Node " << id << " " << node->type_string() << " "
+    LOG(INFO) << "[Yitao] queue.size() = " << inline_ready.queueLength() + 1 << ", then pop Node " << id << " " << node->type_string() << " "
               << node->name() << " " << node->in_edges().size() << " inputs";
     if (inline_ready.empty()) {
       LOG(INFO) << "[Yitao]    after pop Node " << id << " " << node->type_string() << " " << node->name() << ", no node left...";
@@ -1778,11 +1778,11 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
       // Propagates outputs.
       if (s.ok()) {
 
-        LOG(INFO) << "[Yitao]    before PropagateOutputs(), ready.size() = " << ready.size();
+        LOG(INFO) << "[Yitao]    (Node " << item.node->id() << " " << item.node->type_string() << " " << item.node->name() << ") before PropagateOutputs(), ready.size() = " << ready.size();
 
         PropagateOutputs(tagged_node, &item, &outputs, &ready);
 
-        LOG(INFO) << "[Yitao]    after PropagateOutputs(), ready.size() = " << ready.size();
+        LOG(INFO) << "[Yitao]    (Node " << item.node->id() << " " << item.node->type_string() << " " << item.node->name() << ") after PropagateOutputs(), ready.size() = " << ready.size();
         // if (ready.size() == 4 && ready[0].node->name() == "Variable") {
         //   // LOG(INFO) << "[Yitao]    ready[0].node->name() = " << ready[0].node->name();
         //   TaggedNode tmpTaggedNode = ready[0];
@@ -2172,14 +2172,14 @@ void ExecutorState::ScheduleReady(const TaggedNodeSeq& ready,
   //   auto& tagged_node = ready[i];                   // <--- Yitao version
     const NodeItem& item = *gview.node(tagged_node.node->id());
 
-    // const Node* tomNode = tagged_node.node; // Yitao for printing case One or Two...
+    const Node* tomNode = tagged_node.node; // Yitao for printing case One or Two...
 
     if (tagged_node.is_dead || !item.kernel_is_expensive) {
-      // LOG(INFO) << "[Yitao] in ScheduleReady(), Node " << tomNode->id() << " " << tomNode->type_string() << " " << tomNode->name() << " is case One";
+      LOG(INFO) << "[Yitao]    in ScheduleReady(), Node " << tomNode->id() << " " << tomNode->type_string() << " " << tomNode->name() << " is inexpensive! Let's push it in inline_back!";
       // Inline this inexpensive node.
       inline_ready->push_back(tagged_node);
     } else {
-      // LOG(INFO) << "[Yitao] in ScheduleReady(), Node " << tomNode->id() << " " << tomNode->type_string() << " " << tomNode->name() << " is case Two";
+      LOG(INFO) << "[Yitao]    in ScheduleReady(), Node " << tomNode->id() << " " << tomNode->type_string() << " " << tomNode->name() << " is expensive... Need extra thread to deal with it...";
 
       if (curr_expensive_node) {
         // Dispatch to another thread since there is plenty of work to
