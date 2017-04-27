@@ -101,8 +101,28 @@ class DirectSession : public Session {
     cost_model_manager_.ExportCostModels(cost_models);
   }
 
+  // Yitao-MySched
+  // int getMySchedTomNum() {
+  //   return mySched.getTomNum();
+  // }
+  MySched* getMySched() {
+    return mySched;
+  }
+  MySched* mySched;
+
  private:
   typedef DirectSession ME;
+
+  // Yitao-MySched
+  // class MySched {
+  //   public:
+  //     MySched(int tomNum) : tomNum_(tomNum) {}
+  //     int getTomNum() {
+  //       return tomNum_;
+  //     }
+  //   private:
+  //     int tomNum_;
+  // };
 
   // We create one executor and its dependent library runtime for
   // every partition.

@@ -1279,6 +1279,9 @@ class ExecutorState {
   // Invoked when the execution finishes.
   Executor::DoneCallback done_cb_;
 
+  // Yitao-MySched
+  MySched* my_sched_;
+
   std::atomic_int_fast32_t num_outstanding_ops_;
 
   mutex mu_;
@@ -1384,6 +1387,7 @@ ExecutorState::ExecutorState(const Executor::Args& args, ExecutorImpl* impl)
       cancellation_manager_(args.cancellation_manager),
       runner_(args.runner),
       sync_on_finish_(args.sync_on_finish),
+      my_sched_(args.my_sched), // Yitao-MySched
       num_outstanding_ops_(0) {
   // We start the entire execution in iteration 0 of the root frame
   // so let us create the root frame and the state for iteration 0.
@@ -1577,6 +1581,9 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
 
   const Node* tomNode = tagged_node.node;
   LOG(INFO) << "[Yitao] we are calling ExecutorState::Process() with Node " << tomNode->id() << " " << tomNode->type_string() << " " << tomNode->name() << " " << tomNode->in_edges().size() << " inputs!";
+
+  // Yitao-MySched
+  LOG(INFO) << "[Yitao] === Debugging === in ExecutorState::Process(), we get my_sched_->getTomNum() = " << my_sched_->getTomNum();
 
   // Parameters passed to OpKernel::Compute.
   TensorValueVec inputs;

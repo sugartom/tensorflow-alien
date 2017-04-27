@@ -231,6 +231,11 @@ DirectSession::DirectSession(const SessionOptions& options,
 
   LOG(INFO) << "[Yitao] DirectSession::DirectSession() My Test App is actually calling DirectSession()..............................";
 
+  // Yitao-MySched
+  mySched = new MySched(1234);
+
+  LOG(INFO) << "[Yitao] === Debugging === in DirectSession::DirectSession, we have mySched->getTomNum() = " << mySched->getTomNum();
+
   if (options_.config.session_inter_op_thread_pool_size() > 0) {
     for (int i = 0; i < options_.config.session_inter_op_thread_pool_size();
          ++i) {
@@ -518,6 +523,9 @@ Status DirectSession::Run(const RunOptions& run_options,
   }
 
   LOG(INFO) << "[Yitao] There are " << num_executors << " items in executors_and_keys, and we are ready to run RunAsync() on each item!...";
+
+  // Yitao-MySched
+  args.my_sched = mySched;
 
   for (const auto& item : executors_and_keys->items) {
     item.executor->RunAsync(args, barrier->Get());

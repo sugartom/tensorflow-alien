@@ -30,6 +30,19 @@ namespace tensorflow {
 
 class StepStatsCollector;
 
+// Yitao-MySched
+class MySched {
+    public:
+      MySched(int tomNum) {
+        tomNum_ = tomNum;
+      }
+      int getTomNum() {
+        return tomNum_;
+      }
+    private:
+      int tomNum_;
+};
+
 // Executor runs a graph computation.
 // Example:
 //   Graph* graph = ...;
@@ -103,6 +116,10 @@ class Executor {
                                  OpKernelContext* ctx)>
         NodeOutputsCallback;
     NodeOutputsCallback node_outputs_cb = nullptr;
+
+    // Yitao-MySched
+    // DirectSession* direct_session = nullptr;
+    MySched* my_sched;
   };
   typedef std::function<void(const Status&)> DoneCallback;
   virtual void RunAsync(const Args& args, DoneCallback done) = 0;
