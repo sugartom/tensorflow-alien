@@ -778,6 +778,14 @@ Status InferAllocAttr(const Node* n, const Node* dst,
   return s;
 }
 
+// struct TomStruct {
+//   TomStruct(int num = 2017) {
+//     num_ = num;
+//   }
+//   int num_;
+// };
+
+
 // The state associated with one invocation of ExecutorImpl::Run.
 // ExecutorState dispatches nodes when they become ready and keeps
 // track of how many predecessors of a node have not done (pending_).
@@ -1281,6 +1289,7 @@ class ExecutorState {
 
   // Yitao-MySched
   MySched* my_sched_;
+  int session_run_count_;
 
   std::atomic_int_fast32_t num_outstanding_ops_;
 
@@ -1388,6 +1397,7 @@ ExecutorState::ExecutorState(const Executor::Args& args, ExecutorImpl* impl)
       runner_(args.runner),
       sync_on_finish_(args.sync_on_finish),
       my_sched_(args.my_sched), // Yitao-MySched
+      session_run_count_(args.session_run_count), // Yitao-MySched
       num_outstanding_ops_(0) {
   // We start the entire execution in iteration 0 of the root frame
   // so let us create the root frame and the state for iteration 0.
@@ -1584,6 +1594,7 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
 
   // Yitao-MySched
   LOG(INFO) << "[Yitao] === Debugging === in ExecutorState::Process(), we get my_sched_->getTomNum() = " << my_sched_->getTomNum();
+  LOG(INFO) << "[Yitao] === Debugging === in ExecutorState::Process(), we get session_run_count_ = " << session_run_count_;
 
   // Parameters passed to OpKernel::Compute.
   TensorValueVec inputs;

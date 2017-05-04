@@ -232,7 +232,8 @@ DirectSession::DirectSession(const SessionOptions& options,
   LOG(INFO) << "[Yitao] DirectSession::DirectSession() My Test App is actually calling DirectSession()..............................";
 
   // Yitao-MySched
-  mySched = new MySched(1234);
+  mySched = new MySched(1985);
+  session_run_count = 0;
 
   LOG(INFO) << "[Yitao] === Debugging === in DirectSession::DirectSession, we have mySched->getTomNum() = " << mySched->getTomNum();
 
@@ -526,6 +527,8 @@ Status DirectSession::Run(const RunOptions& run_options,
 
   // Yitao-MySched
   args.my_sched = mySched;
+  session_run_count += 1;
+  args.session_run_count = session_run_count;
 
   for (const auto& item : executors_and_keys->items) {
     item.executor->RunAsync(args, barrier->Get());

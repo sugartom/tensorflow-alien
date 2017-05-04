@@ -102,27 +102,17 @@ class DirectSession : public Session {
   }
 
   // Yitao-MySched
-  // int getMySchedTomNum() {
-  //   return mySched.getTomNum();
+  // MySched* getMySched() {
+  //   return mySched;
   // }
-  MySched* getMySched() {
-    return mySched;
-  }
-  MySched* mySched;
 
  private:
-  typedef DirectSession ME;
 
   // Yitao-MySched
-  // class MySched {
-  //   public:
-  //     MySched(int tomNum) : tomNum_(tomNum) {}
-  //     int getTomNum() {
-  //       return tomNum_;
-  //     }
-  //   private:
-  //     int tomNum_;
-  // };
+  MySched* mySched;
+  int session_run_count;
+
+  typedef DirectSession ME;
 
   // We create one executor and its dependent library runtime for
   // every partition.

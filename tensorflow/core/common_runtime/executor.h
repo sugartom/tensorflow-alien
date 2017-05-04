@@ -31,16 +31,25 @@ namespace tensorflow {
 class StepStatsCollector;
 
 // Yitao-MySched
+struct TomStruct {
+  TomStruct(int num = 2017) {
+    num_ = num;
+  }
+  int num_;
+};
 class MySched {
     public:
       MySched(int tomNum) {
-        tomNum_ = tomNum;
+        // tomNum_ = tomNum;
+        tomStruct = new TomStruct(tomNum);
       }
       int getTomNum() {
-        return tomNum_;
+        // return tomNum_
+        return tomStruct->num_;
       }
     private:
-      int tomNum_;
+      // int tomNum_;
+      TomStruct* tomStruct;
 };
 
 // Executor runs a graph computation.
@@ -120,6 +129,7 @@ class Executor {
     // Yitao-MySched
     // DirectSession* direct_session = nullptr;
     MySched* my_sched;
+    int session_run_count;
   };
   typedef std::function<void(const Status&)> DoneCallback;
   virtual void RunAsync(const Args& args, DoneCallback done) = 0;
