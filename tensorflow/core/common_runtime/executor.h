@@ -130,6 +130,9 @@ class Executor {
     // DirectSession* direct_session = nullptr;
     MySched* my_sched;
     int session_run_count;
+    mutex* tomMutex;
+    std::condition_variable* run2Ready_cv;
+    bool* run3Done;
   };
   typedef std::function<void(const Status&)> DoneCallback;
   virtual void RunAsync(const Args& args, DoneCallback done) = 0;

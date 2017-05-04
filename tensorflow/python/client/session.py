@@ -569,11 +569,11 @@ class BaseSession(SessionInterface):
       tf.errors.OpError: Or one of its subclasses if an error occurs while
         closing the TensorFlow session.
     """
-    with self._extend_lock:
-      if self._opened and not self._closed:
-        self._closed = True
-        with errors.raise_exception_on_not_ok_status() as status:
-          tf_session.TF_CloseDeprecatedSession(self._session, status)
+    # with self._extend_lock:
+    #   if self._opened and not self._closed:
+    #     self._closed = True
+    #     with errors.raise_exception_on_not_ok_status() as status:
+    #       tf_session.TF_CloseDeprecatedSession(self._session, status)
 
   def __del__(self):
     # cleanly ignore all exceptions

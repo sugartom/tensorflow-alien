@@ -234,6 +234,10 @@ DirectSession::DirectSession(const SessionOptions& options,
   // Yitao-MySched
   mySched = new MySched(1985);
   session_run_count = 0;
+  tomMutex = new mutex;
+  run2Ready_cv = new std::condition_variable;
+  run3Done = new bool;
+  (*run3Done) = false;
 
   LOG(INFO) << "[Yitao] === Debugging === in DirectSession::DirectSession, we have mySched->getTomNum() = " << mySched->getTomNum();
 
@@ -529,6 +533,9 @@ Status DirectSession::Run(const RunOptions& run_options,
   args.my_sched = mySched;
   session_run_count += 1;
   args.session_run_count = session_run_count;
+  args.tomMutex = tomMutex;
+  args.run2Ready_cv = run2Ready_cv;
+  args.run3Done = run3Done;
 
   for (const auto& item : executors_and_keys->items) {
     item.executor->RunAsync(args, barrier->Get());

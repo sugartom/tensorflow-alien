@@ -111,6 +111,9 @@ class DirectSession : public Session {
   // Yitao-MySched
   MySched* mySched;
   int session_run_count;
+  mutex* tomMutex;
+  std::condition_variable* run2Ready_cv;
+  bool* run3Done;
 
   typedef DirectSession ME;
 
