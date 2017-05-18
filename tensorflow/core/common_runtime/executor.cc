@@ -1294,6 +1294,11 @@ class ExecutorState {
   std::condition_variable* run2Ready_cv_;
   bool* run3Done_;
 
+  // Yitao-MySched
+  std::mutex* sched_lock_;
+  std::condition_variable* sched_cv_;
+  int* nextRunId_;
+
   std::atomic_int_fast32_t num_outstanding_ops_;
 
   mutex mu_;
@@ -1404,6 +1409,9 @@ ExecutorState::ExecutorState(const Executor::Args& args, ExecutorImpl* impl)
       tomMutex_(args.tomMutex), // Yitao-MySched
       run2Ready_cv_(args.run2Ready_cv), // Yitao-MySched
       run3Done_(args.run3Done), // Yitao-MySched
+      sched_lock_(args.sched_lock), // Yitao-MySched
+      sched_cv_(args.sched_cv), // Yitao-MySched
+      nextRunId_(args.nextRunId), // Yitao-MySched
       num_outstanding_ops_(0) {
   // We start the entire execution in iteration 0 of the root frame
   // so let us create the root frame and the state for iteration 0.
@@ -1648,6 +1656,14 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
     //   run2Ready_cv_->wait(l, [this](){return *run3Done_;});
     // }
 
+    // Yitao-MySched
+    std::unique_lock<std::mutex> l(*sched_lock_);
+    if (session_run_count_ == 2 || session_run_count_ == 3) {
+      // std::unique_lock<std::mutex> l(*sched_lock_);
+      sched_cv_->wait(l, [this](){return *nextRunId_ == session_run_count_;});
+      *nextRunId_ = -1;
+    }
+
     tagged_node = inline_ready.front();
     inline_ready.pop_front();
     const Node* node = tagged_node.node;
@@ -1841,6 +1857,12 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
       // Postprocess.
       completed = NodeDone(s, item.node, ready, stats, &inline_ready);
     }
+
+    // Yitao-MySched
+    if (session_run_count_ == 2 || session_run_count_ == 3) {
+      sched_cv_->notify_all();
+    }
+
   }  // while !inline_ready.empty()
 
   // Yitao-MySched

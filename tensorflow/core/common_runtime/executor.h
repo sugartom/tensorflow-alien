@@ -133,6 +133,11 @@ class Executor {
     mutex* tomMutex;
     std::condition_variable* run2Ready_cv;
     bool* run3Done;
+
+    // Yitao-MySched
+    std::mutex* sched_lock;
+    std::condition_variable* sched_cv;
+    int* nextRunId;
   };
   typedef std::function<void(const Status&)> DoneCallback;
   virtual void RunAsync(const Args& args, DoneCallback done) = 0;

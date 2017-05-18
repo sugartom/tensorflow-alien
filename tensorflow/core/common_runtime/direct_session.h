@@ -23,6 +23,9 @@ limitations under the License.
 #include <unordered_set>
 #include <vector>
 
+// Yitao-MySched
+#include <thread>
+
 #include "tensorflow/core/common_runtime/costmodel_manager.h"
 #include "tensorflow/core/common_runtime/debugger_state_interface.h"
 #include "tensorflow/core/common_runtime/device_mgr.h"
@@ -114,6 +117,12 @@ class DirectSession : public Session {
   mutex* tomMutex;
   std::condition_variable* run2Ready_cv;
   bool* run3Done;
+
+  // Yitao-MySched
+  std::mutex* sched_lock;
+  std::condition_variable* sched_cv;
+  int* nextRunId;
+  std::thread* myThread;
 
   typedef DirectSession ME;
 

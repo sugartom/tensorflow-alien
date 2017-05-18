@@ -220,6 +220,24 @@ void DirectSession::SchedClosure(thread::ThreadPool* pool,
 #endif  // __ANDROID__
 }
 
+void TLS(std::mutex* sched_lock, std::condition_variable* sched_cv, int* nextRunId) {
+  LOG(INFO) << "[Yitao] ********** start TLS...";
+  int myPid = -1;
+  int counter = 0;
+
+  while (true) {
+    std::unique_lock<std::mutex> l(*sched_lock);
+    sched_cv->wait(l, [myPid, nextRunId](){return *nextRunId == myPid;});
+
+    counter = (counter + 1) % 2;
+    *nextRunId = (counter == 0) ? 2 : 3;
+
+    LOG(INFO) << "[Yitao] ********** TLS decided to run nextRunId = " << *nextRunId;
+
+    sched_cv->notify_all();
+  }
+}
+
 DirectSession::DirectSession(const SessionOptions& options,
                              const DeviceMgr* device_mgr,
                              DirectSessionFactory* const factory)
@@ -238,6 +256,13 @@ DirectSession::DirectSession(const SessionOptions& options,
   run2Ready_cv = new std::condition_variable;
   run3Done = new bool;
   (*run3Done) = false;
+
+  // Yitao-MySched
+  sched_lock = new std::mutex;
+  sched_cv = new std::condition_variable;
+  nextRunId = new int;
+  *nextRunId = 2;
+  myThread = new std::thread(TLS, sched_lock, sched_cv, nextRunId);
 
   LOG(INFO) << "[Yitao] === Debugging === in DirectSession::DirectSession, we have mySched->getTomNum() = " << mySched->getTomNum();
 
@@ -286,6 +311,10 @@ DirectSession::DirectSession(const SessionOptions& options,
 }
 
 DirectSession::~DirectSession() {
+
+  // Yitao-MySched
+  myThread->join();
+
   if (!closed_) Close().IgnoreError();
   for (auto& it : partial_runs_) {
     it.second.reset(nullptr);
@@ -536,6 +565,11 @@ Status DirectSession::Run(const RunOptions& run_options,
   args.tomMutex = tomMutex;
   args.run2Ready_cv = run2Ready_cv;
   args.run3Done = run3Done;
+
+  // Yitao-MySched
+  args.sched_lock = sched_lock;
+  args.sched_cv = sched_cv;
+  args.nextRunId = nextRunId;
 
   for (const auto& item : executors_and_keys->items) {
     item.executor->RunAsync(args, barrier->Get());
