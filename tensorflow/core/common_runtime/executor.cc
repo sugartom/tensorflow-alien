@@ -1641,11 +1641,12 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
   while (!inline_ready.empty()) {
 
     // Yitao-MySched
-    if (session_run_count_ == 2) {
-      std::unique_lock<std::mutex> l(*tomMutex_);
-      // hahaTest.wait(l, [this](){return completed;});
-      run2Ready_cv_->wait(l, [this](){return *run3Done_;});
-    }
+    // if (session_run_count_ == 2) {
+    //   LOG(INFO) << "[Yitao] === Debugging === *** Important *** the 2nd Session.Run() will wait for the 3rd one!";
+    //   std::unique_lock<std::mutex> l(*tomMutex_);
+    //   // hahaTest.wait(l, [this](){return completed;});
+    //   run2Ready_cv_->wait(l, [this](){return *run3Done_;});
+    // }
 
     tagged_node = inline_ready.front();
     inline_ready.pop_front();
@@ -1843,12 +1844,13 @@ void ExecutorState::Process(TaggedNode tagged_node, int64 scheduled_usec) {
   }  // while !inline_ready.empty()
 
   // Yitao-MySched
-  if (session_run_count_ == 3) {
-    if (completed) {
-      (*run3Done_) = true;
-      run2Ready_cv_->notify_one();
-    }
-  }
+  // if (session_run_count_ == 3) {
+  //   if (completed) {
+  //     LOG(INFO) << "[Yitao] === Debugging === *** Important *** the 3nd Session.Run() is notifying the 2nd one!";
+  //     (*run3Done_) = true;
+  //     run2Ready_cv_->notify_one();
+  //   }
+  // }
 
   // This thread of computation is done if completed = true.
   if (completed) Finish();
